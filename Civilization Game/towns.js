@@ -109,17 +109,14 @@ function Town(x,y,i){
     					   document.getElementById("GarrisonUnit" + (a+1)).src = "";
     					}
                         if(garrisonUnitIsHeld == true){
-                            document.getElementById("GarrisonUnit" + (garrisonUnitNumber+1)).style.top = mouseY + 800;
-                            document.getElementById("GarrisonUnit" + (garrisonUnitNumber+1)).style.left = mouseX;
+                            document.getElementById("GarrisonUnit" + garrisonUnitNumber).style.top = mouseY + 800;
+                            document.getElementById("GarrisonUnit" + garrisonUnitNumber).style.left = mouseX;
                         }
                         
     				}
     			
     			}	
-                if(garrisonUnitIsHeld==true){
-                    document.getElementById("GarrisonUnit" + garrisonUnitNumber).style.left = mouseX;
-                    document.getElementById("GarrisonUnit" + garrisonUnitNumber).style.top = mouseY +800;
-                }
+
     			
     			
     			if(this.tower==true){

@@ -10,8 +10,6 @@ var maximumUnits = 10;
 var squadListUnitHeld= false;
 var squadListUnitNumber;
 
-//changes
-
 function mouseIsContainedIn(x1,y1,x2,y2){
     if(mouseX>x1 && (mouseY+800)>y1 && mouseX<x2 && (mouseY+800)<y2){
             return true;
@@ -341,10 +339,10 @@ function mousePressed(){
             if(towns[e].garrison.length>0){
                 for(var d=0;d<towns[e].garrison.length;d++){
                     if(mouseIsContainedIn(parseInt(document.getElementById("GarrisonUnit"+(d+1)).style.left),parseInt(document.getElementById("GarrisonUnit"+(d+1)).style.top),parseInt(document.getElementById("GarrisonUnit"+(d+1)).style.left)+200,parseInt(document.getElementById("GarrisonUnit"+(d+1)).style.top)+40)){
-                        console.log(document.getElementById("GarrisonUnit"+(d+1)).style.top,mouseY+800,parseInt(document.getElementById("GarrisonUnit"+(d+1)).style.top)+40);
                         if(mouseIsPressed && townSelected == true){     
                             garrisonUnitIsHeld = true;
                             garrisonUnitNumber = d+1;
+                            console.log(d+1);
                         }    
                     }                  
                 }    
@@ -360,7 +358,7 @@ function mousePressed(){
                         if(mouseIsContainedIn(parseInt(document.getElementById("SquadUnit"+(a+1)).style.left),parseInt(document.getElementById("SquadUnit"+(a+1)).style.top),parseInt(document.getElementById("SquadUnit"+(a+1)).style.left)+200,parseInt(document.getElementById("SquadUnit"+(a+1)).style.top)+40)){
                             if(mouseIsPressed && townSelected == true){     
                                 squadListUnitHeld = true;
-                                squadListUnitNumber = d+1;
+                                squadListUnitNumber = a+1;
                             }    
                         }
                     }
