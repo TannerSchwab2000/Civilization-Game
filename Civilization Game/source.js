@@ -10,6 +10,8 @@ var maximumUnits = 10;
 var squadListUnitHeld= false;
 var squadListUnitNumber;
 
+//changes
+
 function mouseIsContainedIn(x1,y1,x2,y2){
     if(mouseX>x1 && (mouseY+800)>y1 && mouseX<x2 && (mouseY+800)<y2){
             return true;
