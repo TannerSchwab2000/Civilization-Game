@@ -1,0 +1,327 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="source.js"></script>
+  <script language="javascript" type="text/javascript" src="towns.js"></script>
+  <script language="javascript" type="text/javascript" src="squads.js"></script>
+  	<style> 
+
+  	body {
+  		padding: 0; 
+  		margin: 0;
+      background-color:#652800;
+    }
+    #town1 {
+    	position: absolute;
+    	left: 70px;
+   		top: 290px;
+    }
+    #town2 {
+    	position: absolute;
+    	left: 200px;
+   		top: 50px;
+    }
+    #town3 {
+    	position: absolute;
+    	left: 320px;
+   		top: 200px;
+    }
+    #town4 {
+      position: absolute;
+      left: 520px;
+      top: 0px;
+    }
+    #town5 {
+      position: absolute;
+      left: 670px;
+      top: 350px;
+    }
+    #town6 {
+      position: absolute;
+      left: 1050px;
+      top: 290px;
+    }
+    #town7 {
+      position: absolute;
+      left: 1060px;
+      top: 70px;
+    }
+    #town8 {
+      position: absolute;
+      left: 1280px;
+      top: 220px;
+    }
+    #town9 {
+      position: absolute;
+      left: 1385px;
+      top: 110px;
+    }
+    #town10 {
+      position: absolute;
+      left: 1330px;
+      top: 400px;
+    }
+    #town11 {
+      position: absolute;
+      left: 1690px;
+      top: 460px;
+    }
+    #town12 {
+      position: absolute;
+      left: 1660px;
+      top: 300px;
+    }
+    #peasants {
+      position: absolute;
+      left: 400px;
+      top: 790px;
+    }
+    #slaves {
+      position: absolute;
+      left: 500px;
+      top: 790px;
+    }
+    #gold {
+      position: absolute;
+      left: 890px;
+      top: 790px;
+    }
+    #SquadTroops {
+      position: absolute;
+      left: 1075px;
+      top: 947px;
+    }
+    #TownTroops {
+      position: absolute;
+      left: 1370px;
+      top: 947px;
+    }
+    #TowerTroops {
+      position: absolute;
+      left: 1670px;
+      top: 947px;
+    }
+    #ConvertUnitsButton {
+      position: absolute;
+      left: 310px;
+      top: 850px;
+    }
+    #GarrisonButton {
+      position: absolute;
+      left: 310px;
+      top: 900px;
+    }
+    #ConstructionsButton {
+      position: absolute;
+      left: 490px;
+      top: 850px;
+    }
+    #TaxRatesButton {
+      position: absolute;
+      left: 490px;
+      top: 900px;
+    }
+    #DividingLine {
+      position: absolute;
+      left: 950px;
+      top: 800px;
+    }
+    #Conversion1 {
+      position: absolute;
+      left: 950px;
+      top: 800px;
+    }
+    #Conversion2 {
+      position: absolute;
+      left: 1400px;
+      top: 800px;
+    }
+    #Conversion3 {
+      position: absolute;
+      left: 1400px;
+      top: 860px;
+    }
+    #Conversion4 {
+      position: absolute;
+      left: 1400px;
+      top: 920px;
+    }
+    #Construction1 {
+      position: absolute;
+      left: 950px;
+      top: 800px;
+    }
+    #Construction2 {
+      position: absolute;
+      left: 1200px;
+      top: 800px;
+    }
+    #SquadListBackground1 {
+      position: absolute;
+      left: 1020px;
+      top: 810px;
+    }
+    #SquadListBackground2 {
+      position: absolute;
+      left: 1320px;
+      top: 810px;
+    }
+    #SquadListBackground3 {
+      position: absolute;
+      left: 1620px;
+      top: 810px;
+    }
+    #GarrisonUnit1 {
+      position: absolute;
+      left: 1325px;
+      top: 815px;
+    }
+    #GarrisonUnit2 {
+      position: absolute;
+      left: 1325px;
+      top: 860px;
+    }
+    #GarrisonUnit3 {
+      position: absolute;
+      left: 1325px;
+      top: 860px;
+    }
+    #GarrisonUnit4 {
+      position: absolute;
+      left: 1325px;
+      top: 860px;
+    }
+    #GarrisonUnit5 {
+      position: absolute;
+      left: 1325px;
+      top: 860px;
+    }
+    #GarrisonUnit6 {
+      position: absolute;
+      left: 1325px;
+      top: 815px;
+    }
+    #GarrisonUnit7 {
+      position: absolute;
+      left: 1325px;
+      top: 860px;
+    }
+    #GarrisonUnit8 {
+      position: absolute;
+      left: 1325px;
+      top: 860px;
+    }
+    #GarrisonUnit9 {
+      position: absolute;
+      left: 1325px;
+      top: 860px;
+    }
+    #GarrisonUnit10 {
+      position: absolute;
+      left: 1325px;
+      top: 860px;
+    }
+    #SquadUnit1 {
+      position: absolute;
+      left: 1025px;
+      top: 815px;
+    }
+    #SquadUnit2 {
+      position: absolute;
+      left: 1025px;
+      top: 860px;
+    }
+    #SquadUnit3 {
+      position: absolute;
+      left: 1025px;
+      top: 860px;
+    }
+    #SliderBackground1 {
+      position: absolute;
+      left: 1228px;
+      top: 810px;
+    }
+    #SliderBackground2 {
+      position: absolute;
+      left: 1528px;
+      top: 810px;
+    }
+    #Slider1 {
+      position: absolute;
+      left: 1229px;
+      top: 811px;
+    }
+    #Slider2 {
+      position: absolute;
+      left: 1529px;
+      top: 811px;
+    }
+    #MapUnit1 {
+      position: absolute;
+      left: 100px;
+      top: 340px;
+    }
+    #MapUnit2 {
+      position: absolute;
+      left: 100px;
+      top: 340px;
+    }
+  	</style>
+</head>
+
+<body>
+	<img src="graphics/map.jpg" draggable="false">
+	<img src="graphics/SmallTown.png" id="town1" draggable="false">
+	<img src="graphics/SmallTown.png" id="town2" draggable="false">
+	<img src="graphics/SmallTown.png" id="town3" draggable="false">
+  <img src="graphics/SmallTown.png" id="town4" draggable="false">
+  <img src="graphics/SmallTown.png" id="town5" draggable="false">
+  <img src="graphics/SmallTown.png" id="town6" draggable="false">
+  <img src="graphics/SmallTown.png" id="town7" draggable="false">
+  <img src="graphics/SmallTown.png" id="town8" draggable="false">
+  <img src="graphics/SmallTown.png" id="town9" draggable="false">
+  <img src="graphics/SmallTown.png" id="town10" draggable="false">
+  <img src="graphics/SmallTown.png" id="town11" draggable="false">
+  <img src="graphics/SmallTown.png" id="town12" draggable="false">
+  <img src="graphics/ConvertUnitsButton.bmp" id="ConvertUnitsButton" draggable="false">
+  <img src="graphics/GarrisonButton.png" id="GarrisonButton" draggable="false">
+  <img src="graphics/ConstructionsButton.png" id="ConstructionsButton" draggable="false">
+  <img src="graphics/TaxRatesButton.png" id="TaxRatesButton" draggable="false">
+  <img src="graphics/DividingLine.png" id="DividingLine" draggable="false">
+  <img src="graphics/Conversion1.png" id="Conversion1" draggable="false">
+  <img src="graphics/Conversion2.png" id="Conversion2" draggable="false">
+  <img src="graphics/Conversion3.png" id="Conversion3" draggable="false">
+  <img src="graphics/Conversion4.png" id="Conversion4" draggable="false">
+  <img src="graphics/Construction1.png" id="Construction1" draggable="false">
+  <img src="graphics/Construction2.png" id="Construction2" draggable="false">
+  <img src="graphics/SquadListBackground.png" id="SquadListBackground1" draggable="false">
+  <img src="graphics/SquadListBackground.png" id="SquadListBackground2" draggable="false">
+  <img src="graphics/SquadListBackground.png" id="SquadListBackground3" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="GarrisonUnit1" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="GarrisonUnit2" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="GarrisonUnit3" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="GarrisonUnit4" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="GarrisonUnit5" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="GarrisonUnit6" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="GarrisonUnit7" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="GarrisonUnit8" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="GarrisonUnit9" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="GarrisonUnit10" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="SquadUnit1" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="SquadUnit2" draggable="false">
+  <img src="graphics/SwordsmanListUnit.png" id="SquadUnit3" draggable="false">
+  <img src="graphics/SliderBackground.png" id="SliderBackground1" draggable="false">
+  <img src="graphics/SliderBackground.png" id="SliderBackground2" draggable="false">
+  <img src="graphics/Slider.png" id="Slider1" draggable="false">
+  <img src="graphics/Slider.png" id="Slider2" draggable="false">
+  <img src="graphics/SwordsmanUnit.png" id="MapUnit1" draggable="false">
+  <img src="graphics/SwordsmanUnit.png" id="MapUnit2" draggable="false">
+  <p id="peasants"></p>
+  <p id="slaves"></p>
+  <p id="gold"></p>
+  <p id="SquadTroops"></p>
+  <p id="TownTroops"></p>
+  <p id="TowerTroops"></p>
+</body>
+</html>

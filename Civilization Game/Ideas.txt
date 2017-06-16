@@ -1,0 +1,43 @@
+Units can be exchanged
+1 peasant = 1 slave
+2 peasants + 10 gold = 1 warrior
+
+
+Warrior types:
+
+swordsmen (advantage against knight)
+knight (advantage against cavalry)
+cavalry(advantage against swordsmen)
+archers (do damage no matter their position in the squad)
+
+
+Types of constructions:
+
+Walls (Keep enemy squads from attacking your squads defending the town for a few turns)
+Archer tower(Picks off a few units from the frontline of enemy squads present every turn. Happens before squads fight)
+Treasury(Allows gold to be held in a town. It will grow overtime relative to the amount, but it will remain in the treasury if the town is conqured.)
+
+While peasants are in towns they reproduce every turn relative to their number. Slaves do also but very slowly.
+
+Towns have garrisons. When a town is conqured the garrison is also transfered to the conquror.
+
+You get 1 gold per peasant per turn. 
+
+You get 5 gold for converting a peasant into a slave. (Taking their belongings)
+
+You can trade slaves for constructions.
+
+Military is seperated into squads that you create. Once you choose to create a squad you drag and drop the types of troops you want. The troops at the top of the list are at the front. The troops fight in the order they are in;
+Frontline troops fight the enemy's frontline troops.
+
+Turn based. You select the points you want the squads to go to just like dominions.
+
+If you attack from both sides of the enemy then one squad will attack from the bottom of the unit list to the top.
+
+If a squad goes to an unprotected town without a wall it will be conqured.
+
+
+
+
+
+
