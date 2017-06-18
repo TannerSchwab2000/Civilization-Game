@@ -9,6 +9,8 @@ var garrisonUnitIsHeld;
 var maximumUnits = 10;
 var squadListUnitHeld= false;
 var squadListUnitNumber;
+var mapUnitIsHeld;
+var mapUnitNumber;
 
 function mouseIsContainedIn(x1,y1,x2,y2){
     if(mouseX>x1 && (mouseY+800)>y1 && mouseX<x2 && (mouseY+800)<y2){
@@ -37,7 +39,16 @@ function renderSquads(){
                 document.getElementById("MapUnit" + (a+1)).src = "graphics/PeasantUnit.png"; 
                 document.getElementById("MapUnit" + (a+1)).style.left = squads[a].x; 
                 document.getElementById("MapUnit" + (a+1)).style.top = squads[a].y; 
+            }else if(squads[a].units[squads[a].units.length-1].unitType == 5){
+                document.getElementById("MapUnit" + (a+1)).src = "graphics/SlaveUnit.png"; 
+                document.getElementById("MapUnit" + (a+1)).style.left = squads[a].x; 
+                document.getElementById("MapUnit" + (a+1)).style.top = squads[a].y; 
             }
+            if(mapUnitIsHeld==true && mapUnitNumber==(a+1)){
+                document.getElementById("MapUnit" + (a+1)).style.left = mouseX-60; 
+                document.getElementById("MapUnit" + (a+1)).style.top = mouseY+750;
+            }
+            
         }
     }
 }
@@ -215,6 +226,7 @@ function mouseReleased() {
     garrisonUnitIsHeld = false;
     squadListUnitHeld = false;
     mouseIsPressed = false;
+    mapUnitIsHeld = false;
     console.log(mouseX,mouseY+800);
     for(var i=0;i<towns.length;i++){
         mouseDistance = Math.abs(mouseX-(towns[i].x+70)) + Math.abs((mouseY+800)-(towns[i].y+70))
@@ -327,7 +339,15 @@ function mouseReleased() {
 }
 
 function mousePressed(){
-    mouseIsPressed = true;    
+    mouseIsPressed = true;   
+
+    for(var a=0;a<squads.length;a++){
+        if(mouseIsContainedIn(parseInt(document.getElementById("MapUnit"+(a+1)).style.left),parseInt(document.getElementById("MapUnit"+(a+1)).style.top),parseInt(document.getElementById("MapUnit"+(a+1)).style.left)+80,parseInt(document.getElementById("MapUnit"+(a+1)).style.top)+90)){
+            mapUnitIsHeld = true;
+            mapUnitNumber = a+1;
+        }
+    }
+
     if(mouseIsPressed && mouseIsContainedIn(parseInt(document.getElementById("Slider1").style.left),parseInt(document.getElementById("Slider1").style.top),parseInt(document.getElementById("Slider1").style.left)+15,parseInt(document.getElementById("Slider1").style.top)+20) && townSelected == true){   
         slider1IsHeld = true;
     }
