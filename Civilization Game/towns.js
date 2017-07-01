@@ -46,7 +46,7 @@ function Town(x,y,i){
                         if(selection == towns[b]){
                             if(squads[a].x == towns[b].x && squads[a].y == towns[b].y){
                                 for(var c=0;c<squads[a].units.length;c++){
-                                    if(squads[a].units[c] != null){
+                                    if(squads[a].units[c] != null && document.getElementById("SquadUnit"+(c+1)) != null){
                                         document.getElementById("SquadUnit"+(c+1)).style.left = 1025;
                                         if(squads[a].units[c].unitType == 1){
                                             document.getElementById("SquadUnit" + (c+1)).src = "graphics/SwordsmanListUnit.png";
