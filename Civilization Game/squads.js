@@ -9,8 +9,6 @@ function Squad(x,y){
 	this.update = function(){
 		this.x = this.targetX;
 		this.y = this.targetY;
-		this.targetX=0;
-		this.targetY=0;
 	}
 }
 
