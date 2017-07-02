@@ -12,6 +12,27 @@ var squadListUnitNumber;
 var mapUnitIsHeld;
 var mapUnitNumber;
 
+function angleBetween(x1,y1,x2,y2){
+    var p1 = {
+        x: x1,
+        y: y1
+    };
+
+    var p2 = {
+        x: x2,
+        y: y2
+    };
+
+    // angle in radians
+    var angleRadians = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+
+    // angle in degrees
+    var angleDeg = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;  
+
+    return(angleDeg);  
+}
+
+
 function mouseIsContainedIn(x1,y1,x2,y2){
     if(mouseX>x1 && (mouseY+800)>y1 && mouseX<x2 && (mouseY+800)<y2){
             return true;
@@ -48,7 +69,6 @@ function renderSquads(){
                 document.getElementById("MapUnit" + (a+1)).style.left = mouseX-60; 
                 document.getElementById("MapUnit" + (a+1)).style.top = mouseY+750;
             }
-            
         }
     }
 }
@@ -142,6 +162,19 @@ function draw() {
     renderSquads();
     document.getElementById("gold").innerHTML = ("Gold:"+gold);
 
+
+    for(var a=0;a<squads.length;a++){
+        if(squads[a].targetX != 0){
+            for(var b=0;b<towns.length;b++){
+                if(towns[b].x==squads[a].targetX&&towns[b].y==squads[a].targetY){
+                    document.getElementById("Arrow").style.top = (squads[a].y + towns[b].y)/2 +70;
+                    document.getElementById("Arrow").style.left = (squads[a].x + towns[b].x)/2;
+                    console.log(angleBetween(squads[a].x,squads[a].y,towns[b].x,towns[b].y));
+                    document.getElementById('Arrow').style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,towns[b].x,towns[b].y)+"deg)";
+                }
+            }  
+        }
+    }
     for (var i=0;i<towns.length;i++){
         towns[i].render();
         towns[i].update();
@@ -160,14 +193,11 @@ function draw() {
 function mouseReleased() {
 
     if(mapUnitIsHeld==true){
-        console.log("1");
         for(var a=0;a<towns.length;a++){
-            console.log(towns.length);
-            console.log(document.getElementById("town"+(a+1)).style.left,mouseX,document.getElementById("town"+(a+1)).style.top,mouseY+800);
             if(mouseIsContainedIn(parseInt(document.getElementById("town"+(a+1)).style.left),parseInt(document.getElementById("town"+(a+1)).style.top),parseInt(document.getElementById("town"+(a+1)).style.left)+110,parseInt(document.getElementById("town"+(a+1)).style.top)+100)){
-                console.log("2");
-                squads[mapUnitNumber-1].x = towns[a].x;
-                squads[mapUnitNumber-1].y = towns[a].y;
+                squads[mapUnitNumber-1].targetX = towns[a].x;
+                squads[mapUnitNumber-1].targetY = towns[a].y;
+                console.log(squads[mapUnitNumber-1]);
             }
         }
     }
@@ -229,10 +259,8 @@ function mouseReleased() {
                                 squads.push(new Squad(towns[c].x,towns[c].y));     
                                 squads[0].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                 towns[c].garrison.splice(garrisonUnitNumber-1,1);
-                            }
-                              
-                        }
-                        
+                            }   
+                        }   
                     }   
                 }
             }
@@ -310,7 +338,6 @@ function mouseReleased() {
                                 }
                             }
                         }
-                    
                 }
                     
         }
@@ -345,8 +372,7 @@ function mouseReleased() {
                                 }
                             }
                         }
-                }
-                    
+                }          
         }
         
 
@@ -384,8 +410,7 @@ function mousePressed(){
                                 console.log(d+1);
                             }    
                         }     
-                    }
-                                     
+                    }                                     
                 }    
             } 
         }
