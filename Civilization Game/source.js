@@ -12,6 +12,39 @@ var squadListUnitNumber;
 var mapUnitIsHeld;
 var mapUnitNumber;
 
+function mapPoint(x,y){
+    this.x = x;
+    this.y = y;
+}
+
+function adjacent(x1,y1,x2,y2){
+    if(x1==100 && y1==340){
+        if(x2==355 && y2==233){
+            return true;
+        }else{
+            return false;
+        }
+    }else if(x1==240 && y1==90){
+        if(x2==355 && y2==233){
+            return true;
+        }else{
+            return false;
+        }
+    }else if(x1==355 && y1==233){
+        if(x2==100 && y2==340 || x2==240 && y2==90 || x2==550 && y2==30){
+            return true;
+        }else{
+            return false;
+        }
+    }else if(x1==550 && y1==30){
+        if(x2==355 && y2==233){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
 function angleBetween(x1,y1,x2,y2){
     var p1 = {
         x: x1,
@@ -126,6 +159,7 @@ function clearMap(){
     document.getElementById("SliderBackground2").src = "";
     document.getElementById("MapUnit1").src = "";
     document.getElementById("MapUnit2").src = "";
+    document.getElementById("Arrow").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
     document.getElementById("TownTroops").innerHTML = ("");
     document.getElementById("TowerTroops").innerHTML = ("");   
@@ -134,6 +168,7 @@ function clearMap(){
 function setup() {
     towns = [];
     squads = [];
+    mapPoints = [];
     towns.push(new Town(100,340,1));
     towns.push(new Town(240,90,2));
     towns.push(new Town(355,233,3));
@@ -147,7 +182,10 @@ function setup() {
     document.getElementById("MapUnit2").style.left=0;
     document.getElementById("MapUnit2").style.top=0;
 
-
+    mapPoints.push(new mapPoint(100,340));
+    mapPoints.push(new mapPoint(240,90));
+    mapPoints.push(new mapPoint(355,233));
+    mapPoints.push(new mapPoint(550,30));
 
     for(var a=0;a<maximumUnits;a++){
         document.getElementById("GarrisonUnit"+(a+1)).style.left = 1325;
@@ -164,13 +202,16 @@ function draw() {
 
 
     for(var a=0;a<squads.length;a++){
-        if(squads[a].targetX != 0){
-            for(var b=0;b<towns.length;b++){
-                if(towns[b].x==squads[a].targetX&&towns[b].y==squads[a].targetY){
-                    document.getElementById("Arrow").style.top = (squads[a].y + towns[b].y)/2 +70;
-                    document.getElementById("Arrow").style.left = (squads[a].x + towns[b].x)/2;
-                    console.log(angleBetween(squads[a].x,squads[a].y,towns[b].x,towns[b].y));
-                    document.getElementById('Arrow').style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,towns[b].x,towns[b].y)+"deg)";
+        if(squads[a].targetX != squads[a].x){
+            for(var b=0;b<mapPoints.length;b++){
+                if(mapPoints[b].x==squads[a].targetX&&mapPoints[b].y==squads[a].targetY){
+                    if(adjacent(squads[a].x,squads[a].y,squads[a].targetX,squads[a].targetY)){
+                        document.getElementById("Arrow").src = ("graphics/Arrow.png");
+                        document.getElementById("Arrow").style.top = (squads[a].y + mapPoints[b].y)/2 +70;
+                        document.getElementById("Arrow").style.left = (squads[a].x + mapPoints[b].x)/2;
+                        console.log(angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y));
+                        document.getElementById('Arrow').style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y)+"deg)";
+                    }
                 }
             }  
         }
@@ -193,10 +234,10 @@ function draw() {
 function mouseReleased() {
 
     if(mapUnitIsHeld==true){
-        for(var a=0;a<towns.length;a++){
-            if(mouseIsContainedIn(parseInt(document.getElementById("town"+(a+1)).style.left),parseInt(document.getElementById("town"+(a+1)).style.top),parseInt(document.getElementById("town"+(a+1)).style.left)+110,parseInt(document.getElementById("town"+(a+1)).style.top)+100)){
-                squads[mapUnitNumber-1].targetX = towns[a].x;
-                squads[mapUnitNumber-1].targetY = towns[a].y;
+        for(var a=0;a<mapPoints.length;a++){
+            if(mouseIsContainedIn(mapPoints[a].x,mapPoints[a].y,mapPoints[a].x+110,mapPoints[a].y+100)){
+                squads[mapUnitNumber-1].targetX = mapPoints[a].x;
+                squads[mapUnitNumber-1].targetY = mapPoints[a].y;
                 console.log(squads[mapUnitNumber-1]);
             }
         }

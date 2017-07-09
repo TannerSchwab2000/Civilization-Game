@@ -7,8 +7,11 @@ function Squad(x,y){
 	this.targetY=0;
 
 	this.update = function(){
-		this.x = this.targetX;
-		this.y = this.targetY;
+		if(adjacent(this.x,this.y,this.targetX,this.targetY)){
+			this.x = this.targetX;
+			this.y = this.targetY;	
+		}
+		
 	}
 }
 
