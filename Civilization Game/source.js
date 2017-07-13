@@ -152,18 +152,9 @@ function renderSquads(){
 
 
 function clearMap(){
-    document.getElementById("town1").src = "";
-    document.getElementById("town2").src = "";
-    document.getElementById("town3").src = "";
-    document.getElementById("town4").src = "";
-    document.getElementById("town5").src = "";
-    document.getElementById("town6").src = "";
-    document.getElementById("town7").src = "";
-    document.getElementById("town8").src = "";
-    document.getElementById("town9").src = "";
-    document.getElementById("town10").src = "";
-    document.getElementById("town11").src = "";
-    document.getElementById("town12").src = "";    
+    for(var a=1;a<12;a++){
+        document.getElementById("town"+a).src = "";  
+    }  
     document.getElementById("ConvertUnitsButton").src = "";    
     document.getElementById("GarrisonButton").src = "";    
     document.getElementById("ConstructionsButton").src = "";    
@@ -177,34 +168,24 @@ function clearMap(){
     document.getElementById("SquadListBackground1").src = ""; 
     document.getElementById("SquadListBackground2").src = ""; 
     document.getElementById("SquadListBackground3").src = ""; 
-    document.getElementById("GarrisonUnit1").src = "";
-    document.getElementById("GarrisonUnit2").src = "";
-    document.getElementById("GarrisonUnit3").src = "";
-    document.getElementById("GarrisonUnit4").src = "";
-    document.getElementById("GarrisonUnit5").src = "";
-    document.getElementById("GarrisonUnit6").src = "";
-    document.getElementById("GarrisonUnit7").src = "";
-    document.getElementById("GarrisonUnit8").src = "";
-    document.getElementById("GarrisonUnit9").src = "";
-    document.getElementById("GarrisonUnit10").src = "";
-    document.getElementById("SquadUnit1").src = "";
-    document.getElementById("SquadUnit2").src = "";
-    document.getElementById("SquadUnit3").src = "";
-    document.getElementById("SquadUnit4").src = "";
-    document.getElementById("SquadUnit5").src = "";
-    document.getElementById("SquadUnit6").src = "";
-    document.getElementById("SquadUnit7").src = "";
-    document.getElementById("SquadUnit8").src = "";
-    document.getElementById("SquadUnit9").src = "";
-    document.getElementById("SquadUnit10").src = "";
+    for(var a=0;a<maximumUnits;a++){
+        document.getElementById("GarrisonUnit"+(a+1)).src = "";  
+        document.getElementById("SquadUnit"+(a+1)).src = "";  
+    }
     document.getElementById("Slider1").src = "";
     document.getElementById("Slider2").src = "";
     document.getElementById("SliderBackground1").src = "";
     document.getElementById("SliderBackground2").src = "";
     document.getElementById("MapUnit1").src = "";
     document.getElementById("MapUnit2").src = "";
+    document.getElementById("MapUnit3").src = "";
+    document.getElementById("MapUnit4").src = "";
+    document.getElementById("MapUnit5").src = "";
     document.getElementById("Arrow1").src = ("");
     document.getElementById("Arrow2").src = ("");
+    document.getElementById("Arrow3").src = ("");
+    document.getElementById("Arrow4").src = ("");
+    document.getElementById("Arrow5").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
     document.getElementById("TownTroops").innerHTML = ("");
     document.getElementById("TowerTroops").innerHTML = ("");   
