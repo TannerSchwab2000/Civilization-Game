@@ -51,9 +51,32 @@ function adjacent(x1,y1,x2,y2){
         }else{
             return false;
         }
-    }
-    else if(x1==1320 && y1==260){
-        if(x2==1080 && y2==330){
+    }else if(x1==1320 && y1==260){
+        if(x2==1080 && y2==330 || x2==1415 && y2==125 || x2==1340 && y2==440){
+            return true;
+        }else{
+            return false;
+        }
+    }else if(x1==1415 && y1==125){
+        if(x2==1320 && y2==260){
+            return true;
+        }else{
+            return false;
+        }
+    }else if(x1==1340 && y1==440){
+        if(x2==1320 && y2==260 || x2==1730 && y2==500){
+            return true;
+        }else{
+            return false;
+        }
+    }else if(x1==1730 && y1==500){
+        if(x2==1340 && y2==440 || x2==1690 && y2==310){
+            return true;
+        }else{
+            return false;
+        }
+    }else if(x1==1690 && y1==310){
+        if(x2==1730 && y2==500){
             return true;
         }else{
             return false;
@@ -194,6 +217,10 @@ function setup() {
     towns.push(new Town(1080,330,6));
     towns.push(new Town(1085,100,7));
     towns.push(new Town(1320,260,8));
+    towns.push(new Town(1415,125,9));
+    towns.push(new Town(1340,440,10));
+    towns.push(new Town(1730,500,11));
+    towns.push(new Town(1690,310,12));
     document.getElementById("Slider1").style.left=1229;
     document.getElementById("Slider1").style.top=811;
     document.getElementById("Slider2").style.left=1529;
@@ -210,6 +237,10 @@ function setup() {
     mapPoints.push(new mapPoint(1080,330));
     mapPoints.push(new mapPoint(1085,100));
     mapPoints.push(new mapPoint(1320,260));
+    mapPoints.push(new mapPoint(1415,125));
+    mapPoints.push(new mapPoint(1340,440));
+    mapPoints.push(new mapPoint(1730,500));
+    mapPoints.push(new mapPoint(1690,310));
 
     for(var a=0;a<maximumUnits;a++){
         document.getElementById("GarrisonUnit"+(a+1)).style.left = 1325;
