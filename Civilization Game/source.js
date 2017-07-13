@@ -31,13 +31,25 @@ function adjacent(x1,y1,x2,y2){
             return false;
         }
     }else if(x1==355 && y1==233){
-        if(x2==100 && y2==340 || x2==240 && y2==90 || x2==550 && y2==30){
+        if(x2==100 && y2==340 || x2==240 && y2==90 || x2==550 && y2==30 || x2==695 && y2==400){
             return true;
         }else{
             return false;
         }
     }else if(x1==550 && y1==30){
         if(x2==355 && y2==233){
+            return true;
+        }else{
+            return false;
+        }
+    }else if(x1==695 && y1==400){
+        if(x2==355 && y2==233|| x2==1080 && y2==330){
+            return true;
+        }else{
+            return false;
+        }
+    }else if(x1==1080 && y1==330){
+        if(x2==695 && y2==400){
             return true;
         }else{
             return false;
@@ -173,6 +185,8 @@ function setup() {
     towns.push(new Town(240,90,2));
     towns.push(new Town(355,233,3));
     towns.push(new Town(550,30,4));
+    towns.push(new Town(695,400,5));
+    towns.push(new Town(1080,330,6));
     document.getElementById("Slider1").style.left=1229;
     document.getElementById("Slider1").style.top=811;
     document.getElementById("Slider2").style.left=1529;
@@ -186,6 +200,8 @@ function setup() {
     mapPoints.push(new mapPoint(240,90));
     mapPoints.push(new mapPoint(355,233));
     mapPoints.push(new mapPoint(550,30));
+    mapPoints.push(new mapPoint(695,400));
+    mapPoints.push(new mapPoint(1080,330));
 
     for(var a=0;a<maximumUnits;a++){
         document.getElementById("GarrisonUnit"+(a+1)).style.left = 1325;
@@ -257,6 +273,11 @@ function mouseReleased() {
                             towns[a].garrison.push(new Unit(squads[b].units[squadListUnitNumber-1].unitType));
                             squads[b].units.splice(squadListUnitNumber-1,1);
                             console.log(towns[a].garrison,squads[b].units);
+                            if(squads[b].length==0){
+                                squads.splice(b,1);
+                                document.getElementById("MapUnit"+(b+1)).style.top = 100;  
+                                console.log(document.getElementById("MapUnit"+(b+1)).style.top);
+                            }
                         }
                     }
 
