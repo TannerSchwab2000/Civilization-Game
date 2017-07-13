@@ -84,6 +84,15 @@ function adjacent(x1,y1,x2,y2){
     }
 }
 
+function squadIsPresentAt(x,y){
+    for(var a=0;a<squads.length;a++){
+        if(squads[a].x == x && squads[a].y == y){
+            return true;
+        }
+    }
+    return false;
+}
+
 function angleBetween(x1,y1,x2,y2){
     var p1 = {
         x: x1,
@@ -194,7 +203,8 @@ function clearMap(){
     document.getElementById("SliderBackground2").src = "";
     document.getElementById("MapUnit1").src = "";
     document.getElementById("MapUnit2").src = "";
-    document.getElementById("Arrow").src = ("");
+    document.getElementById("Arrow1").src = ("");
+    document.getElementById("Arrow2").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
     document.getElementById("TownTroops").innerHTML = ("");
     document.getElementById("TowerTroops").innerHTML = ("");   
@@ -261,11 +271,10 @@ function draw() {
             for(var b=0;b<mapPoints.length;b++){
                 if(mapPoints[b].x==squads[a].targetX&&mapPoints[b].y==squads[a].targetY){
                     if(adjacent(squads[a].x,squads[a].y,squads[a].targetX,squads[a].targetY)){
-                        document.getElementById("Arrow").src = ("graphics/Arrow.png");
-                        document.getElementById("Arrow").style.top = (squads[a].y + mapPoints[b].y)/2 +70;
-                        document.getElementById("Arrow").style.left = (squads[a].x + mapPoints[b].x)/2;
-                        console.log(angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y));
-                        document.getElementById('Arrow').style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y)+"deg)";
+                            document.getElementById("Arrow"+(a+1)).src = ("graphics/Arrow.png");
+                            document.getElementById("Arrow"+(a+1)).style.top = (squads[a].y + mapPoints[b].y)/2 +70;
+                            document.getElementById("Arrow"+(a+1)).style.left = (squads[a].x + mapPoints[b].x)/2;
+                            document.getElementById('Arrow'+(a+1)).style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y)+"deg)";    
                     }
                 }
             }  

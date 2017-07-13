@@ -8,8 +8,10 @@ function Squad(x,y){
 
 	this.update = function(){
 		if(adjacent(this.x,this.y,this.targetX,this.targetY)){
-			this.x = this.targetX;
-			this.y = this.targetY;	
+			if(squadIsPresentAt(this.targetX,this.targetY)==false){
+				this.x = this.targetX;
+				this.y = this.targetY;	
+			}	
 		}
 		
 	}

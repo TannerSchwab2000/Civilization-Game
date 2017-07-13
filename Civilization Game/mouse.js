@@ -60,15 +60,28 @@ function mouseReleased() {
                         for(var b=0;b<squads.length;b++){
                             for(var c=0;c<towns.length;c++){
                                 if(selection == towns[c]){
-                                    if(squads[b].x == towns[c].x && squads[b].y == towns[c].y){
+                                    if(squadIsPresentAt(towns[c].x,towns[c].y)==false){
                                         if(towns[c].garrison[garrisonUnitNumber-1].unitType==4){
                                             towns[c].peasants--;
                                         }else if(towns[c].garrison[garrisonUnitNumber-1].unitType==5){
                                             towns[c].slaves--;
                                         }
-                                        squads[b].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
-                                        towns[c].garrison.splice(garrisonUnitNumber-1,1);
-                                        console.log(towns[c].garrison,squads[b].units);
+                                        squads.push(new Squad(towns[c].x,towns[c].y));     
+                                        squads[squads.length-1].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
+                                        towns[c].garrison.splice(garrisonUnitNumber-1,1); 
+                                    }else{
+                                        if(squads[b].x == towns[c].x && squads[b].y == towns[c].y){
+                                            if(towns[c].garrison[garrisonUnitNumber-1]!=null){
+                                                if(towns[c].garrison[garrisonUnitNumber-1].unitType==4){
+                                                    towns[c].peasants--;
+                                                }else if(towns[c].garrison[garrisonUnitNumber-1].unitType==5){
+                                                    towns[c].slaves--;
+                                                }
+                                                squads[b].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
+                                                towns[c].garrison.splice(garrisonUnitNumber-1,1);
+                                                console.log(towns[c].garrison,squads[b].units);
+                                            }
+                                        }
                                     }
                                 }
                             }
