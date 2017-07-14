@@ -35,7 +35,7 @@ function Town(x,y,i){
     			document.getElementById("SquadListBackground1").src = "graphics/SquadListBackground.png"; 
     			document.getElementById("SquadListBackground2").src = "graphics/SquadListBackground.png"; 
     			document.getElementById("SquadTroops").innerHTML = ("Sqaud Troops");
-    			document.getElementById("TownTroops").innerHTML = ("Town Garrison");
+    			document.getElementById("TownTroops").innerHTML = ("Town Garrison("+this.garrison.length+")");
     			document.getElementById("Slider1").src = "graphics/Slider.png";
     			document.getElementById("Slider2").src = "graphics/Slider.png";
     			document.getElementById("SliderBackground1").src = "graphics/SliderBackground.png";
@@ -45,6 +45,7 @@ function Town(x,y,i){
                     for(var b=0;b<towns.length;b++){
                         if(selection == towns[b]){
                             if(squads[a].x == towns[b].x && squads[a].y == towns[b].y){
+                                document.getElementById("SquadTroops").innerHTML = ("Sqaud Troops("+squads[a].units.length+")");
                                 for(var c=0;c<squads[a].units.length;c++){
                                     if(squads[a].units[c] != null && document.getElementById("SquadUnit"+(c+1)) != null){
                                         document.getElementById("SquadUnit"+(c+1)).style.left = 1025;
