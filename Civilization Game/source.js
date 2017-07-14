@@ -1,6 +1,6 @@
 var selection;
 var gold = 10;
-var maximumUnits = 10;
+var maximumUnits = 12;
 
 
 function mapPoint(x,y){

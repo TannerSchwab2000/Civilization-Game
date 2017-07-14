@@ -4,7 +4,7 @@ function Town(x,y,i){
 	this.x = x;
 	this.y = y;
 	this.i = i;
-	this.peasants = 3;
+	this.peasants = 10;
 	this.slaves = 0;
 	this.menu = 0;
 	this.tower = false;
@@ -51,19 +51,19 @@ function Town(x,y,i){
                                         document.getElementById("SquadUnit"+(c+1)).style.left = 1025;
                                         if(squads[a].units[c].unitType == 1){
                                             document.getElementById("SquadUnit" + (c+1)).src = "graphics/SwordsmanListUnit.png";
-                                            document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*2.5);
+                                            document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*sliderScale);
                                         }else if(squads[a].units[c].unitType == 2){
                                             document.getElementById("SquadUnit" + (c+1)).src = "graphics/KnightListUnit.png";
-                                            document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*2.5);
+                                            document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*sliderScale);
                                         }else if(squads[a].units[c].unitType == 3){
                                             document.getElementById("SquadUnit" + (c+1)).src = "graphics/CavalryListUnit.png";
-                                            document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*2.5);
+                                            document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*sliderScale);
                                         }else if(squads[a].units[c].unitType == 4){
                                             document.getElementById("SquadUnit" + (c+1)).src = "graphics/PeasantListUnit.png";
-                                            document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*2.5);
+                                            document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*sliderScale);
                                         }else if(squads[a].units[c].unitType == 5){
                                             document.getElementById("SquadUnit" + (c+1)).src = "graphics/SlaveListUnit.png";
-                                            document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*2.5);
+                                            document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*sliderScale);
                                         }
                                         if(parseInt(document.getElementById("SquadUnit" + (c+1)).style.top) > 920){
                                             document.getElementById("SquadUnit" + (c+1)).src = "";
@@ -89,19 +89,19 @@ function Town(x,y,i){
                         document.getElementById("GarrisonUnit"+(a+1)).style.left = 1325;
     					if(this.garrison[a].unitType==1){
     					   document.getElementById("GarrisonUnit" + (a+1)).src = "graphics/SwordsmanListUnit.png";
-    					   document.getElementById("GarrisonUnit" + (a+1)).style.top = 815 + Math.abs((this.garrison.length-1)-a)*45 - ((parseInt(document.getElementById("Slider2").style.top) - 811)*2.5);
+    					   document.getElementById("GarrisonUnit" + (a+1)).style.top = 815 + Math.abs((this.garrison.length-1)-a)*45 - ((parseInt(document.getElementById("Slider2").style.top) - 811)*sliderScale);
     					}else if(this.garrison[a].unitType==2){
     					   document.getElementById("GarrisonUnit" + (a+1)).src = "graphics/KnightListUnit.png";
-    					   document.getElementById("GarrisonUnit" + (a+1)).style.top = 815 + Math.abs((this.garrison.length-1)-a)*45 - ((parseInt(document.getElementById("Slider2").style.top) - 811)*2.5);
+    					   document.getElementById("GarrisonUnit" + (a+1)).style.top = 815 + Math.abs((this.garrison.length-1)-a)*45 - ((parseInt(document.getElementById("Slider2").style.top) - 811)*sliderScale);
     					}else if(this.garrison[a].unitType==3){
     					   document.getElementById("GarrisonUnit" + (a+1)).src = "graphics/CavalryListUnit.png";
-    					   document.getElementById("GarrisonUnit" + (a+1)).style.top = 815 + Math.abs((this.garrison.length-1)-a)*45 - ((parseInt(document.getElementById("Slider2").style.top) - 811)*2.5);
+    					   document.getElementById("GarrisonUnit" + (a+1)).style.top = 815 + Math.abs((this.garrison.length-1)-a)*45 - ((parseInt(document.getElementById("Slider2").style.top) - 811)*sliderScale);
     					}else if(this.garrison[a].unitType==4){
                            document.getElementById("GarrisonUnit" + (a+1)).src = "graphics/PeasantListUnit.png";
-                           document.getElementById("GarrisonUnit" + (a+1)).style.top = 815 + Math.abs((this.garrison.length-1)-a)*45 - ((parseInt(document.getElementById("Slider2").style.top) - 811)*2.5);
+                           document.getElementById("GarrisonUnit" + (a+1)).style.top = 815 + Math.abs((this.garrison.length-1)-a)*45 - ((parseInt(document.getElementById("Slider2").style.top) - 811)*sliderScale);
                         }else if(this.garrison[a].unitType==5){
                            document.getElementById("GarrisonUnit" + (a+1)).src = "graphics/SlaveListUnit.png";
-                           document.getElementById("GarrisonUnit" + (a+1)).style.top = 815 + Math.abs((this.garrison.length-1)-a)*45 - ((parseInt(document.getElementById("Slider2").style.top) - 811)*2.5);
+                           document.getElementById("GarrisonUnit" + (a+1)).style.top = 815 + Math.abs((this.garrison.length-1)-a)*45 - ((parseInt(document.getElementById("Slider2").style.top) - 811)*sliderScale);
                         }
     					if(parseInt(document.getElementById("GarrisonUnit" + (a+1)).style.top) > 920){
     					   document.getElementById("GarrisonUnit" + (a+1)).src = "";

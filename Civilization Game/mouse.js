@@ -8,6 +8,7 @@ var slider1IsHeld = false;
 var slider2IsHeld = false;
 var garrisonUnitNumber;
 var garrisonUnitIsHeld;
+var sliderScale = 3.2;
 
 
 
