@@ -12,6 +12,20 @@ var sliderScale = 3.2;
 
 
 function mouseReleased() {
+    console.log(mouseX,mouseY+800);
+
+    for(var a=0;a<squads.length;a++){
+        if(selection == squads[a]){
+            if(squads[a].slaves>=townCost){
+                towns.push(new Town(squads[a].x,squads[a].y,towns.length+1));  
+                if(mouseIsContainedIn(1300,810,1462,845)){
+                    for(var b=0;b<townCost;b++){
+                        removeSquadUnit(a,5);      
+                    }     
+                }
+            }
+        }
+    }
 
     if(mapUnitIsHeld==true){
         for(var a=0;a<mapPoints.length;a++){

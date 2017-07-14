@@ -6,6 +6,7 @@ function Squad(x,y,i){
 	this.targetX=0;
 	this.targetY=0;
 	this.i = i;
+	this.slaves=0;
 
 	this.update = function(){
 		if(adjacent(this.x,this.y,this.targetX,this.targetY)){
@@ -18,12 +19,24 @@ function Squad(x,y,i){
 	}
 
 	this.render = function(){
+
+
 		if(selection == squads[this.i]){
 			document.getElementById("SquadListBackground1").src = "graphics/SquadListBackground.png"; 
 			document.getElementById("Slider1").src = "graphics/Slider.png";
 			document.getElementById("SliderBackground1").src = "graphics/SliderBackground.png";
 			var a = this.i;
 
+			var slaves = 0;
+		for(var s=0;s<this.units.length;s++){
+			if(this.units[s].unitType == 5){
+				slaves++;
+			}
+		}
+		this.slaves = slaves;
+		if(slaves>=townCost){
+			document.getElementById("SettleTownButton").src = "graphics/SettleTownButton.png";
+		}
 
 			document.getElementById("SquadTroops").innerHTML = ("Sqaud Troops("+squads[a].units.length+")");
             for(var c=0;c<squads[a].units.length;c++){

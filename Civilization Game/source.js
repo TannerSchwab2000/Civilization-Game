@@ -1,6 +1,7 @@
 var selection;
 var gold = 10;
 var maximumUnits = 12;
+var townCost = 3;
 
 
 function mapPoint(x,y){
@@ -82,6 +83,22 @@ function adjacent(x1,y1,x2,y2){
             return false;
         }
     }
+}
+
+function removeSquadUnit(s,u){
+    var removed = false;
+    for(var a=0;a<squads[s].units.length;a++){
+        if(squads[s].units[a].unitType==u){
+            if(removed == false){
+                squads[s].units.splice(a,1);   
+                removed = true;
+            }
+        }
+    }
+    if(squads[s].units.length==0){
+                    squads.splice(s,1);
+    } 
+    
 }
 
 function squadIsPresentAt(x,y){
@@ -168,6 +185,7 @@ function clearMap(){
     document.getElementById("GarrisonButton").src = "";    
     document.getElementById("ConstructionsButton").src = "";    
     document.getElementById("TaxRatesButton").src = "";   
+    document.getElementById("SettleTownButton").src = "";   
     document.getElementById("Conversion1").src = ""; 
     document.getElementById("Conversion2").src = ""; 
     document.getElementById("Conversion3").src = ""; 
