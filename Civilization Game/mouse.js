@@ -27,7 +27,7 @@ function mouseReleased() {
     if(mouseIsContainedIn(1130,880,1150,900)){
         for(var a=0;a<towns.length;a++){
             if(selection==towns[a] && towns[a].menu == 4){
-                if(towns[a].realTaxRate<10){
+                if(towns[a].realTaxRate<4){
                     towns[a].realTaxRate++;   
                 }
             }
