@@ -178,8 +178,9 @@ function renderSquads(){
 
 
 function clearMap(){
-    for(var a=1;a<12;a++){
-        document.getElementById("town"+a).src = "";  
+    for(var a=1;a<13;a++){
+        document.getElementById("town"+a).src = ""; 
+        document.getElementById("Flag"+a).src = ""; 
     }  
     document.getElementById("ConvertUnitsButton").src = "";    
     document.getElementById("GarrisonButton").src = "";    
@@ -213,11 +214,17 @@ function clearMap(){
     document.getElementById("Arrow3").src = ("");
     document.getElementById("Arrow4").src = ("");
     document.getElementById("Arrow5").src = ("");
+    document.getElementById("MinusButton").src = ("");
+    document.getElementById("PlusButton").src = ("");
+    document.getElementById("NumberBackground").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
     document.getElementById("TownTroops").innerHTML = ("");
     document.getElementById("TowerTroops").innerHTML = ("");   
     document.getElementById("peasants").innerHTML = ("");   
-    document.getElementById("slaves").innerHTML = ("");   
+    document.getElementById("slaves").innerHTML = (""); 
+    document.getElementById("Number").innerHTML = ("");    
+    document.getElementById("GoldPerTurn").innerHTML = (""); 
+    document.getElementById("GrowthRate").innerHTML = ("");          
 }
 
 
@@ -229,7 +236,34 @@ function setup() {
     towns = [];
     squads = [];
     mapPoints = [];
-    towns.push(new Town(100,340,1));
+    var rand = round(random(1,12));
+    console.log(rand);
+    if(rand==1){
+        towns.push(new Town(100,340,1,1));     
+    }else if(rand==2){
+        towns.push(new Town(240,90,1,1));     
+    }else if(rand==3){
+        towns.push(new Town(355,233,1,1));     
+    }else if(rand==4){
+        towns.push(new Town(550,30,1,1));     
+    }else if(rand==5){
+        towns.push(new Town(695,400,1,1));     
+    }else if(rand==6){
+        towns.push(new Town(1080,330,1,1));     
+    }else if(rand==7){
+        towns.push(new Town(1085,100,1,1));     
+    }else if(rand==8){
+        towns.push(new Town(1320,260,1,1));     
+    }else if(rand==9){
+        towns.push(new Town(1415,125,1,1));     
+    }else if(rand==10){
+        towns.push(new Town(1340,440,1,1));     
+    }else if(rand==11){
+        towns.push(new Town(1730,500,1,1));     
+    }else if(rand==12){
+        towns.push(new Town(1690,310,1,1));     
+    }
+    
     document.getElementById("Slider1").style.left=1229;
     document.getElementById("Slider1").style.top=811;
     document.getElementById("Slider2").style.left=1529;

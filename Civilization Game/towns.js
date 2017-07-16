@@ -1,14 +1,16 @@
 
-function Town(x,y,i){
-	this.size = 3;
+function Town(x,y,i,t){
+	this.size = 1;
 	this.x = x;
 	this.y = y;
 	this.i = i;
-	this.peasants = 10;
+	this.peasants = 11;
 	this.slaves = 0;
 	this.menu = 0;
 	this.tower = false;
 	this.garrison = [];
+    this.team = t;
+    this.taxRate = 0;
 
     for(var b=0;b<this.peasants;b++){
             this.garrison.push(new Unit(4));
@@ -18,11 +20,42 @@ function Town(x,y,i){
 		document.getElementById("town" + this.i).style.left = this.x;
 		document.getElementById("town" + this.i).style.top = this.y;
 
-    	if(selection == towns[i-1]){
+        if(this.team == 1){
+            document.getElementById("Flag"+this.i).src = "graphics/BlueFlag.png"; 
+            if(this.size==1){
+                document.getElementById("Flag"+this.i).style.left = this.x-50;
+                document.getElementById("Flag"+this.i).style.top = this.y-30;
+            }else if(this.size==2){
+                document.getElementById("Flag"+this.i).style.left = this.x-40;
+                document.getElementById("Flag"+this.i).style.top = this.y-20;
+            }else if(this.size==3){
+                document.getElementById("Flag"+this.i).style.left = this.x-20;
+                document.getElementById("Flag"+this.i).style.top = this.y-20;
+            }
+
+        }else if(this.team == 2){
+            document.getElementById("Flag"+this.i).src = "graphics/RedFlag.png"; 
+            if(this.size==1){
+                document.getElementById("Flag"+this.i).style.left = this.x-50;
+                document.getElementById("Flag"+this.i).style.top = this.y-30;
+            }else if(this.size==2){
+                document.getElementById("Flag"+this.i).style.left = this.x-40;
+                document.getElementById("Flag"+this.i).style.top = this.y-20;
+            }else if(this.size==3){
+                document.getElementById("Flag"+this.i).style.left = this.x-20;
+                document.getElementById("Flag"+this.i).style.top = this.y-20;
+            }
+
+        }
+
+    	if(selection == towns[i-1] && this.team == 1){
 			document.getElementById("ConvertUnitsButton").src = "graphics/ConvertUnitsButton.bmp";    
    			document.getElementById("GarrisonButton").src = "graphics/GarrisonButton.png";    
     		document.getElementById("ConstructionsButton").src = "graphics/ConstructionsButton.png"; 
     		document.getElementById("TaxRatesButton").src = "graphics/TaxRatesButton.png"; 
+            document.getElementById("peasants").innerHTML = ("Peasants:"+this.peasants);
+            document.getElementById("slaves").innerHTML = ("Slaves:"+this.slaves);
+        
     		if(this.menu==1){
     			document.getElementById("Conversion1").src = "graphics/Conversion1.png"; 
     			document.getElementById("Conversion2").src = "graphics/Conversion2.png"; 
@@ -125,7 +158,15 @@ function Town(x,y,i){
     				document.getElementById("TowerTroops").innerHTML = ("Tower Garrison");	
     			}
     			
-    		}
+    		}else if(this.menu==4){
+                document.getElementById("NumberBackground").src = "graphics/NumberBackground.png";
+                document.getElementById("MinusButton").src = "graphics/MinusButton.png";
+                document.getElementById("PlusButton").src = "graphics/PlusButton.png";
+                document.getElementById("Number").innerHTML = (this.taxRate);
+                document.getElementById("GoldPerTurn").innerHTML = ("Gold Per Turn");
+                var growthRate = 50 - (this.taxRate*10);
+                document.getElementById("GrowthRate").innerHTML = (growthRate +"% Population Growth Rate");
+            }
     		
 
 		}
@@ -133,24 +174,18 @@ function Town(x,y,i){
 		if(this.size==1){
 			if(selection == towns[i-1]){
 				document.getElementById("town" + this.i).src = "graphics/SmallTownSelected.png";	
-				document.getElementById("peasants").innerHTML = ("Peasants:"+this.peasants);
-				document.getElementById("slaves").innerHTML = ("Slaves:"+this.slaves);
 			}else{
 				document.getElementById("town" + this.i).src = "graphics/SmallTown.png";	
 			}
 		}else if(this.size==2){
 			if(selection == towns[i-1]){
 				document.getElementById("town" + this.i).src = "graphics/MediumTownSelected.png";	
-				document.getElementById("peasants").innerHTML = ("Peasants:"+this.peasants);
-				document.getElementById("slaves").innerHTML = ("Slaves:"+this.slaves);
 			}else{
 				document.getElementById("town" + this.i).src = "graphics/MediumTown.png";	
 			}
 		}else if(this.size==3){
 			if(selection == towns[i-1]){
 				document.getElementById("town" + this.i).src = "graphics/LargeTownSelected.png";
-				document.getElementById("peasants").innerHTML = ("Peasants:"+this.peasants);	
-				document.getElementById("slaves").innerHTML = ("Slaves:"+this.slaves);
 			}else{
 				document.getElementById("town" + this.i).src = "graphics/LargeTown.png";	
 			}
