@@ -95,6 +95,17 @@ function advanceTurn(){
         console.log("Turn #"+turn);   
         console.log("Enemy Gold:"+redGold); 
         turnAdvanced=true; 
+
+        for(var a=0;a<squads.length;a++){
+            if(squads[a].team==2){
+                rand = round(random(0,squads[a].adjacentSpaces.length-1));
+                squads[a].update();
+                squads[a].targetX = squads[a].adjacentSpaces[rand].x;
+                squads[a].targetY = squads[a].adjacentSpaces[rand].y; 
+            }
+        }
+
+        
     }   
 }
 
@@ -165,11 +176,12 @@ function transferUnit(t,s,n){
     
     
 }
-
-function squadIsPresentAt(x,y){
+function squadIsPresentAt(x,y,t){
     for(var a=0;a<squads.length;a++){
         if(squads[a].x == x && squads[a].y == y){
-            return true;
+            if(squads[a].team == t){
+                return true;    
+            }
         }
     }
     return false;

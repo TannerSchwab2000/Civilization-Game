@@ -239,6 +239,13 @@ function Town(x,y,i,t){
             }
         }
 
+        this.peasants = 0;
+        for(var a=0;a<this.garrison.length;a++){
+            if(this.garrison[a].unitType==4){
+                this.peasants++;
+            }
+        }
+
 
 
 		if(selection == towns[i-1]){
@@ -268,7 +275,8 @@ function Town(x,y,i,t){
                             }else{
                                 for(var a=0;a<squads.length;a++){
                                     if(squads[a].x == this.x && squads[a].y == this.y){
-                                        transferUnit(this.i-1,a,0)
+                                        transferUnit(this.i-1,a,0);
+                                        transferUnit(this.i-1,a,5);
                                     }
                                 }
                                 

@@ -1,4 +1,6 @@
 
+
+
 function Squad(x,y,i,t){
 	this.x=x;
 	this.y=y;
@@ -7,10 +9,19 @@ function Squad(x,y,i,t){
 	this.targetY=0;
 	this.i = i;
 	this.slaves=0;
+	this.team=t;
+	this.adjacentSpaces =[];
 
 	this.update = function(){
+		this.adjacentSpaces =[];
+		for(var a=0;a<mapPoints.length;a++){
+			if(adjacent(this.x,this.y,mapPoints[a].x,mapPoints[a].y)){
+				this.adjacentSpaces.push(new mapPoint(mapPoints[a].x,mapPoints[a].y));
+			}
+		}
+
 		if(adjacent(this.x,this.y,this.targetX,this.targetY)){
-			if(squadIsPresentAt(this.targetX,this.targetY)==false){
+			if(squadIsPresentAt(this.targetX,this.targetY,this.team)==false){
 				this.x = this.targetX;
 				this.y = this.targetY;	
 			}	

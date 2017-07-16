@@ -70,11 +70,6 @@ function mouseReleased() {
                 if(selection == towns[a]){
                     for(var b=0;b<squads.length;b++){
                         if(squads[b].x==towns[a].x&&squads[b].y==towns[a].y){
-                            if(squads[b].units[squadListUnitNumber-1].unitType==4){
-                                towns[a].peasants++;
-                            }else if(squads[b].units[squadListUnitNumber-1].unitType==5){
-                                towns[a].slaves++;
-                            }
                             towns[a].garrison.push(new Unit(squads[b].units[squadListUnitNumber-1].unitType));
                             squads[b].units.splice(squadListUnitNumber-1,1);
                             if(squads[b].units.length==0){
@@ -99,22 +94,12 @@ function mouseReleased() {
                             for(var c=0;c<towns.length;c++){
                                 if(selection == towns[c] && towns[c].menu == 3){
                                     if(squadIsPresentAt(towns[c].x,towns[c].y)==false){
-                                        if(towns[c].garrison[garrisonUnitNumber-1].unitType==4){
-                                            towns[c].peasants--;
-                                        }else if(towns[c].garrison[garrisonUnitNumber-1].unitType==5){
-                                            towns[c].slaves--;
-                                        }
                                         squads.push(new Squad(towns[c].x,towns[c].y,squads.length));     
                                         squads[squads.length-1].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                         towns[c].garrison.splice(garrisonUnitNumber-1,1); 
                                     }else{
                                         if(squads[b].x == towns[c].x && squads[b].y == towns[c].y){
                                             if(towns[c].garrison[garrisonUnitNumber-1]!=null){
-                                                if(towns[c].garrison[garrisonUnitNumber-1].unitType==4){
-                                                    towns[c].peasants--;
-                                                }else if(towns[c].garrison[garrisonUnitNumber-1].unitType==5){
-                                                    towns[c].slaves--;
-                                                }
                                                 squads[b].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                                 towns[c].garrison.splice(garrisonUnitNumber-1,1);
                                             }
@@ -126,11 +111,6 @@ function mouseReleased() {
                     }else{
                         for(var c=0;c<towns.length;c++){
                             if(selection == towns[c]){
-                                if(towns[c].garrison[garrisonUnitNumber-1].unitType==4){
-                                    towns[c].peasants--;
-                                }else if(towns[c].garrison[garrisonUnitNumber-1].unitType==5){
-                                    towns[c].slaves--;
-                                }
                                 squads.push(new Squad(towns[c].x,towns[c].y,squads.length));     
                                 squads[0].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                 towns[c].garrison.splice(garrisonUnitNumber-1,1);
@@ -172,8 +152,6 @@ function mouseReleased() {
              for(var i=0;i<towns.length;i++){
                 if(selection == towns[i] && towns[i].menu == 1){
                     if(towns[i].peasants>0){
-                        towns[i].peasants--;
-                        towns[i].slaves++;
                         gold = gold + 5;
                         var unitRemoved = false;
                         for(var c=0;c<towns[i].garrison.length;c++){
@@ -199,7 +177,6 @@ function mouseReleased() {
         
         if(mouseIsContainedIn(1600,805,1760,840) && townSelected == true){
                 if(towns[i].peasants > 0 && gold >= 5 && selection == towns[i]){
-                    towns[i].peasants--;
                     gold -=5;
                     var unitRemoved = false;
                         for(var c=0;c<towns[i].garrison.length;c++){
@@ -216,7 +193,6 @@ function mouseReleased() {
         }
         if(mouseIsContainedIn(1600,865,1760,900) && townSelected == true){
                 if(towns[i].peasants > 0 && gold >= 5 && selection == towns[i]){
-                    towns[i].peasants--;
                     gold -=5;
                     var unitRemoved = false;
                         for(var c=0;c<towns[i].garrison.length;c++){
@@ -233,7 +209,6 @@ function mouseReleased() {
         }
         if(mouseIsContainedIn(1600,925,1760,960) && townSelected == true){
                 if(towns[i].peasants > 0 && gold >= 5 && selection == towns[i]){
-                    towns[i].peasants--;
                     gold -=5;
                     var unitRemoved = false;
                         for(var c=0;c<towns[i].garrison.length;c++){
