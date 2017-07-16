@@ -14,6 +14,26 @@ var sliderScale = 3.2;
 function mouseReleased() {
     console.log(mouseX,mouseY+800);
 
+    if(mouseIsContainedIn(1070,880,1090,900)){
+        for(var a=0;a<towns.length;a++){
+            if(selection==towns[a] && towns[a].menu == 4){
+                if(towns[a].taxRate>-1){
+                    towns[a].taxRate--;
+                }
+            }
+        }
+    }
+
+    if(mouseIsContainedIn(1130,880,1150,900)){
+        for(var a=0;a<towns.length;a++){
+            if(selection==towns[a] && towns[a].menu == 4){
+                if(towns[a].taxRate<10){
+                    towns[a].taxRate++;   
+                }
+            }
+        }
+    }
+
     if(mouseIsContainedIn(490,900,650,935)){
         for(var a=0;a<towns.length;a++){
             if(selection==towns[a]){
@@ -233,7 +253,9 @@ function mouseReleased() {
             } 
             for(var a=0;a<squads.length;a++){
                 squads[a].update();
-            }        
+            }    
+            growPopulations();    
+            collectTaxes();
         }
         for(var a=0;a<squads.length;a++){
             mouseDistance = Math.abs(mouseX-(squads[a].x+50)) + Math.abs((mouseY+800)-(squads[a].y+55))

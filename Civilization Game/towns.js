@@ -4,13 +4,14 @@ function Town(x,y,i,t){
 	this.x = x;
 	this.y = y;
 	this.i = i;
-	this.peasants = 11;
+	this.peasants = 2;
 	this.slaves = 0;
 	this.menu = 0;
 	this.tower = false;
 	this.garrison = [];
     this.team = t;
     this.taxRate = 0;
+    this.growthRate = 0;
 
     for(var b=0;b<this.peasants;b++){
             this.garrison.push(new Unit(4));
@@ -164,8 +165,9 @@ function Town(x,y,i,t){
                 document.getElementById("PlusButton").src = "graphics/PlusButton.png";
                 document.getElementById("Number").innerHTML = (this.taxRate);
                 document.getElementById("GoldPerTurn").innerHTML = ("Gold Per Turn");
-                var growthRate = 50 - (this.taxRate*10);
+                var growthRate = 40 - (this.taxRate*10);
                 document.getElementById("GrowthRate").innerHTML = (growthRate +"% Population Growth Rate");
+                this.growthRate = growthRate/100;
             }
     		
 
@@ -196,6 +198,8 @@ function Town(x,y,i,t){
 	}
 
 	this.update = function(){
+        var growthRate = 40 - (this.taxRate*10);
+        this.growthRate = growthRate/100;
 		if(selection == towns[i-1]){
 			townSelected = true;
         }

@@ -3,6 +3,31 @@ var gold = 10;
 var maximumUnits = 12;
 var townCost = 3;
 
+function growPopulations(){
+    for(var a=0;a<towns.length;a++){
+        var oldPop = towns[a].peasants;
+        var newPop = round(oldPop*(1+towns[a].growthRate));
+        var difference = newPop-oldPop;
+        console.log(oldPop,newPop);
+        if(difference>0){
+            for(var b=0;b<difference;b++){
+                towns[a].garrison.push(new Unit(4));
+                towns[a].peasants++;
+            }    
+        }else{
+            for(var b=0;b<abs(difference);b++){
+                removeTownUnit(a,4);
+                towns[a].peasants--;
+            } 
+        }
+    }
+}
+
+function collectTaxes(){
+    for(var a=0;a<towns.length;a++){
+        gold = gold + towns[a].taxRate;
+    }
+}
 
 function mapPoint(x,y){
     this.x = x;
@@ -98,6 +123,19 @@ function removeSquadUnit(s,u){
     if(squads[s].units.length==0){
                     squads.splice(s,1);
     } 
+    
+}
+
+function removeTownUnit(t,u){
+    var removed = false;
+    for(var a=0;a<towns[t].garrison.length;a++){
+        if(towns[t].garrison[a].unitType==u){
+            if(removed == false){
+                towns[t].garrison.splice(a,1);   
+                removed = true;
+            }
+        }
+    }
     
 }
 
