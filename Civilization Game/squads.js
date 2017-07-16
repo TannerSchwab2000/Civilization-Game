@@ -5,8 +5,8 @@ function Squad(x,y,i,t){
 	this.x=x;
 	this.y=y;
 	this.units = [];
-	this.targetX=0;
-	this.targetY=0;
+	this.targetX=this.x;
+	this.targetY=this.y;
 	this.i = i;
 	this.slaves=0;
 	this.team=t;

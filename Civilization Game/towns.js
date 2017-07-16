@@ -284,7 +284,6 @@ function Town(x,y,i,t){
                         }else{
                             if(squadIsPresentAt(this.x,this.y)==false){
                                 squads.push(new Squad(this.x,this.y,squads.length,2));
-                                console.log("squad length:"+squads.length);
                                 transferUnit(this.i-1,squads.length-1,0);
                                 transferUnit(this.i-1,squads.length-1,0);
                                 transferUnit(this.i-1,squads.length-1,0);

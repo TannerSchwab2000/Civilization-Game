@@ -6,6 +6,9 @@ var turnFinished = true;
 var turn = 1;
 var turnAdvanced = false;
 var redGold = 10;
+var battle = 0;
+var squad1;
+var squad2;
 
 
 function mapPoint(x,y){
@@ -98,13 +101,32 @@ function advanceTurn(){
 
         for(var a=0;a<squads.length;a++){
             if(squads[a].team==2){
-                rand = round(random(0,squads[a].adjacentSpaces.length-1));
                 squads[a].update();
+                rand = round(random(0,squads[a].adjacentSpaces.length-1));
                 squads[a].targetX = squads[a].adjacentSpaces[rand].x;
                 squads[a].targetY = squads[a].adjacentSpaces[rand].y; 
             }
         }
 
+        for(var a=0;a<mapPoints.length;a++){
+            if(squadIsPresentAt(mapPoints[a].x,mapPoints[a].y,1)){
+                if(squadIsPresentAt(mapPoints[a].x,mapPoints[a].y,2)){
+                var presentSquads = [];
+                for(var b=0;b<squads.length;b++){
+                    if(squads[b].x == mapPoints[a].x && squads[b].y == mapPoints[a].y){
+                        presentSquads.push(squads[b]);
+                        console.log(presentSquads);
+                        if(squads[b].team==1){
+                            squad1=b;
+                        }else if(squads[b].team==2){
+                            squad2=b;
+                        }
+                    }
+                }
+                battle = 1;
+            }
+        }
+    }
         
     }   
 }
@@ -264,6 +286,7 @@ function clearMap(){
     document.getElementById("ConstructionsButton").src = "";    
     document.getElementById("TaxRatesButton").src = "";   
     document.getElementById("SettleTownButton").src = "";   
+    document.getElementById("EndTurnButton").src = "";   
     document.getElementById("Conversion1").src = ""; 
     document.getElementById("Conversion2").src = ""; 
     document.getElementById("Conversion3").src = ""; 
@@ -291,9 +314,12 @@ function clearMap(){
     document.getElementById("Arrow3").src = ("");
     document.getElementById("Arrow4").src = ("");
     document.getElementById("Arrow5").src = ("");
+    document.getElementById("VS").src = ("");
     document.getElementById("MinusButton").src = ("");
     document.getElementById("PlusButton").src = ("");
     document.getElementById("NumberBackground").src = ("");
+    document.getElementById("DividingLine").src = ("");
+    document.getElementById("Map").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
     document.getElementById("TownTroops").innerHTML = ("");
     document.getElementById("TowerTroops").innerHTML = ("");   
@@ -302,6 +328,7 @@ function clearMap(){
     document.getElementById("Number").innerHTML = ("");    
     document.getElementById("GoldPerTurn").innerHTML = (""); 
     document.getElementById("GrowthRate").innerHTML = ("");          
+    document.getElementById("gold").innerHTML = ("");     
 }
 
 
@@ -313,61 +340,7 @@ function setup() {
     towns = [];
     squads = [];
     mapPoints = [];
-    var rand = round(random(1,12));
-    console.log(rand);
-    if(rand==1){
-        towns.push(new Town(100,340,1,1));     
-    }else if(rand==2){
-        towns.push(new Town(240,90,1,1));     
-    }else if(rand==3){
-        towns.push(new Town(355,233,1,1));     
-    }else if(rand==4){
-        towns.push(new Town(550,30,1,1));     
-    }else if(rand==5){
-        towns.push(new Town(695,400,1,1));     
-    }else if(rand==6){
-        towns.push(new Town(1080,330,1,1));     
-    }else if(rand==7){
-        towns.push(new Town(1085,100,1,1));     
-    }else if(rand==8){
-        towns.push(new Town(1320,260,1,1));     
-    }else if(rand==9){
-        towns.push(new Town(1415,125,1,1));     
-    }else if(rand==10){
-        towns.push(new Town(1340,440,1,1));     
-    }else if(rand==11){
-        towns.push(new Town(1730,500,1,1));     
-    }else if(rand==12){
-        towns.push(new Town(1690,310,1,1));     
-    }
-
-    var rand = round(random(1,12));
-    console.log(rand);
-    if(rand==1){
-        towns.push(new Town(100,340,2,2));     
-    }else if(rand==2){
-        towns.push(new Town(240,90,2,2));     
-    }else if(rand==3){
-        towns.push(new Town(355,233,2,2));     
-    }else if(rand==4){
-        towns.push(new Town(550,30,2,2));     
-    }else if(rand==5){
-        towns.push(new Town(695,400,2,2));     
-    }else if(rand==6){
-        towns.push(new Town(1080,330,2,2));     
-    }else if(rand==7){
-        towns.push(new Town(1085,100,2,2));     
-    }else if(rand==8){
-        towns.push(new Town(1320,260,2,2));     
-    }else if(rand==9){
-        towns.push(new Town(1415,125,2,2));     
-    }else if(rand==10){
-        towns.push(new Town(1340,440,2,2));     
-    }else if(rand==11){
-        towns.push(new Town(1730,500,2,2));     
-    }else if(rand==12){
-        towns.push(new Town(1690,310,2,2));     
-    }
+    
     
     document.getElementById("Slider1").style.left=1229;
     document.getElementById("Slider1").style.top=811;
@@ -390,6 +363,18 @@ function setup() {
     mapPoints.push(new mapPoint(1730,500));
     mapPoints.push(new mapPoint(1690,310));
 
+    var rand = round(random(0,11));
+    towns.push(new Town(mapPoints[rand].x,mapPoints[rand].y,1,1));    
+
+    rand = round(random(0,11));
+    towns.push(new Town(mapPoints[rand].x,mapPoints[rand].y,2,2));     
+
+    if(towns[1].x==towns[0].x&&towns[1].y==towns[0].y){
+        rand = round(random(0,11));
+        towns[1].x = mapPoints[rand].x;
+        towns[1].y = mapPoints[rand].y;
+    }
+
     for(var a=0;a<maximumUnits;a++){
         document.getElementById("GarrisonUnit"+(a+1)).style.left = 1325;
         document.getElementById("GarrisonUnit"+(a+1)).style.top = 0;
@@ -403,7 +388,10 @@ function draw() {
     turnAdvanced=false;
     clearMap();
     renderSquads();
+    document.getElementById("Map").src = ("graphics/map.jpg");
     document.getElementById("gold").innerHTML = ("Gold:"+gold);
+    document.getElementById("DividingLine").src = ("graphics/DividingLine.png");
+    document.getElementById("EndTurnButton").src = ("graphics/EndTurnButton.png");
 
     for(var a=0;a<squads.length;a++){
         if(squads[a].targetX != squads[a].x){
@@ -446,6 +434,60 @@ function draw() {
     if(slider2IsHeld == true){
         document.getElementById("Slider2").style.top = mouseY + 790;       
         document.getElementById("Slider2").style.top = constrain(parseInt(document.getElementById("Slider2").style.top), 811, 939);
+    }
+
+    if(battle==1){
+        clearMap();
+        document.getElementById("MapUnit"+(squad1+1)).style.left = 700;
+        document.getElementById("MapUnit"+(squad1+1)).style.top = 300;
+        document.getElementById("VS").src = "graphics/VS.png";
+        document.getElementById("VS").style.left = 900;
+        document.getElementById("VS").style.top = 300;
+        document.getElementById("MapUnit"+(squad2+1)).style.left = 1100;
+        document.getElementById("MapUnit"+(squad2+1)).style.top = 300;
+
+        document.getElementById("SquadListBackground1").src = "graphics/SquadListBackground.png";
+        document.getElementById("SquadListBackground1").style.left = 300;
+        document.getElementById("SquadListBackground1").style.top = 290;
+        document.getElementById("SquadListBackground2").src = "graphics/SquadListBackground.png";
+        document.getElementById("SquadListBackground2").style.left = 1400;
+        document.getElementById("SquadListBackground2").style.top = 290;
+        document.getElementById("Slider1").src = "graphics/Slider.png";
+        document.getElementById("Slider2").src = "graphics/Slider.png";
+        document.getElementById("SliderBackground1").src = "graphics/SliderBackground.png";
+        document.getElementById("SliderBackground2").src = "graphics/SliderBackground.png";
+        document.getElementById("Slider1").style.left = 509;
+        document.getElementById("Slider1").style.top = 291;
+        document.getElementById("SliderBackground1").style.left = 508;
+        document.getElementById("SliderBackground1").style.top = 290;
+        document.getElementById("Slider2").style.left = 1609;
+        document.getElementById("Slider2").style.top = 291;
+        document.getElementById("SliderBackground2").style.left = 1608;
+        document.getElementById("SliderBackground2").style.top = 290;
+
+        if(squads[squad1].units[squads[squad1].units.length-1].unitType==1){
+            document.getElementById("MapUnit"+(squad1+1)).src = "graphics/SwordsmanUnit.png";   
+        }else if(squads[squad1].units[squads[squad1].units.length-1].unitType==2){
+            document.getElementById("MapUnit"+(squad1+1)).src = "graphics/KnightUnit.png";   
+        }else if(squads[squad1].units[squads[squad1].units.length-1].unitType==3){
+            document.getElementById("MapUnit"+(squad1+1)).src = "graphics/CavalryUnit.png";   
+        }else if(squads[squad1].units[squads[squad1].units.length-1].unitType==4){
+            document.getElementById("MapUnit"+(squad1+1)).src = "graphics/PeasantUnit.png";   
+        }else if(squads[squad1].units[squads[squad1].units.length-1].unitType==5){
+            document.getElementById("MapUnit"+(squad1+1)).src = "graphics/SlaveUnit.png";   
+        }
+
+        if(squads[squad2].units[squads[squad2].units.length-1].unitType==1){
+            document.getElementById("MapUnit"+(squad2+1)).src = "graphics/SwordsmanUnit.png";   
+        }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==2){
+            document.getElementById("MapUnit"+(squad2+1)).src = "graphics/KnightUnit.png";   
+        }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==3){
+            document.getElementById("MapUnit"+(squad2+1)).src = "graphics/CavalryUnit.png";   
+        }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==4){
+            document.getElementById("MapUnit"+(squad2+1)).src = "graphics/PeasantUnit.png";   
+        }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==5){
+            document.getElementById("MapUnit"+(squad2+1)).src = "graphics/SlaveUnit.png";   
+        }
     }
 
 }
