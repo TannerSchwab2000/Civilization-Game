@@ -1,5 +1,5 @@
 
-function Squad(x,y,i){
+function Squad(x,y,i,t){
 	this.x=x;
 	this.y=y;
 	this.units = [];

@@ -248,6 +248,7 @@ function mouseReleased() {
                 }          
         }
         if(mouseIsContainedIn(870,766,1030,800)){
+            advanceTurn();
             for(var a=0;a<squads.length;a++){
                 squads[a].update();
             } 

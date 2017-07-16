@@ -3,6 +3,9 @@ var gold = 10;
 var maximumUnits = 12;
 var townCost = 3;
 var turnFinished = true;
+var turn = 1;
+var turnAdvanced = false;
+var redGold = 10;
 
 
 function mapPoint(x,y){
@@ -86,6 +89,15 @@ function adjacent(x1,y1,x2,y2){
     }
 }
 
+function advanceTurn(){
+    if(turnAdvanced==false){
+        turn++;
+        console.log("Turn #"+turn);   
+        console.log("Enemy Gold:"+redGold); 
+        turnAdvanced=true; 
+    }   
+}
+
 function removeSquadUnit(s,u){
     var removed = false;
     for(var a=0;a<squads[s].units.length;a++){
@@ -97,21 +109,60 @@ function removeSquadUnit(s,u){
         }
     }
     if(squads[s].units.length==0){
-                    squads.splice(s,1);
+        squads.splice(s,1);
     } 
     
 }
 
 function removeTownUnit(t,u){
     var removed = false;
-    for(var a=0;a<towns[t].garrison.length;a++){
-        if(towns[t].garrison[a].unitType==u){
-            if(removed == false){
-                towns[t].garrison.splice(a,1);   
-                removed = true;
+    if(u == 0){
+       for(var a=0;a<towns[t].garrison.length;a++){
+            if(towns[t].garrison[a].unitType==1 || towns[t].garrison[a].unitType==2 || towns[t].garrison[a].unitType==3){
+                if(removed == false){
+                    towns[t].garrison.splice(a,1);   
+                    removed = true;
+                }
             }
-        }
+        }  
+    }else{
+        for(var a=0;a<towns[t].garrison.length;a++){
+            if(towns[t].garrison[a].unitType==u){
+                if(removed == false){
+                    towns[t].garrison.splice(a,1);   
+                    removed = true;
+                }
+            }
+        }    
     }
+    
+    
+}
+
+function transferUnit(t,s,n){
+    var removed = false;
+    if(n == 0){
+       for(var a=0;a<towns[t].garrison.length;a++){
+            if(towns[t].garrison[a].unitType==1 || towns[t].garrison[a].unitType==2 || towns[t].garrison[a].unitType==3){
+                if(removed == false){
+                    squads[s].units.push(new Unit(towns[t].garrison[a].unitType));
+                    towns[t].garrison.splice(a,1);   
+                    removed = true;
+                }
+            }
+        }  
+    }else{
+        for(var a=0;a<towns[t].garrison.length;a++){
+            if(towns[t].garrison[a].unitType==n){
+                if(removed == false){
+                    squads[s].units.push(new Unit(n));
+                    towns[t].garrison.splice(a,1);   
+                    removed = true;
+                }
+            }
+        }    
+    }
+    
     
 }
 
@@ -277,6 +328,34 @@ function setup() {
     }else if(rand==12){
         towns.push(new Town(1690,310,1,1));     
     }
+
+    var rand = round(random(1,12));
+    console.log(rand);
+    if(rand==1){
+        towns.push(new Town(100,340,2,2));     
+    }else if(rand==2){
+        towns.push(new Town(240,90,2,2));     
+    }else if(rand==3){
+        towns.push(new Town(355,233,2,2));     
+    }else if(rand==4){
+        towns.push(new Town(550,30,2,2));     
+    }else if(rand==5){
+        towns.push(new Town(695,400,2,2));     
+    }else if(rand==6){
+        towns.push(new Town(1080,330,2,2));     
+    }else if(rand==7){
+        towns.push(new Town(1085,100,2,2));     
+    }else if(rand==8){
+        towns.push(new Town(1320,260,2,2));     
+    }else if(rand==9){
+        towns.push(new Town(1415,125,2,2));     
+    }else if(rand==10){
+        towns.push(new Town(1340,440,2,2));     
+    }else if(rand==11){
+        towns.push(new Town(1730,500,2,2));     
+    }else if(rand==12){
+        towns.push(new Town(1690,310,2,2));     
+    }
     
     document.getElementById("Slider1").style.left=1229;
     document.getElementById("Slider1").style.top=811;
@@ -309,6 +388,7 @@ function setup() {
 
 
 function draw() {
+    turnAdvanced=false;
     clearMap();
     renderSquads();
     document.getElementById("gold").innerHTML = ("Gold:"+gold);

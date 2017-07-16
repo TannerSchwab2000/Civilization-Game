@@ -13,6 +13,8 @@ function Town(x,y,i,t){
     this.realTaxRate = 0;
     this.taxRate = 0;
     this.growthRate = 0;
+    this.soldiers = 0;
+    this.slaves = 0;
 
     for(var b=0;b<this.peasants;b++){
             this.garrison.push(new Unit(4));
@@ -30,7 +32,12 @@ function Town(x,y,i,t){
     }
 
     this.collect = function(){
-        gold = gold + this.taxRate;
+        if(this.team==1){
+            gold = gold + this.taxRate;
+        }else{
+            redGold = redGold + this.taxRate;
+        }
+        
     }
 
 	this.render = function(){
@@ -65,7 +72,7 @@ function Town(x,y,i,t){
 
         }
 
-    	if(selection == towns[i-1] && this.team == 1){
+    	if(selection == towns[i-1]){
 			document.getElementById("ConvertUnitsButton").src = "graphics/ConvertUnitsButton.bmp";    
    			document.getElementById("GarrisonButton").src = "graphics/GarrisonButton.png";    
     		document.getElementById("ConstructionsButton").src = "graphics/ConstructionsButton.png"; 
@@ -217,6 +224,23 @@ function Town(x,y,i,t){
         var growthRate = 40 - (this.taxRate*10);
         this.growthRate = growthRate/100;
         this.taxRate = this.realTaxRate;
+
+        this.soldiers = 0;
+        for(var a=0;a<this.garrison.length;a++){
+            if(this.garrison[a].unitType==1 || this.garrison[a].unitType==2 || this.garrison[a].unitType==3){
+                this.soldiers++;
+            }
+        }
+
+        this.slaves = 0;
+        for(var a=0;a<this.garrison.length;a++){
+            if(this.garrison[a].unitType==5){
+                this.slaves++;
+            }
+        }
+
+
+
 		if(selection == towns[i-1]){
 			townSelected = true;
         }
@@ -227,7 +251,68 @@ function Town(x,y,i,t){
         }else if(this.peasants>10){
             this.size = 3;
         }
+
+        if(this.team==2){
+            if(turn<3){
+                if(this.taxRate > 1){
+                    this.taxRate = 1;    
+                }
+            }else {
+
+                if(this.soldiers>2){
+                        if(this.slaves<3){
+                            if(squadIsPresentAt(this.x,this.y)==false){
+                            removeTownUnit(this.i-1,4);
+                            this.garrison.push(new Unit(5));
+                            redGold = redGold + 5;
+                            }else{
+                                for(var a=0;a<squads.length;a++){
+                                    if(squads[a].x == this.x && squads[a].y == this.y){
+                                        transferUnit(this.i-1,a,0)
+                                    }
+                                }
+                                
+                            }
+                        }else{
+                            if(squadIsPresentAt(this.x,this.y)==false){
+                                squads.push(new Squad(this.x,this.y,squads.length,2));
+                                console.log("squad length:"+squads.length);
+                                transferUnit(this.i-1,squads.length-1,0);
+                                transferUnit(this.i-1,squads.length-1,0);
+                                transferUnit(this.i-1,squads.length-1,0);
+                                transferUnit(this.i-1,squads.length-1,5);
+                                transferUnit(this.i-1,squads.length-1,5);
+                                transferUnit(this.i-1,squads.length-1,5);    
+                            }
+                        
+                        }
+                }
+
+                if(turn>3 && this.taxRate < 3){
+                    if(redGold<10){
+                        this.taxRate = 3;    
+                    }
+                }
+                if(this.peasants>2){
+                    if(redGold>4 && this.soldiers<3){
+                        redGold = redGold-5;
+                        removeTownUnit(this.i-1,4);
+                        var r = round(random(1,3));
+                        this.garrison.push(new Unit(r));
+                        this.peasants--;
+                    }   
+                    if(this.taxRate<2){
+                    this.taxRate = 2;
+                    } 
+                }else{
+                    this.taxRate = 0;
+                }
+                
+                
+            }
+        }
 	}
+
 
 	
 }
