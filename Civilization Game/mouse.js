@@ -17,8 +17,8 @@ function mouseReleased() {
     if(mouseIsContainedIn(1070,880,1090,900)){
         for(var a=0;a<towns.length;a++){
             if(selection==towns[a] && towns[a].menu == 4){
-                if(towns[a].taxRate>-1){
-                    towns[a].taxRate--;
+                if(towns[a].realTaxRate>-1){
+                    towns[a].realTaxRate--;
                 }
             }
         }
@@ -27,8 +27,8 @@ function mouseReleased() {
     if(mouseIsContainedIn(1130,880,1150,900)){
         for(var a=0;a<towns.length;a++){
             if(selection==towns[a] && towns[a].menu == 4){
-                if(towns[a].taxRate<10){
-                    towns[a].taxRate++;   
+                if(towns[a].realTaxRate<10){
+                    towns[a].realTaxRate++;   
                 }
             }
         }
@@ -45,8 +45,8 @@ function mouseReleased() {
     for(var a=0;a<squads.length;a++){
         if(selection == squads[a]){
             if(squads[a].slaves>=townCost){
-                towns.push(new Town(squads[a].x,squads[a].y,towns.length+1,1));  
                 if(mouseIsContainedIn(1300,810,1462,845)){
+                    towns.push(new Town(squads[a].x,squads[a].y,towns.length+1,1));  
                     for(var b=0;b<townCost;b++){
                         removeSquadUnit(a,5);      
                     }     
@@ -97,7 +97,7 @@ function mouseReleased() {
                     if(squads.length>0){
                         for(var b=0;b<squads.length;b++){
                             for(var c=0;c<towns.length;c++){
-                                if(selection == towns[c]){
+                                if(selection == towns[c] && towns[c].menu == 3){
                                     if(squadIsPresentAt(towns[c].x,towns[c].y)==false){
                                         if(towns[c].garrison[garrisonUnitNumber-1].unitType==4){
                                             towns[c].peasants--;
@@ -254,8 +254,12 @@ function mouseReleased() {
             for(var a=0;a<squads.length;a++){
                 squads[a].update();
             }    
-            growPopulations();    
-            collectTaxes();
+            for(var z=0;z<towns.length;z++){
+                towns[z].grow();
+                towns[z].collect();
+                towns[z].growthRate=0;
+                towns[z].taxRate=0;
+            }
         }
         for(var a=0;a<squads.length;a++){
             mouseDistance = Math.abs(mouseX-(squads[a].x+50)) + Math.abs((mouseY+800)-(squads[a].y+55))

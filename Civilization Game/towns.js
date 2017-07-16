@@ -10,11 +10,27 @@ function Town(x,y,i,t){
 	this.tower = false;
 	this.garrison = [];
     this.team = t;
+    this.realTaxRate = 0;
     this.taxRate = 0;
     this.growthRate = 0;
 
     for(var b=0;b<this.peasants;b++){
             this.garrison.push(new Unit(4));
+    }
+
+    this.grow = function(){
+        var oldPop = this.peasants;
+        var newPop = round(this.peasants*(1+this.growthRate));
+        var difference = newPop-oldPop;
+        this.peasants = this.peasants + difference;
+        console.log(this.growthRate);
+        for(var a=0;a<difference;a++){
+            this.garrison.push(new Unit(4));
+        }
+    }
+
+    this.collect = function(){
+        gold = gold + this.taxRate;
     }
 
 	this.render = function(){
@@ -200,6 +216,7 @@ function Town(x,y,i,t){
 	this.update = function(){
         var growthRate = 40 - (this.taxRate*10);
         this.growthRate = growthRate/100;
+        this.taxRate = this.realTaxRate;
 		if(selection == towns[i-1]){
 			townSelected = true;
         }

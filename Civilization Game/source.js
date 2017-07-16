@@ -2,32 +2,8 @@ var selection;
 var gold = 10;
 var maximumUnits = 12;
 var townCost = 3;
+var turnFinished = true;
 
-function growPopulations(){
-    for(var a=0;a<towns.length;a++){
-        var oldPop = towns[a].peasants;
-        var newPop = round(oldPop*(1+towns[a].growthRate));
-        var difference = newPop-oldPop;
-        console.log(oldPop,newPop);
-        if(difference>0){
-            for(var b=0;b<difference;b++){
-                towns[a].garrison.push(new Unit(4));
-                towns[a].peasants++;
-            }    
-        }else{
-            for(var b=0;b<abs(difference);b++){
-                removeTownUnit(a,4);
-                towns[a].peasants--;
-            } 
-        }
-    }
-}
-
-function collectTaxes(){
-    for(var a=0;a<towns.length;a++){
-        gold = gold + towns[a].taxRate;
-    }
-}
 
 function mapPoint(x,y){
     this.x = x;
