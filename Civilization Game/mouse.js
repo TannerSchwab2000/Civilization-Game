@@ -93,7 +93,7 @@ function mouseReleased() {
                         for(var b=0;b<squads.length;b++){
                             for(var c=0;c<towns.length;c++){
                                 if(selection == towns[c] && towns[c].menu == 3){
-                                    if(squadIsPresentAt(towns[c].x,towns[c].y)==false){
+                                    if(squadIsPresentAt(towns[c].x,towns[c].y,1)==false){
                                         squads.push(new Squad(towns[c].x,towns[c].y,squads.length,1));     
                                         squads[squads.length-1].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                         towns[c].garrison.splice(garrisonUnitNumber-1,1); 
