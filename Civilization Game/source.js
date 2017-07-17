@@ -124,6 +124,8 @@ function advanceTurn(){
                     }
                 }
                 battle = 1;
+                document.getElementById("Slider1").style.top = 290;
+                document.getElementById("Slider2").style.top = 290;
             }
         }
     }
@@ -236,12 +238,20 @@ function angleBetween(x1,y1,x2,y2){
 
 
 function mouseIsContainedIn(x1,y1,x2,y2){
-    if(mouseX>x1 && (mouseY+800)>y1 && mouseX<x2 && (mouseY+800)<y2){
+    if(battle==1){
+        if(mouseX>x1 && (mouseY)>y1 && mouseX<x2 && (mouseY)<y2){
             return true;
         }else{
             return false;
         }
-}
+    }else{
+        if(mouseX>x1 && (mouseY+800)>y1 && mouseX<x2 && (mouseY+800)<y2){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    }
 
 function renderSquads(){
     for(var a=0;a<squads.length;a++){
@@ -438,6 +448,16 @@ function draw() {
 
     if(battle==1){
         clearMap();
+        
+        if(slider1IsHeld){
+            document.getElementById("Slider1").style.top = mouseY;       
+            document.getElementById("Slider1").style.top = constrain(parseInt(document.getElementById("Slider1").style.top), 291, 420);
+        }
+        if(slider2IsHeld){
+            document.getElementById("Slider2").style.top = mouseY;       
+            document.getElementById("Slider2").style.top = constrain(parseInt(document.getElementById("Slider2").style.top), 291, 420);
+        }
+
         document.getElementById("MapUnit"+(squad1+1)).style.left = 700;
         document.getElementById("MapUnit"+(squad1+1)).style.top = 300;
         document.getElementById("VS").src = "graphics/VS.png";
@@ -457,13 +477,55 @@ function draw() {
         document.getElementById("SliderBackground1").src = "graphics/SliderBackground.png";
         document.getElementById("SliderBackground2").src = "graphics/SliderBackground.png";
         document.getElementById("Slider1").style.left = 509;
-        document.getElementById("Slider1").style.top = 291;
         document.getElementById("SliderBackground1").style.left = 508;
         document.getElementById("SliderBackground1").style.top = 290;
         document.getElementById("Slider2").style.left = 1609;
-        document.getElementById("Slider2").style.top = 291;
         document.getElementById("SliderBackground2").style.left = 1608;
         document.getElementById("SliderBackground2").style.top = 290;
+
+        for(var a=0;a<squads[squad1].units.length;a++){
+            document.getElementById("SquadUnit"+(a+1)).style.left = 305;
+            document.getElementById("SquadUnit"+(a+1)).style.top = 295 +(45*squads[squad1].units.length-1)-(45*(a+1))+(291-parseInt(document.getElementById("Slider1").style.top));
+
+            if(squads[squad1].units[a].unitType==1){
+                document.getElementById("SquadUnit"+(a+1)).src = "graphics/SwordsmanListUnit.png";   
+            }else if(squads[squad1].units[a].unitType==2){
+                document.getElementById("SquadUnit"+(a+1)).src = "graphics/KnightListUnit.png";   
+            }else if(squads[squad1].units[a].unitType==3){
+                document.getElementById("SquadUnit"+(a+1)).src = "graphics/CavalryListUnit.png";   
+            }else if(squads[squad1].units[a].unitType==4){
+                document.getElementById("SquadUnit"+(a+1)).src = "graphics/PeasantListUnit.png";   
+            }else if(squads[squad1].units[a].unitType==5){
+                document.getElementById("SquadUnit"+(a+1)).src = "graphics/SlaveListUnit.png";   
+            }
+
+            if(parseInt(document.getElementById("SquadUnit"+(a+1)).style.top)>420 || parseInt(document.getElementById("SquadUnit"+(a+1)).style.top)<285){
+                document.getElementById("SquadUnit"+(a+1)).src = ""; 
+            }
+
+        }
+
+        for(var a=0;a<squads[squad2].units.length;a++){
+            document.getElementById("GarrisonUnit"+(a+1)).style.left = 1405;
+            document.getElementById("GarrisonUnit"+(a+1)).style.top = 295 +(45*squads[squad2].units.length-1)-(45*(a+1))+(291-parseInt(document.getElementById("Slider2").style.top));
+
+            if(squads[squad2].units[a].unitType==1){
+                document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/SwordsmanListUnit.png";   
+            }else if(squads[squad2].units[a].unitType==2){
+                document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/KnightListUnit.png";   
+            }else if(squads[squad2].units[a].unitType==3){
+                document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/CavalryListUnit.png";   
+            }else if(squads[squad2].units[a].unitType==4){
+                document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/PeasantListUnit.png";   
+            }else if(squads[squad2].units[a].unitType==5){
+                document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/SlaveListUnit.png";   
+            }
+
+            if(parseInt(document.getElementById("GarrisonUnit"+(a+1)).style.top)>420 || parseInt(document.getElementById("GarrisonUnit"+(a+1)).style.top)<285){
+                document.getElementById("GarrisonUnit"+(a+1)).src = ""; 
+            }
+
+        }
 
         if(squads[squad1].units[squads[squad1].units.length-1].unitType==1){
             document.getElementById("MapUnit"+(squad1+1)).src = "graphics/SwordsmanUnit.png";   
