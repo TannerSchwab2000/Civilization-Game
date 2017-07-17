@@ -9,6 +9,8 @@ var redGold = 10;
 var battle = 0;
 var squad1;
 var squad2;
+var paused = false;
+var winner = 0;
 
 
 function mapPoint(x,y){
@@ -330,6 +332,7 @@ function clearMap(){
     document.getElementById("NumberBackground").src = ("");
     document.getElementById("DividingLine").src = ("");
     document.getElementById("Map").src = ("");
+    document.getElementById("RollButton").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
     document.getElementById("TownTroops").innerHTML = ("");
     document.getElementById("TowerTroops").innerHTML = ("");   
@@ -482,6 +485,7 @@ function draw() {
         document.getElementById("Slider2").style.left = 1609;
         document.getElementById("SliderBackground2").style.left = 1608;
         document.getElementById("SliderBackground2").style.top = 290;
+        document.getElementById("RollButton").src = "graphics/RollButton.png";
 
         for(var a=0;a<squads[squad1].units.length;a++){
             document.getElementById("SquadUnit"+(a+1)).style.left = 305;

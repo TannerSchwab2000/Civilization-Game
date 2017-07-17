@@ -12,7 +12,25 @@ var sliderScale = 3.2;
 
 
 function mouseReleased() {
-    console.log(mouseX,mouseY+800);
+    if(battle==0){
+        console.log(mouseX,mouseY+800);
+    }else{
+        console.log(mouseX,mouseY);
+    }
+    
+
+    if(mouseIsContainedIn(890,480,1050,515)&&battle==1){
+        console.log("rolled");
+        rand1 = round(random(1,6));
+        document.getElementById("Roll1").innerHTML = (rand1);    
+        rand2 = round(random(1,6));
+        document.getElementById("Roll2").innerHTML = (rand2);   
+        if(rand1>rand2){
+            paused = true;
+            winner = 1;
+            
+        }
+    }
 
     if(mouseIsContainedIn(1070,880,1090,900)){
         for(var a=0;a<towns.length;a++){
@@ -222,7 +240,7 @@ function mouseReleased() {
                         }
                 }          
         }
-        if(mouseIsContainedIn(870,766,1030,800)){
+        if(mouseIsContainedIn(870,766,1030,800) && battle==0){
             advanceTurn();
             for(var a=0;a<squads.length;a++){
                 squads[a].update();
