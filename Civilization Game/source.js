@@ -333,6 +333,7 @@ function clearMap(){
     document.getElementById("DividingLine").src = ("");
     document.getElementById("Map").src = ("");
     document.getElementById("RollButton").src = ("");
+    document.getElementById("X").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
     document.getElementById("TownTroops").innerHTML = ("");
     document.getElementById("TowerTroops").innerHTML = ("");   
@@ -342,6 +343,7 @@ function clearMap(){
     document.getElementById("GoldPerTurn").innerHTML = (""); 
     document.getElementById("GrowthRate").innerHTML = ("");          
     document.getElementById("gold").innerHTML = ("");     
+    
 }
 
 
@@ -451,6 +453,13 @@ function draw() {
 
     if(battle==1){
         clearMap();
+
+        if(paused==true){
+            document.getElementById("X").src = "graphics/X.png";
+            document.getElementById("RollButton").src = "graphics/NextButton.png";
+        }else{
+            document.getElementById("RollButton").src = "graphics/RollButton.png";
+        }
         
         if(slider1IsHeld){
             document.getElementById("Slider1").style.top = mouseY;       
@@ -485,7 +494,6 @@ function draw() {
         document.getElementById("Slider2").style.left = 1609;
         document.getElementById("SliderBackground2").style.left = 1608;
         document.getElementById("SliderBackground2").style.top = 290;
-        document.getElementById("RollButton").src = "graphics/RollButton.png";
 
         for(var a=0;a<squads[squad1].units.length;a++){
             document.getElementById("SquadUnit"+(a+1)).style.left = 305;
@@ -509,27 +517,30 @@ function draw() {
 
         }
 
-        for(var a=0;a<squads[squad2].units.length;a++){
-            document.getElementById("GarrisonUnit"+(a+1)).style.left = 1405;
-            document.getElementById("GarrisonUnit"+(a+1)).style.top = 295 +(45*squads[squad2].units.length-1)-(45*(a+1))+(291-parseInt(document.getElementById("Slider2").style.top));
+        if(squads[squad2] != null){
+            for(var a=0;a<squads[squad2].units.length;a++){
+                document.getElementById("GarrisonUnit"+(a+1)).style.left = 1405;
+                document.getElementById("GarrisonUnit"+(a+1)).style.top = 295 +(45*squads[squad2].units.length-1)-(45*(a+1))+(291-parseInt(document.getElementById("Slider2").style.top));
 
-            if(squads[squad2].units[a].unitType==1){
-                document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/SwordsmanListUnit.png";   
-            }else if(squads[squad2].units[a].unitType==2){
-                document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/KnightListUnit.png";   
-            }else if(squads[squad2].units[a].unitType==3){
-                document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/CavalryListUnit.png";   
-            }else if(squads[squad2].units[a].unitType==4){
-                document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/PeasantListUnit.png";   
-            }else if(squads[squad2].units[a].unitType==5){
-                document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/SlaveListUnit.png";   
-            }
+                if(squads[squad2].units[a].unitType==1){
+                    document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/SwordsmanListUnit.png";   
+                }else if(squads[squad2].units[a].unitType==2){
+                    document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/KnightListUnit.png";   
+                }else if(squads[squad2].units[a].unitType==3){
+                    document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/CavalryListUnit.png";   
+                }else if(squads[squad2].units[a].unitType==4){
+                    document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/PeasantListUnit.png";   
+                }else if(squads[squad2].units[a].unitType==5){
+                    document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/SlaveListUnit.png";   
+                }
 
-            if(parseInt(document.getElementById("GarrisonUnit"+(a+1)).style.top)>420 || parseInt(document.getElementById("GarrisonUnit"+(a+1)).style.top)<285){
-                document.getElementById("GarrisonUnit"+(a+1)).src = ""; 
-            }
+                if(parseInt(document.getElementById("GarrisonUnit"+(a+1)).style.top)>420 || parseInt(document.getElementById("GarrisonUnit"+(a+1)).style.top)<285){
+                    document.getElementById("GarrisonUnit"+(a+1)).src = ""; 
+                }
 
+            }    
         }
+        
 
         if(squads[squad1].units[squads[squad1].units.length-1].unitType==1){
             document.getElementById("MapUnit"+(squad1+1)).src = "graphics/SwordsmanUnit.png";   
@@ -543,17 +554,20 @@ function draw() {
             document.getElementById("MapUnit"+(squad1+1)).src = "graphics/SlaveUnit.png";   
         }
 
-        if(squads[squad2].units[squads[squad2].units.length-1].unitType==1){
-            document.getElementById("MapUnit"+(squad2+1)).src = "graphics/SwordsmanUnit.png";   
-        }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==2){
-            document.getElementById("MapUnit"+(squad2+1)).src = "graphics/KnightUnit.png";   
-        }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==3){
-            document.getElementById("MapUnit"+(squad2+1)).src = "graphics/CavalryUnit.png";   
-        }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==4){
-            document.getElementById("MapUnit"+(squad2+1)).src = "graphics/PeasantUnit.png";   
-        }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==5){
-            document.getElementById("MapUnit"+(squad2+1)).src = "graphics/SlaveUnit.png";   
+        if(squads[squad2] != null){
+            if(squads[squad2].units[squads[squad2].units.length-1].unitType==1){
+                document.getElementById("MapUnit"+(squad2+1)).src = "graphics/SwordsmanUnit.png";   
+            }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==2){
+                document.getElementById("MapUnit"+(squad2+1)).src = "graphics/KnightUnit.png";   
+            }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==3){
+                document.getElementById("MapUnit"+(squad2+1)).src = "graphics/CavalryUnit.png";   
+            }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==4){
+                document.getElementById("MapUnit"+(squad2+1)).src = "graphics/PeasantUnit.png";   
+            }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==5){
+                document.getElementById("MapUnit"+(squad2+1)).src = "graphics/SlaveUnit.png";   
+            }    
         }
+        
     }
 
 }

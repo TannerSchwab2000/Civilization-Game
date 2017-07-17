@@ -20,15 +20,58 @@ function mouseReleased() {
     
 
     if(mouseIsContainedIn(890,480,1050,515)&&battle==1){
-        console.log("rolled");
-        rand1 = round(random(1,6));
-        document.getElementById("Roll1").innerHTML = (rand1);    
-        rand2 = round(random(1,6));
-        document.getElementById("Roll2").innerHTML = (rand2);   
-        if(rand1>rand2){
-            paused = true;
-            winner = 1;
-            
+        if(paused == false){
+            console.log("rolled");
+            rand1 = round(random(1,6));
+            document.getElementById("Roll1").innerHTML = (rand1);    
+            rand2 = round(random(1,6));
+            document.getElementById("Roll2").innerHTML = (rand2);   
+            if(rand1>rand2){
+                paused = true;
+                winner = 1;
+                document.getElementById("X").src = "graphics/X.png";
+                document.getElementById("X").style.left = 1100;
+                document.getElementById("X").style.top = 300;
+            }else if(rand1<rand2){
+                paused = true;
+                winner = 2;
+                document.getElementById("X").src = "graphics/X.png";
+                document.getElementById("X").style.left = 700;
+                document.getElementById("X").style.top = 300;
+            }
+        }else{
+            paused = false;
+            console.log("to here");
+            if(winner==1){
+                if(squads[squad2] != null){
+                    if(squads[squad2].units.length>1){
+                        removeSquadUnit(squad2,squads[squad2].units[squads[squad2].units.length-1].unitType);   
+                    }else{
+                        squads.splice(squad2,1);
+                        battle =0;
+                        console.log("Battle ended");
+                        document.getElementById("Roll1").innerHTML = ("");    
+                        document.getElementById("Roll2").innerHTML = ("");   
+                        console.log(squads);   
+                    }
+                }
+
+            }else if(winner==2){
+                if(squads[squad1] != null){
+                    if(squads[squad1].units.length>1){
+                        removeSquadUnit(squad1,squads[squad1].units[squads[squad1].units.length-1].unitType);   
+                    }else{
+                        squads.splice(squad1,1);
+                        battle =0;
+                        console.log("Battle ended");
+                        document.getElementById("Roll1").innerHTML = ("");    
+                        document.getElementById("Roll2").innerHTML = ("");  
+                        console.log(squads);  
+                    }
+                }
+
+            }
+            winner = 0;
         }
     }
 
@@ -259,7 +302,7 @@ function mouseReleased() {
             mouseDistance = Math.abs(mouseX-(squads[a].x+50)) + Math.abs((mouseY+800)-(squads[a].y+55))
             if(mouseDistance<65 && townIsPresentAt(squads[a].x,squads[a].y)==false){
                 selection = squads[a];
-                console.log("squad selected");
+                console.log(selection);
             }
         }
         

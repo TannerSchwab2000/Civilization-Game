@@ -36,6 +36,8 @@ function Squad(x,y,i,t){
 			document.getElementById("SquadListBackground1").src = "graphics/SquadListBackground.png"; 
 			document.getElementById("Slider1").src = "graphics/Slider.png";
 			document.getElementById("SliderBackground1").src = "graphics/SliderBackground.png";
+			document.getElementById("SliderBackground1").style.left = 1228;
+			document.getElementById("SliderBackground1").style.top = 810;
 			var a = this.i;
 
 			var slaves = 0;
