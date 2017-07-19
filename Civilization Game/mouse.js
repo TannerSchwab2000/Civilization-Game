@@ -21,10 +21,19 @@ function mouseReleased() {
 
     if(mouseIsContainedIn(890,480,1050,515)&&battle==1){
         if(paused == false){
-            rand1 = round(random(1,6));
-            document.getElementById("Roll1").innerHTML = (rand1);    
-            rand2 = round(random(1,6));
-            document.getElementById("Roll2").innerHTML = (rand2);   
+
+            if(calculateAdvantage(squads[squad1].units[squads[squad1].units.length-1].unitType,squads[squad2].units[squads[squad2].units.length-1].unitType) == 1){
+                rand1 = round(random(1+advantage,6));
+                document.getElementById("Roll1").innerHTML = (rand1);    
+                rand2 = round(random(1,6));
+                document.getElementById("Roll2").innerHTML = (rand2);   
+            }else if(calculateAdvantage(squads[squad1].units[squads[squad1].units.length-1].unitType,squads[squad2].units[squads[squad2].units.length-1].unitType) == 2){
+                rand1 = round(random(1,6));
+                document.getElementById("Roll1").innerHTML = (rand1);    
+                rand2 = round(random(1+advantage,6));
+                document.getElementById("Roll2").innerHTML = (rand2); 
+            }
+
             if(rand1>rand2){
                 paused = true;
                 winner = 1;
@@ -41,20 +50,37 @@ function mouseReleased() {
                 document.getElementById("X").style.top = 300;
                 document.getElementById("Roll2").style.color = "green";  
                 document.getElementById("Roll1").style.color = "red"; 
+            }else if(rand1==rand2){
+                document.getElementById("Roll2").style.color = "yellow";  
+                document.getElementById("Roll1").style.color = "yellow";  
             }
         }else{
             paused = false;
             document.getElementById("Roll1").innerHTML = null; 
-            document.getElementById("Roll2").innerHTML = null;   
+            document.getElementById("Roll2").innerHTML = null;  
+            
             if(winner==1){
                 if(squads[squad2] != null){
                     if(squads[squad2].units.length>1){
                         removeSquadUnit(squad2,squads[squad2].units[squads[squad2].units.length-1].unitType);   
                     }else{
                         squads.splice(squad2,1);
-                        battle =0;
+                        battle = 0;
+                        battleScreen = 0;
                         document.getElementById("Roll1").innerHTML = ("");    
-                        document.getElementById("Roll2").innerHTML = ("");     
+                        document.getElementById("Roll2").innerHTML = ("");   
+                        document.getElementById("SquadListBackground1").style.left = 1020; 
+                        document.getElementById("SquadListBackground1").style.top = 810; 
+                        document.getElementById("SquadListBackground2").style.left = 1320; 
+                        document.getElementById("SquadListBackground2").style.top = 810; 
+                        document.getElementById("SliderBackground1").style.left = 1228; 
+                        document.getElementById("SliderBackground1").style.top = 810; 
+                        document.getElementById("SliderBackground2").style.left = 1528; 
+                        document.getElementById("SliderBackground2").style.top = 810; 
+                        document.getElementById("Slider1").style.left = 1229; 
+                        document.getElementById("Slider1").style.top = 811; 
+                        document.getElementById("Slider2").style.left = 1529; 
+                        document.getElementById("Slider2").style.top = 811;   
                     }
                 }
 
@@ -64,9 +90,22 @@ function mouseReleased() {
                         removeSquadUnit(squad1,squads[squad1].units[squads[squad1].units.length-1].unitType);   
                     }else{
                         squads.splice(squad1,1);
-                        battle =0;
+                        battle = 0;
+                        battleScreen = 0;
                         document.getElementById("Roll1").innerHTML = ("");    
                         document.getElementById("Roll2").innerHTML = ("");  
+                        document.getElementById("SquadListBackground1").style.left = 1020; 
+                        document.getElementById("SquadListBackground1").style.top = 810; 
+                        document.getElementById("SquadListBackground2").style.left = 1320; 
+                        document.getElementById("SquadListBackground2").style.top = 810; 
+                        document.getElementById("SliderBackground1").style.left = 1228; 
+                        document.getElementById("SliderBackground1").style.top = 810; 
+                        document.getElementById("SliderBackground2").style.left = 1528; 
+                        document.getElementById("SliderBackground2").style.top = 810; 
+                        document.getElementById("Slider1").style.left = 1229; 
+                        document.getElementById("Slider1").style.top = 811; 
+                        document.getElementById("Slider2").style.left = 1529; 
+                        document.getElementById("Slider2").style.top = 811; 
                     }
                 }
 
@@ -291,7 +330,6 @@ function mouseReleased() {
                 }          
         }
         if(mouseIsContainedIn(870,766,1030,800) && battle==0){
-            advanceTurn();
             for(var a=0;a<squads.length;a++){
                 squads[a].update();
             } 
@@ -304,6 +342,8 @@ function mouseReleased() {
                 towns[z].growthRate=0;
                 towns[z].taxRate=0;
             }
+
+            advanceTurn();
         }
         for(var a=0;a<squads.length;a++){
             mouseDistance = Math.abs(mouseX-(squads[a].x+50)) + Math.abs((mouseY+800)-(squads[a].y+55))

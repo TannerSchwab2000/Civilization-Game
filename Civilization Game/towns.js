@@ -96,6 +96,7 @@ function Town(x,y,i,t){
     			document.getElementById("Slider2").src = "graphics/Slider.png";
     			document.getElementById("SliderBackground1").src = "graphics/SliderBackground.png";
     			document.getElementById("SliderBackground2").src = "graphics/SliderBackground.png";
+                
 
                 for(var a=0;a<squads.length;a++){
                     for(var b=0;b<towns.length;b++){

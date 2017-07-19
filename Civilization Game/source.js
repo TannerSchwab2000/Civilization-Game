@@ -12,6 +12,7 @@ var squad1;
 var squad2;
 var paused = false;
 var winner = 0;
+var advantage = 0;
 
 
 function mapPoint(x,y){
@@ -133,6 +134,83 @@ function advanceTurn(){
         }
         
     }   
+}
+
+function calculateAdvantage(u1,u2){
+    if(u1 == 1){
+        if(u2 == 2){
+            advantage = 1;
+            return 1;
+        }else if(u2 == 3){
+            advantage = 1;
+            return 2;
+        }else if(u2 == 1){
+            advantage = 0;
+            return 0;
+        }else if(u2 == 5){
+            advantage = 3;
+            return 1;
+        }else{
+            advantage = 2;
+            return 1;
+        }
+    }else if(u1 == 2){
+        if(u2 == 1){
+            advantage = 1;
+            return 2;
+        }else if(u2 == 3){
+            advantage = 1;
+            return 1;
+        }else if(u2 == 2){
+            advantage = 0;
+            return 0;
+        }else if(u2 == 5){
+            advantage = 3;
+            return 1;
+        }else{
+            advantage = 2;
+            return 1;
+        }
+    }else if(u1 == 3){
+        if(u2 == 1){
+            advantage = 1;
+            return 1;
+        }else if(u2 == 2){
+            advantage = 1;
+            return 2;
+        }else if(u2 == 3){
+            advantage = 0;
+            return 0;
+        }else if(u2 == 5){
+            advantage = 3;
+            return 1;
+        }else{
+            advantage = 2;
+            return 1;
+        }
+    }else if(u1 == 4){
+        if(u2 == 1 || u2 == 2 || u2 == 3){
+            advantage = 2;
+            return 2;
+        }else if(u2 == 5){
+            advantage = 1;
+            return 1;
+        }else{
+            advantage = 0;
+            return 0;
+        }
+    }else if(u1 == 5){
+        if(u2 == 1 || u2 == 2 || u2 == 3){
+            advantage = 3;
+            return 2;
+        }else if(u2 == 4){
+            advantage = 1;
+            return 2;
+        }else{
+            advantage = 0;
+            return 0;
+        }
+    }
 }
 
 function removeSquadUnit(s,u){
@@ -344,7 +422,7 @@ function clearMap(){
     document.getElementById("GoldPerTurn").innerHTML = (""); 
     document.getElementById("GrowthRate").innerHTML = ("");          
     document.getElementById("gold").innerHTML = ("");     
-    
+    document.getElementById("Advantage").innerHTML = ("");   
 }
 
 
@@ -464,6 +542,16 @@ function draw() {
 
     if(battle==1 && battleScreen==1){
         clearMap();
+
+        if(calculateAdvantage(squads[squad1].units[squads[squad1].units.length-1].unitType,squads[squad2].units[squads[squad2].units.length-1].unitType) == 1){
+            document.getElementById("Advantage").innerHTML = ("+"+advantage+" Advantage");    
+            document.getElementById("Advantage").style.left = 670;
+            document.getElementById("Advantage").style.top = 400;
+        }else if(calculateAdvantage(squads[squad1].units[squads[squad1].units.length-1].unitType,squads[squad2].units[squads[squad2].units.length-1].unitType) == 2){
+            document.getElementById("Advantage").innerHTML = ("+"+advantage+" Advantage");    
+            document.getElementById("Advantage").style.left = 1090;
+            document.getElementById("Advantage").style.top = 400;
+        }
 
         if(paused==true){
             document.getElementById("X").src = "graphics/X.png";
