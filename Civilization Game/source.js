@@ -109,7 +109,6 @@ function advanceTurn(){
                 for(var b=0;b<squads.length;b++){
                     if(squads[b].x == mapPoints[a].x && squads[b].y == mapPoints[a].y){
                         presentSquads.push(squads[b]);
-                        console.log(presentSquads);
                         if(squads[b].team==1){
                             squad1=b;
                         }else if(squads[b].team==2){

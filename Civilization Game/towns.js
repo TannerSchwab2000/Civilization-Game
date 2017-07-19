@@ -25,7 +25,6 @@ function Town(x,y,i,t){
         var newPop = round(this.peasants*(1+this.growthRate));
         var difference = newPop-oldPop;
         this.peasants = this.peasants + difference;
-        console.log(this.growthRate);
         for(var a=0;a<difference;a++){
             this.garrison.push(new Unit(4));
         }
