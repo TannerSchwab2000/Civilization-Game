@@ -32,15 +32,21 @@ function mouseReleased() {
                 document.getElementById("X").src = "graphics/X.png";
                 document.getElementById("X").style.left = 1100;
                 document.getElementById("X").style.top = 300;
+                document.getElementById("Roll1").style.color = "green";  
+                document.getElementById("Roll2").style.color = "red";   
             }else if(rand1<rand2){
                 paused = true;
                 winner = 2;
                 document.getElementById("X").src = "graphics/X.png";
                 document.getElementById("X").style.left = 700;
                 document.getElementById("X").style.top = 300;
+                document.getElementById("Roll2").style.color = "green";  
+                document.getElementById("Roll1").style.color = "red"; 
             }
         }else{
             paused = false;
+            document.getElementById("Roll1").innerHTML = null; 
+            document.getElementById("Roll2").innerHTML = null;   
             console.log("to here");
             if(winner==1){
                 if(squads[squad2] != null){
@@ -74,6 +80,14 @@ function mouseReleased() {
             winner = 0;
         }
     }
+
+    if(battle == 1 && battleScreen == 0){
+        console.log(squads[squad1].x,squads[squad1].y,squads[squad1].x+100,squads[squad1].y+100);
+        if(mouseIsContainedIn(squads[squad1].x,squads[squad1].y,squads[squad1].x+100,squads[squad1].y+100)){
+        battleScreen = 1;
+        }    
+    }
+    
 
     if(mouseIsContainedIn(1070,880,1090,900)){
         for(var a=0;a<towns.length;a++){

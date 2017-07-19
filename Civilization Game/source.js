@@ -7,6 +7,7 @@ var turn = 1;
 var turnAdvanced = false;
 var redGold = 10;
 var battle = 0;
+var battleScreen = 0;
 var squad1;
 var squad2;
 var paused = false;
@@ -101,15 +102,6 @@ function advanceTurn(){
         console.log("Enemy Gold:"+redGold); 
         turnAdvanced=true; 
 
-        for(var a=0;a<squads.length;a++){
-            if(squads[a].team==2){
-                squads[a].update();
-                rand = round(random(0,squads[a].adjacentSpaces.length-1));
-                squads[a].targetX = squads[a].adjacentSpaces[rand].x;
-                squads[a].targetY = squads[a].adjacentSpaces[rand].y; 
-            }
-        }
-
         for(var a=0;a<mapPoints.length;a++){
             if(squadIsPresentAt(mapPoints[a].x,mapPoints[a].y,1)){
                 if(squadIsPresentAt(mapPoints[a].x,mapPoints[a].y,2)){
@@ -130,7 +122,16 @@ function advanceTurn(){
                 document.getElementById("Slider2").style.top = 290;
             }
         }
+
     }
+    for(var a=0;a<squads.length;a++){
+            if(squads[a].team==2 && battle == 0){
+                squads[a].update();
+                rand = round(random(0,squads[a].adjacentSpaces.length-1));
+                squads[a].targetX = squads[a].adjacentSpaces[rand].x;
+                squads[a].targetY = squads[a].adjacentSpaces[rand].y; 
+            }
+        }
         
     }   
 }
@@ -240,7 +241,7 @@ function angleBetween(x1,y1,x2,y2){
 
 
 function mouseIsContainedIn(x1,y1,x2,y2){
-    if(battle==1){
+    if(battle==1 && battleScreen == 1){
         if(mouseX>x1 && (mouseY)>y1 && mouseX<x2 && (mouseY)<y2){
             return true;
         }else{
@@ -334,6 +335,7 @@ function clearMap(){
     document.getElementById("Map").src = ("");
     document.getElementById("RollButton").src = ("");
     document.getElementById("X").src = ("");
+    document.getElementById("Swords").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
     document.getElementById("TownTroops").innerHTML = ("");
     document.getElementById("TowerTroops").innerHTML = ("");   
@@ -408,6 +410,16 @@ function draw() {
     document.getElementById("DividingLine").src = ("graphics/DividingLine.png");
     document.getElementById("EndTurnButton").src = ("graphics/EndTurnButton.png");
 
+    for(var a=0;a<mapPoints.length;a++){
+        if(battle == 1){
+            if(squads[squad1].x == mapPoints[a].x && squads[squad1].y == mapPoints[a].y){
+                document.getElementById("Swords").src = ("graphics/CrossedSwords.png");
+                document.getElementById("Swords").style.left = mapPoints[a].x;  
+                document.getElementById("Swords").style.top = mapPoints[a].y;  
+            }
+        }
+    }
+
     for(var a=0;a<squads.length;a++){
         if(squads[a].targetX != squads[a].x){
             for(var b=0;b<mapPoints.length;b++){
@@ -451,7 +463,7 @@ function draw() {
         document.getElementById("Slider2").style.top = constrain(parseInt(document.getElementById("Slider2").style.top), 811, 939);
     }
 
-    if(battle==1){
+    if(battle==1 && battleScreen==1){
         clearMap();
 
         if(paused==true){
@@ -494,6 +506,8 @@ function draw() {
         document.getElementById("Slider2").style.left = 1609;
         document.getElementById("SliderBackground2").style.left = 1608;
         document.getElementById("SliderBackground2").style.top = 290;
+        document.getElementById("Swords").style.left = 0;  
+        document.getElementById("Swords").style.top = 0;  
 
         for(var a=0;a<squads[squad1].units.length;a++){
             document.getElementById("SquadUnit"+(a+1)).style.left = 305;
