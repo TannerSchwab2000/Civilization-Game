@@ -125,16 +125,17 @@ function advanceTurn(){
 
     }
     for(var a=0;a<squads.length;a++){
-            if(squads[a].team==2 && battle == 0){
-                squads[a].update();
-                rand = round(random(0,squads[a].adjacentSpaces.length-1));
-                squads[a].targetX = squads[a].adjacentSpaces[rand].x;
-                squads[a].targetY = squads[a].adjacentSpaces[rand].y; 
-            }
-            if(squads[a].team==1 && battle == 0){
-                squads[a].update();
-            }
+        if(squads[a].team==2 && battle == 0){
+            squads[a].update();
+            rand = round(random(0,squads[a].adjacentSpaces.length-1));
+            squads[a].targetX = squads[a].adjacentSpaces[rand].x;
+            squads[a].targetY = squads[a].adjacentSpaces[rand].y; 
+            console.log(squads[a]);
         }
+        if(squads[a].team==1 && battle == 0){
+            squads[a].update();
+        }
+    }
         
     }   
 }
@@ -402,11 +403,17 @@ function clearMap(){
     document.getElementById("MapUnit3").src = "";
     document.getElementById("MapUnit4").src = "";
     document.getElementById("MapUnit5").src = "";
+    document.getElementById("MapUnit6").src = "";
+    document.getElementById("MapUnit7").src = "";
+    document.getElementById("MapUnit8").src = "";
     document.getElementById("Arrow1").src = ("");
     document.getElementById("Arrow2").src = ("");
     document.getElementById("Arrow3").src = ("");
     document.getElementById("Arrow4").src = ("");
     document.getElementById("Arrow5").src = ("");
+    document.getElementById("Arrow6").src = ("");
+    document.getElementById("Arrow7").src = ("");
+    document.getElementById("Arrow8").src = ("");
     document.getElementById("VS").src = ("");
     document.getElementById("MinusButton").src = ("");
     document.getElementById("PlusButton").src = ("");
@@ -501,26 +508,24 @@ function draw() {
     }
 
     for(var a=0;a<squads.length;a++){
+        console.log(squads[a].x,squads[a].y,squads[a].targetX,squads[a].targetY);
         if(squads[a].targetX != squads[a].x){
             for(var b=0;b<mapPoints.length;b++){
                 if(mapPoints[b].x==squads[a].targetX&&mapPoints[b].y==squads[a].targetY){
                     if(adjacent(squads[a].x,squads[a].y,squads[a].targetX,squads[a].targetY)){
-                        if(squadIsPresentAt(squads[a].targetX,squads[a].targetY)==false){
+                        if(squads[a].team==1){
+                            if(squadIsPresentAt(squads[a].targetX,squads[a].targetY,1)==false){
+                                document.getElementById("Arrow"+(a+1)).src = ("graphics/Arrow.png");
+                                document.getElementById("Arrow"+(a+1)).style.top = (squads[a].y + mapPoints[b].y)/2 +70;
+                                document.getElementById("Arrow"+(a+1)).style.left = (squads[a].x + mapPoints[b].x)/2;
+                                document.getElementById('Arrow'+(a+1)).style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y)+"deg)";    
+                            }    
+                        }else if(squads[a].team==2){
+                            console.log("Arrowed");
                             document.getElementById("Arrow"+(a+1)).src = ("graphics/Arrow.png");
                             document.getElementById("Arrow"+(a+1)).style.top = (squads[a].y + mapPoints[b].y)/2 +70;
                             document.getElementById("Arrow"+(a+1)).style.left = (squads[a].x + mapPoints[b].x)/2;
                             document.getElementById('Arrow'+(a+1)).style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y)+"deg)";    
-                        }else{
-                            for(var c=0;c<squads.length;c++){
-                                if(squads[c].x == squads[a].targetX && squads[c].y == squads[a].targetY){
-                                    if(squads[c].targetX != squads[c].x && squads[c].targetY != squads[c].y){
-                                        document.getElementById("Arrow"+(a+1)).src = ("graphics/Arrow.png");
-                                        document.getElementById("Arrow"+(a+1)).style.top = (squads[a].y + mapPoints[b].y)/2 +70;
-                                        document.getElementById("Arrow"+(a+1)).style.left = (squads[a].x + mapPoints[b].x)/2;
-                                        document.getElementById('Arrow'+(a+1)).style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y)+"deg)";    
-                                    }
-                                }
-                            }
                         }
                     }
                 }

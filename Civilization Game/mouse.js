@@ -69,6 +69,8 @@ function mouseReleased() {
                     if(squads[squad2].units.length>1){
                         removeSquadUnit(squad2,squads[squad2].units[squads[squad2].units.length-1].unitType);   
                     }else{
+                        squad1=-1;
+                        squad2=-1;
                         squads.splice(squad2,1);
                         battle = 0;
                         battleScreen = 0;
@@ -97,6 +99,8 @@ function mouseReleased() {
                         squads.splice(squad1,1);
                         battle = 0;
                         battleScreen = 0;
+                        squad1=-1;
+                        squad2=-1;
                         document.getElementById("Roll1").innerHTML = ("");    
                         document.getElementById("Roll2").innerHTML = ("");  
                         document.getElementById("SquadListBackground1").style.left = 1020; 
@@ -170,8 +174,10 @@ function mouseReleased() {
     if(mapUnitIsHeld==true){
         for(var a=0;a<mapPoints.length;a++){
             if(mouseIsContainedIn(mapPoints[a].x,mapPoints[a].y,mapPoints[a].x+110,mapPoints[a].y+100)){
-                squads[mapUnitNumber-1].targetX = mapPoints[a].x;
-                squads[mapUnitNumber-1].targetY = mapPoints[a].y;
+                if(battle==0){
+                    squads[mapUnitNumber-1].targetX = mapPoints[a].x;
+                    squads[mapUnitNumber-1].targetY = mapPoints[a].y;    
+                } 
             }
         }
     }
