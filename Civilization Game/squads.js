@@ -14,6 +14,14 @@ function Squad(x,y,i,t){
 
 	this.update = function(){
 		this.adjacentSpaces =[];
+
+		this.slaves = 0;
+		for(var s=0;s<this.units.length;s++){
+			if(this.units[s].unitType == 5){
+				this.slaves++;
+			}
+		}
+
 		for(var a=0;a<mapPoints.length;a++){
 			if(adjacent(this.x,this.y,mapPoints[a].x,mapPoints[a].y)){
 				this.adjacentSpaces.push(new mapPoint(mapPoints[a].x,mapPoints[a].y));
@@ -25,6 +33,14 @@ function Squad(x,y,i,t){
 				this.x = this.targetX;
 				this.y = this.targetY;	
 			}	
+		}
+		if(townIsPresentAt(this.x,this.y)==false && this.team == 2){
+			if(this.slaves>2){
+				removeSquadUnit(this.i,5);
+				removeSquadUnit(this.i,5);
+				removeSquadUnit(this.i,5);
+				towns.push(new Town(this.x,this.y,towns.length+1,2));
+			}
 		}
 		
 	}
@@ -41,13 +57,14 @@ function Squad(x,y,i,t){
 			var a = this.i;
 
 			var slaves = 0;
-		for(var s=0;s<this.units.length;s++){
-			if(this.units[s].unitType == 5){
-				slaves++;
+			for(var s=0;s<this.units.length;s++){
+				if(this.units[s].unitType == 5){
+					slaves++;
+				}
 			}
-		}
 		this.slaves = slaves;
-		if(slaves>=townCost){
+		console.log(this.slaves,townCost);
+		if(this.slaves>townCost || this.slaves==townCost){
 			document.getElementById("SettleTownButton").src = "graphics/SettleTownButton.png";
 		}
 

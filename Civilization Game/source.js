@@ -131,6 +131,9 @@ function advanceTurn(){
                 squads[a].targetX = squads[a].adjacentSpaces[rand].x;
                 squads[a].targetY = squads[a].adjacentSpaces[rand].y; 
             }
+            if(squads[a].team==1 && battle == 0){
+                squads[a].update();
+            }
         }
         
     }   

@@ -9,6 +9,7 @@ var slider2IsHeld = false;
 var garrisonUnitNumber;
 var garrisonUnitIsHeld;
 var sliderScale = 3.2;
+var unitDropped = false;
 
 
 function mouseReleased() {
@@ -21,7 +22,6 @@ function mouseReleased() {
 
     if(mouseIsContainedIn(890,480,1050,515)&&battle==1){
         if(paused == false){
-
             if(calculateAdvantage(squads[squad1].units[squads[squad1].units.length-1].unitType,squads[squad2].units[squads[squad2].units.length-1].unitType) == 1){
                 rand1 = round(random(1+advantage,6));
                 document.getElementById("Roll1").innerHTML = (rand1);    
@@ -31,6 +31,11 @@ function mouseReleased() {
                 rand1 = round(random(1,6));
                 document.getElementById("Roll1").innerHTML = (rand1);    
                 rand2 = round(random(1+advantage,6));
+                document.getElementById("Roll2").innerHTML = (rand2); 
+            }else{
+                rand1 = round(random(1,6));
+                document.getElementById("Roll1").innerHTML = (rand1);    
+                rand2 = round(random(1,6));
                 document.getElementById("Roll2").innerHTML = (rand2); 
             }
 
@@ -191,7 +196,6 @@ function mouseReleased() {
         }
     }
 
-    
     if(garrisonUnitIsHeld==true){
         if(mouseIsContainedIn(1020,810,1230,960)){
             for(var a=0;a<maximumUnits;a++){
@@ -206,9 +210,10 @@ function mouseReleased() {
                                         towns[c].garrison.splice(garrisonUnitNumber-1,1); 
                                     }else{
                                         if(squads[b].x == towns[c].x && squads[b].y == towns[c].y){
-                                            if(towns[c].garrison[garrisonUnitNumber-1]!=null){
+                                            if(towns[c].garrison[garrisonUnitNumber-1]!=null && unitDropped == false){
                                                 squads[b].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                                 towns[c].garrison.splice(garrisonUnitNumber-1,1);
+                                                unitDropped = true;
                                             }
                                         }
                                     }
@@ -346,8 +351,7 @@ function mouseReleased() {
             advanceTurn();
         }
         for(var a=0;a<squads.length;a++){
-            mouseDistance = Math.abs(mouseX-(squads[a].x+50)) + Math.abs((mouseY+800)-(squads[a].y+55))
-            if(mouseDistance<65 && townIsPresentAt(squads[a].x,squads[a].y)==false){
+            if(mouseIsContainedIn(squads[a].x,squads[a].y,squads[a].x+100,squads[a].y+100) && townIsPresentAt(squads[a].x,squads[a].y)==false){
                 selection = squads[a];
             }
         }
@@ -361,7 +365,7 @@ function mouseReleased() {
 
 function mousePressed(){
     mouseIsPressed = true;   
-
+    unitDropped = false;
     for(var a=0;a<squads.length;a++){
         if(mouseIsContainedIn(parseInt(document.getElementById("MapUnit"+(a+1)).style.left),parseInt(document.getElementById("MapUnit"+(a+1)).style.top),parseInt(document.getElementById("MapUnit"+(a+1)).style.left)+80,parseInt(document.getElementById("MapUnit"+(a+1)).style.top)+90)){
             mapUnitIsHeld = true;

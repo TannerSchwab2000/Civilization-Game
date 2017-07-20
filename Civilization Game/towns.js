@@ -267,11 +267,11 @@ function Town(x,y,i,t){
             }else {
 
                 if(this.soldiers>2){
-                        if(this.slaves<3){
-                            if(squadIsPresentAt(this.x,this.y)==false){
-                            removeTownUnit(this.i-1,4);
-                            this.garrison.push(new Unit(5));
-                            redGold = redGold + 5;
+                        if(this.slaves<3 && this.peasants>2){
+                            if(squadIsPresentAt(this.x,this.y,2)==false){
+                                removeTownUnit(this.i-1,4);
+                                this.garrison.push(new Unit(5));
+                                redGold = redGold + 5;
                             }else{
                                 for(var a=0;a<squads.length;a++){
                                     if(squads[a].x == this.x && squads[a].y == this.y){
@@ -282,7 +282,7 @@ function Town(x,y,i,t){
                                 
                             }
                         }else{
-                            if(squadIsPresentAt(this.x,this.y)==false){
+                            if(squadIsPresentAt(this.x,this.y,2)==false){
                                 squads.push(new Squad(this.x,this.y,squads.length,2));
                                 transferUnit(this.i-1,squads.length-1,0);
                                 transferUnit(this.i-1,squads.length-1,0);
@@ -296,11 +296,16 @@ function Town(x,y,i,t){
                 }
 
                 if(turn>3 && this.taxRate < 3){
-                    if(redGold<10){
-                        this.taxRate = 3;    
+                    if(this.peasants>4){
+                        if(redGold<10){
+                            this.taxRate = 3;    
+                        }
+                    }else{
+                        this.taxRate = 1; 
                     }
+                    
                 }
-                if(this.peasants>2){
+                if(this.peasants>3){
                     if(redGold>4 && this.soldiers<3){
                         redGold = redGold-5;
                         removeTownUnit(this.i-1,4);
