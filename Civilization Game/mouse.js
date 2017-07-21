@@ -127,6 +127,7 @@ function mouseReleased() {
     if(battle == 1 && battleScreen == 0){
         if(mouseIsContainedIn(squads[squad1].x,squads[squad1].y,squads[squad1].x+100,squads[squad1].y+100)){
         battleScreen = 1;
+        document.getElementById("Clash").play();
         }    
     }
     
