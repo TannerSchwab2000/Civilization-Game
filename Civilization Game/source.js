@@ -446,7 +446,6 @@ function setup() {
     squads = [];
     mapPoints = [];
     
-    
     document.getElementById("Slider1").style.left=1229;
     document.getElementById("Slider1").style.top=811;
     document.getElementById("Slider2").style.left=1529;

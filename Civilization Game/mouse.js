@@ -22,6 +22,7 @@ function mouseReleased() {
 
     if(mouseIsContainedIn(890,480,1050,515)&&battle==1){
         if(paused == false){
+            document.getElementById("Dice").play();
             if(calculateAdvantage(squads[squad1].units[squads[squad1].units.length-1].unitType,squads[squad2].units[squads[squad2].units.length-1].unitType) == 1){
                 rand1 = round(random(1+advantage,6));
                 document.getElementById("Roll1").innerHTML = (rand1);    
@@ -135,6 +136,7 @@ function mouseReleased() {
             if(selection==towns[a] && towns[a].menu == 4){
                 if(towns[a].realTaxRate>-1){
                     towns[a].realTaxRate--;
+                    document.getElementById("Click").play();
                 }
             }
         }
@@ -145,6 +147,7 @@ function mouseReleased() {
             if(selection==towns[a] && towns[a].menu == 4){
                 if(towns[a].realTaxRate<4){
                     towns[a].realTaxRate++;   
+                    document.getElementById("Click").play();
                 }
             }
         }
@@ -154,6 +157,7 @@ function mouseReleased() {
         for(var a=0;a<towns.length;a++){
             if(selection==towns[a]){
                 towns[a].menu=4;
+                document.getElementById("Click").play();
             }
         }
     }
@@ -163,6 +167,7 @@ function mouseReleased() {
             if(squads[a].slaves>=townCost){
                 if(mouseIsContainedIn(1300,810,1462,845)){
                     towns.push(new Town(squads[a].x,squads[a].y,towns.length+1,1));  
+                    document.getElementById("Click").play();
                     for(var b=0;b<townCost;b++){
                         removeSquadUnit(a,5);      
                     }     
@@ -256,6 +261,7 @@ function mouseReleased() {
             for(var i=0;i<towns.length;i++){
                 if(selection == towns[i]){
                     towns[i].menu = 1;
+                    document.getElementById("Click").play();
                 }
             }
         }
@@ -263,6 +269,7 @@ function mouseReleased() {
              for(var i=0;i<towns.length;i++){
                 if(selection == towns[i]){
                     towns[i].menu = 2;
+                    document.getElementById("Click").play();
                 }
             }
         }
@@ -278,6 +285,7 @@ function mouseReleased() {
                                     towns[i].garrison.splice(c,1); 
                                     towns[i].garrison.push(new Unit(5));
                                     unitRemoved = true;
+                                    document.getElementById("Click").play();
                                 }
                             }
                         }
@@ -289,6 +297,7 @@ function mouseReleased() {
             for(var i=0;i<towns.length;i++){
                 if(selection == towns[i]){
                     towns[i].menu = 3;
+                    document.getElementById("Click").play();
                 }
             }
         }
@@ -303,6 +312,7 @@ function mouseReleased() {
                                     towns[i].garrison.splice(c,1); 
                                     towns[i].garrison.push(new Unit(1));
                                     unitRemoved = true;
+                                    document.getElementById("Click").play();
                                 }
                             }
                         }
@@ -319,6 +329,7 @@ function mouseReleased() {
                                     towns[i].garrison.splice(c,1); 
                                     towns[i].garrison.push(new Unit(2));
                                     unitRemoved = true;
+                                    document.getElementById("Click").play();
                                 }
                             }
                         }
@@ -335,6 +346,7 @@ function mouseReleased() {
                                     towns[i].garrison.splice(c,1); 
                                     towns[i].garrison.push(new Unit(3));
                                     unitRemoved = true;
+                                    document.getElementById("Click").play();
                                 }
                             }
                         }
@@ -353,7 +365,7 @@ function mouseReleased() {
                 towns[z].growthRate=0;
                 towns[z].taxRate=0;
             }
-
+            document.getElementById("Click").play();
             advanceTurn();
         }
         for(var a=0;a<squads.length;a++){
@@ -374,8 +386,11 @@ function mousePressed(){
     unitDropped = false;
     for(var a=0;a<squads.length;a++){
         if(mouseIsContainedIn(parseInt(document.getElementById("MapUnit"+(a+1)).style.left),parseInt(document.getElementById("MapUnit"+(a+1)).style.top),parseInt(document.getElementById("MapUnit"+(a+1)).style.left)+80,parseInt(document.getElementById("MapUnit"+(a+1)).style.top)+90)){
-            mapUnitIsHeld = true;
-            mapUnitNumber = a+1;
+            if(battle==0){
+                mapUnitIsHeld = true;
+                mapUnitNumber = a+1;    
+            }
+            
         }
     }
 
