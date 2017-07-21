@@ -96,6 +96,24 @@ function Town(x,y,i,t){
     			document.getElementById("Slider2").src = "graphics/Slider.png";
     			document.getElementById("SliderBackground1").src = "graphics/SliderBackground.png";
     			document.getElementById("SliderBackground2").src = "graphics/SliderBackground.png";
+                if(squadListUnitHeld && townSelected==false){
+                    if(squadListUnitType==1||squadListUnitType==2||squadListUnitType==3){
+                        document.getElementById("SoldierToPeasant").src = ("graphics/SoldierToPeasant.png");
+                        document.getElementById("SoldierToPeasant").style.left = 1650;     
+                    }    
+                }
+                if(garrisonUnitIsHeld){
+                    if(garrisonUnitType==1||garrisonUnitType==2||garrisonUnitType==3){
+                        document.getElementById("SoldierToPeasant").src = ("graphics/SoldierToPeasant.png");
+                        document.getElementById("SoldierToPeasant").style.left = 1650;     
+                    }    
+                }
+                
+
+                if(battle == 1 && battleScreen == 0){
+                    document.getElementById("Slider1").src = "";
+                    document.getElementById("Slider2").src = "";
+                }
                 
 
                 for(var a=0;a<squads.length;a++){

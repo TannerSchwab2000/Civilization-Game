@@ -54,7 +54,15 @@ function Squad(x,y,i,t){
 			document.getElementById("SliderBackground1").src = "graphics/SliderBackground.png";
 			document.getElementById("SliderBackground1").style.left = 1228;
 			document.getElementById("SliderBackground1").style.top = 810;
+            if(squadListUnitHeld){
+                if(squadListUnitType==1||squadListUnitType==2||squadListUnitType==3){
+                    document.getElementById("SoldierToPeasant").src = ("graphics/SoldierToPeasant.png");
+                    document.getElementById("SoldierToPeasant").style.left = 1300;     
+                }    
+            }
+			
 			var a = this.i;
+
 
 			var slaves = 0;
 			for(var s=0;s<this.units.length;s++){
