@@ -120,6 +120,7 @@ function advanceTurn(){
                 battle = 1;
                 document.getElementById("Slider1").style.top = 290;
                 document.getElementById("Slider2").style.top = 290;
+                document.getElementById("Slider2").src = "";
             }
         }
 
