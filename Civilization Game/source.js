@@ -423,6 +423,7 @@ function clearMap(){
     document.getElementById("RollButton").src = ("");
     document.getElementById("X").src = ("");
     document.getElementById("Swords").src = ("");
+    document.getElementById("HorizontalLine").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
     document.getElementById("TownTroops").innerHTML = ("");
     document.getElementById("TowerTroops").innerHTML = ("");   
@@ -495,6 +496,7 @@ function draw() {
     document.getElementById("Map").src = ("graphics/map.jpg");
     document.getElementById("gold").innerHTML = ("Gold:"+gold);
     document.getElementById("DividingLine").src = ("graphics/DividingLine.png");
+    document.getElementById("HorizontalLine").src = ("graphics/HorizontalLine.png");
     document.getElementById("EndTurnButton").src = ("graphics/EndTurnButton.png");
 
     for(var a=0;a<mapPoints.length;a++){
