@@ -138,6 +138,8 @@ function mouseReleased() {
                 if(towns[a].realTaxRate>-1){
                     towns[a].realTaxRate--;
                     document.getElementById("Click").play();
+                    pushedButton = "MinusButton";
+                    buttonEffect();
                 }
             }
         }
@@ -149,6 +151,8 @@ function mouseReleased() {
                 if(towns[a].realTaxRate<4){
                     towns[a].realTaxRate++;   
                     document.getElementById("Click").play();
+                    pushedButton = "PlusButton";
+                    buttonEffect();
                 }
             }
         }
@@ -159,6 +163,8 @@ function mouseReleased() {
             if(selection==towns[a]){
                 towns[a].menu=4;
                 document.getElementById("Click").play();
+                pushedButton = "TaxRatesButton";
+                buttonEffect();
             }
         }
     }
@@ -263,6 +269,8 @@ function mouseReleased() {
                 if(selection == towns[i]){
                     towns[i].menu = 1;
                     document.getElementById("Click").play();
+                    pushedButton = "ConvertUnitsButton";
+                    buttonEffect();
                 }
             }
         }
@@ -271,6 +279,8 @@ function mouseReleased() {
                 if(selection == towns[i]){
                     towns[i].menu = 2;
                     document.getElementById("Click").play();
+                    pushedButton = "ConstructionsButton";
+                    buttonEffect();
                 }
             }
         }
@@ -299,6 +309,8 @@ function mouseReleased() {
                 if(selection == towns[i]){
                     towns[i].menu = 3;
                     document.getElementById("Click").play();
+                    pushedButton = "GarrisonButton";
+                    buttonEffect();
                 }
             }
         }
@@ -367,6 +379,8 @@ function mouseReleased() {
                 towns[z].taxRate=0;
             }
             document.getElementById("Click").play();
+            pushedButton = "EndTurnButton";
+            buttonEffect();
             advanceTurn();
         }
         for(var a=0;a<squads.length;a++){

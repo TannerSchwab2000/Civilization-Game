@@ -13,7 +13,18 @@ var squad2;
 var paused = false;
 var winner = 0;
 var advantage = 0;
+var pushedButton = "";
+var pressed = false;
 
+
+function wait(){
+    pressed = false;
+}
+
+function buttonEffect(n,t){
+    pressed=true;
+    setTimeout(wait, 100);
+}
 
 function mapPoint(x,y){
     this.x = x;
@@ -131,7 +142,6 @@ function advanceTurn(){
             rand = round(random(0,squads[a].adjacentSpaces.length-1));
             squads[a].targetX = squads[a].adjacentSpaces[rand].x;
             squads[a].targetY = squads[a].adjacentSpaces[rand].y; 
-            console.log(squads[a]);
         }
         if(squads[a].team==1 && battle == 0){
             squads[a].update();
@@ -500,6 +510,15 @@ function draw() {
     document.getElementById("HorizontalLine").src = ("graphics/HorizontalLine.png");
     document.getElementById("EndTurnButton").src = ("graphics/EndTurnButton.png");
 
+    if(pushedButton != ""){
+        if(pressed==true){
+            document.getElementById(pushedButton).style.WebkitFilter="brightness(80%)";
+        }else{
+            document.getElementById(pushedButton).style.WebkitFilter="brightness(100%)";
+        }    
+    }
+    
+
     for(var a=0;a<mapPoints.length;a++){
         if(battle == 1){
             if(squads[squad1].x == mapPoints[a].x && squads[squad1].y == mapPoints[a].y){
@@ -511,7 +530,6 @@ function draw() {
     }
 
     for(var a=0;a<squads.length;a++){
-        console.log(squads[a].x,squads[a].y,squads[a].targetX,squads[a].targetY);
         if(squads[a].targetX != squads[a].x){
             for(var b=0;b<mapPoints.length;b++){
                 if(mapPoints[b].x==squads[a].targetX&&mapPoints[b].y==squads[a].targetY){
@@ -524,7 +542,6 @@ function draw() {
                                 document.getElementById('Arrow'+(a+1)).style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y)+"deg)";    
                             }    
                         }else if(squads[a].team==2){
-                            console.log("Arrowed");
                             document.getElementById("Arrow"+(a+1)).src = ("graphics/Arrow.png");
                             document.getElementById("Arrow"+(a+1)).style.top = (squads[a].y + mapPoints[b].y)/2 +70;
                             document.getElementById("Arrow"+(a+1)).style.left = (squads[a].x + mapPoints[b].x)/2;

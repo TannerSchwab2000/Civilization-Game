@@ -63,7 +63,6 @@ function Squad(x,y,i,t){
 				}
 			}
 		this.slaves = slaves;
-		console.log(this.slaves,townCost);
 		if(this.slaves>townCost || this.slaves==townCost){
 			document.getElementById("SettleTownButton").src = "graphics/SettleTownButton.png";
 		}
