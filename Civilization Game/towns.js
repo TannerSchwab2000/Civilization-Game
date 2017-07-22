@@ -71,7 +71,7 @@ function Town(x,y,i,t){
 
         }
 
-    	if(selection == towns[i-1]){
+    	if(selection == towns[i-1] && this.team == 1){
 			document.getElementById("ConvertUnitsButton").src = "graphics/ConvertUnitsButton.bmp";    
    			document.getElementById("GarrisonButton").src = "graphics/GarrisonButton.png";    
     		document.getElementById("ConstructionsButton").src = "graphics/ConstructionsButton.png"; 
@@ -119,7 +119,7 @@ function Town(x,y,i,t){
                 for(var a=0;a<squads.length;a++){
                     for(var b=0;b<towns.length;b++){
                         if(selection == towns[b]){
-                            if(squads[a].x == towns[b].x && squads[a].y == towns[b].y){
+                            if(squads[a].x == towns[b].x && squads[a].y == towns[b].y && squads[a].team == 1){
                                 document.getElementById("SquadTroops").innerHTML = ("Sqaud Troops("+squads[a].units.length+")");
                                 for(var c=0;c<squads[a].units.length;c++){
                                     if(squads[a].units[c] != null && document.getElementById("SquadUnit"+(c+1)) != null){

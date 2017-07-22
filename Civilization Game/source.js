@@ -564,7 +564,21 @@ function draw() {
                                 document.getElementById("Arrow"+(a+1)).style.top = (squads[a].y + mapPoints[b].y)/2 +70;
                                 document.getElementById("Arrow"+(a+1)).style.left = (squads[a].x + mapPoints[b].x)/2;
                                 document.getElementById('Arrow'+(a+1)).style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y)+"deg)";    
-                            }    
+                            }else{
+                                for(var z=0;z<squads.length;z++){
+                                    if(squads[z].x==squads[a].targetX&&squads[z].y==squads[a].targetY){
+                                        if(squads[z].targetX != squads[z].x && squads[z].y != squads[z].targetY){
+                                            document.getElementById("Arrow"+(a+1)).src = ("graphics/Arrow.png");
+                                            document.getElementById("Arrow"+(a+1)).style.top = (squads[a].y + mapPoints[b].y)/2 +70;
+                                            document.getElementById("Arrow"+(a+1)).style.left = (squads[a].x + mapPoints[b].x)/2;
+                                            document.getElementById('Arrow'+(a+1)).style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y)+"deg)";   
+                                        }
+                                            
+                                    }
+                                }    
+                            } 
+                            
+                               
                         }else if(squads[a].team==2){
                             document.getElementById("Arrow"+(a+1)).src = ("graphics/Arrow.png");
                             document.getElementById("Arrow"+(a+1)).style.top = (squads[a].y + mapPoints[b].y)/2 +70;

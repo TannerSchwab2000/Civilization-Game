@@ -162,7 +162,7 @@ function mouseReleased() {
 
     if(mouseIsContainedIn(1070,880,1090,900)){
         for(var a=0;a<towns.length;a++){
-            if(selection==towns[a] && towns[a].menu == 4){
+            if(selection==towns[a] && towns[a].menu == 4 && towns[a].team == 1){
                 if(towns[a].realTaxRate>-1){
                     towns[a].realTaxRate--;
                     document.getElementById("Click").play();
@@ -175,7 +175,7 @@ function mouseReleased() {
 
     if(mouseIsContainedIn(1130,880,1150,900)){
         for(var a=0;a<towns.length;a++){
-            if(selection==towns[a] && towns[a].menu == 4){
+            if(selection==towns[a] && towns[a].menu == 4 && towns[a].team == 1){
                 if(towns[a].realTaxRate<4){
                     towns[a].realTaxRate++;   
                     document.getElementById("Click").play();
@@ -188,7 +188,7 @@ function mouseReleased() {
 
     if(mouseIsContainedIn(490,900,650,935)){
         for(var a=0;a<towns.length;a++){
-            if(selection==towns[a]){
+            if(selection==towns[a] && towns[a].team == 1){
                 towns[a].menu=4;
                 document.getElementById("Click").play();
                 pushedButton = "TaxRatesButton";
@@ -225,9 +225,9 @@ function mouseReleased() {
     if(squadListUnitHeld==true){
         if(mouseIsContainedIn(1320,810,1525,960)){
             for(var a=0;a<towns.length;a++){
-                if(selection == towns[a]){
+                if(selection == towns[a] && towns[a].team == 1){
                     for(var b=0;b<squads.length;b++){
-                        if(squads[b].x==towns[a].x&&squads[b].y==towns[a].y){
+                        if(squads[b].x==towns[a].x&&squads[b].y==towns[a].y && squads[b].team == 1){
                             towns[a].garrison.push(new Unit(squads[b].units[squadListUnitNumber-1].unitType));
                             squads[b].units.splice(squadListUnitNumber-1,1);
                             if(squads[b].units.length==0){
@@ -249,13 +249,13 @@ function mouseReleased() {
                     if(squads.length>0){
                         for(var b=0;b<squads.length;b++){
                             for(var c=0;c<towns.length;c++){
-                                if(selection == towns[c] && towns[c].menu == 3){
+                                if(selection == towns[c] && towns[c].menu == 3 && towns[c].team == 1){
                                     if(squadIsPresentAt(towns[c].x,towns[c].y,1)==false){
                                         squads.push(new Squad(towns[c].x,towns[c].y,squads.length,1));     
                                         squads[squads.length-1].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                         towns[c].garrison.splice(garrisonUnitNumber-1,1); 
                                     }else{
-                                        if(squads[b].x == towns[c].x && squads[b].y == towns[c].y){
+                                        if(squads[b].x == towns[c].x && squads[b].y == towns[c].y && squads[b].team == 1){
                                             if(towns[c].garrison[garrisonUnitNumber-1]!=null && unitDropped == false){
                                                 squads[b].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                                 towns[c].garrison.splice(garrisonUnitNumber-1,1);
@@ -296,7 +296,7 @@ function mouseReleased() {
         }
         if(mouseIsContainedIn(310,850,470,890) && townSelected == true){
             for(var i=0;i<towns.length;i++){
-                if(selection == towns[i]){
+                if(selection == towns[i] && towns[i].team == 1){
                     towns[i].menu = 1;
                     document.getElementById("Click").play();
                     pushedButton = "ConvertUnitsButton";
@@ -306,7 +306,7 @@ function mouseReleased() {
         }
         if(mouseIsContainedIn(490,850,650,890) && townSelected == true){
              for(var i=0;i<towns.length;i++){
-                if(selection == towns[i]){
+                if(selection == towns[i] && towns[i].team == 1){
                     towns[i].menu = 2;
                     document.getElementById("Click").play();
                     pushedButton = "ConstructionsButton";
@@ -316,7 +316,7 @@ function mouseReleased() {
         }
         if(mouseIsContainedIn(1150,800,1300,840) && townSelected == true){
              for(var i=0;i<towns.length;i++){
-                if(selection == towns[i] && towns[i].menu == 1){
+                if(selection == towns[i] && towns[i].menu == 1 && towns[i].team == 1){
                     if(towns[i].peasants>0){
                         gold = gold + 5;
                         var unitRemoved = false;
@@ -336,7 +336,7 @@ function mouseReleased() {
         }
         if(mouseIsContainedIn(310,900,470,940) && townSelected == true){
             for(var i=0;i<towns.length;i++){
-                if(selection == towns[i]){
+                if(selection == towns[i] && towns[i].team == 1){
                     towns[i].menu = 3;
                     document.getElementById("Click").play();
                     pushedButton = "GarrisonButton";

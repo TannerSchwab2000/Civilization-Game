@@ -48,7 +48,7 @@ function Squad(x,y,i,t){
 	this.render = function(){
 
 
-		if(selection == squads[this.i]){
+		if(selection == squads[this.i] && this.team == 1){
 			document.getElementById("SquadListBackground1").src = "graphics/SquadListBackground.png"; 
 			document.getElementById("Slider1").src = "graphics/Slider.png";
 			document.getElementById("SliderBackground1").src = "graphics/SliderBackground.png";
