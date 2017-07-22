@@ -614,10 +614,15 @@
       left: 1650px;
       top: 850px;
     }
-    #SmallFire1 {
+    #Fire {
       position: absolute;
       left: 70px;
       top: 290px;
+    }
+    #RaiseTownButton {
+      position: absolute;
+      left: 1300px;
+      top: 875px;
     }
 
   	</style>
@@ -625,6 +630,7 @@
 
 <body>
 	<img src="graphics/map.jpg" id="Map" draggable="false">
+  <img src="graphics/Fire.png" id="Fire" draggable="false">
 	<img src="graphics/SmallTown.png" id="town1" draggable="false">
 	<img src="graphics/SmallTown.png" id="town2" draggable="false">
 	<img src="graphics/SmallTown.png" id="town3" draggable="false">
@@ -657,6 +663,7 @@
   <img src="graphics/EndTurnButton.png" id="EndTurnButton" draggable="false">
   <img src="graphics/SettleTownButton.png" id="SettleTownButton" draggable="false">
   <img src="graphics/RollButton.png" id="RollButton" draggable="false">
+  <img src="graphics/RaiseTownButton.png" id="RaiseTownButton" draggable="false">
   <img src="graphics/DividingLine.png" id="DividingLine" draggable="false">
   <img src="graphics/Conversion1.png" id="Conversion1" draggable="false">
   <img src="graphics/Conversion2.png" id="Conversion2" draggable="false">
@@ -734,7 +741,6 @@
   <img src="graphics/VS.png" id="VS" draggable="false">
   <img src="graphics/X.png" id="X" draggable="false">
   <img src="graphics/CrossedSwords.png" id="Swords" draggable="false">
-  <img src="" id="SmallFire1" draggable="false">
   <p id="peasants"></p>
   <p id="slaves"></p>
   <p id="gold"></p>
@@ -758,6 +764,9 @@
   </audio>
   <audio id="Build">
   <source src="sounds/build.wav" type="audio/mpeg">
+  </audio>
+  <audio id="FireSound">
+  <source src="sounds/fire.wav" type="audio/mpeg">
   </audio>
 
 </body>

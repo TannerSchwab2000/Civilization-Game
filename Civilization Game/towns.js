@@ -236,7 +236,10 @@ function Town(x,y,i,t){
 			}
 		}
 
-		
+		if(selection==towns[this.i-1]&&this.team==2){
+            if(squadIsPresentAt(this.x,this.y,1)&&squadIsPresentAt(this.x,this.y,2)==false)
+            document.getElementById("RaiseTownButton").src = "graphics/RaiseTownButton.png";
+        }
 
 	}
 

@@ -213,7 +213,7 @@ function mouseReleased() {
 
     if(mapUnitIsHeld==true){
         for(var a=0;a<mapPoints.length;a++){
-            if(mouseIsContainedIn(mapPoints[a].x,mapPoints[a].y,mapPoints[a].x+110,mapPoints[a].y+100)){
+            if(mouseIsContainedIn(mapPoints[a].x,mapPoints[a].y,mapPoints[a].x+150,mapPoints[a].y+150)){
                 if(battle==0){
                     squads[mapUnitNumber-1].targetX = mapPoints[a].x;
                     squads[mapUnitNumber-1].targetY = mapPoints[a].y;    
@@ -418,6 +418,17 @@ function mouseReleased() {
         for(var a=0;a<squads.length;a++){
             if(mouseIsContainedIn(squads[a].x,squads[a].y,squads[a].x+100,squads[a].y+100) && townIsPresentAt(squads[a].x,squads[a].y)==false){
                 selection = squads[a];
+            }
+        }
+
+        if(mouseIsContainedIn(1300,875,1460,910)){
+            console.log("clicked");
+            for(var a=0;a<towns.length;a++){
+                if(selection==towns[a]&&towns[a].team==2){
+                    if(squadIsPresentAt(towns[a].x,towns[a].y,1) && squadIsPresentAt(towns[a].x,towns[a].y,2)==false){
+                        burn(a);    
+                    }  
+                }
             }
         }
 

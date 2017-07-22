@@ -15,7 +15,21 @@ var winner = 0;
 var advantage = 0;
 var pushedButton = "";
 var pressed = false;
+var burning = false;
+var burningTown;
 
+function destroyTown(){
+    towns.splice(burningTown,1);
+    burning = false;
+}
+
+function burn(t){
+    flameLevel = 0;
+    burning = true;
+    burningTown = t; 
+    document.getElementById("FireSound").play();
+    setTimeout(destroyTown, 2000);
+}
 
 function wait(){
     pressed = false;
@@ -114,6 +128,7 @@ function advanceTurn(){
         console.log("Enemy Gold:"+redGold); 
         turnAdvanced=true; 
 
+
         for(var a=0;a<mapPoints.length;a++){
             if(squadIsPresentAt(mapPoints[a].x,mapPoints[a].y,1)){
                 if(squadIsPresentAt(mapPoints[a].x,mapPoints[a].y,2)){
@@ -135,6 +150,13 @@ function advanceTurn(){
         }
 
     }
+
+    for(var a=0;a<towns.length;a++){
+        if(squadIsPresentAt(towns[a].x,towns[a].y,1)==false&&squadIsPresentAt(towns[a].x,towns[a].y,2)&&towns[a].team==1){
+            burn(a);   
+        }
+    }
+
     for(var a=0;a<squads.length;a++){
         if(squads[a].team==2 && battle == 0){
             squads[a].update();
@@ -410,6 +432,7 @@ function clearMap(){
     document.getElementById("TaxRatesButton").src = "";   
     document.getElementById("SettleTownButton").src = "";   
     document.getElementById("EndTurnButton").src = "";    
+    document.getElementById("RaiseTownButton").src = "";
     document.getElementById("Conversion1").src = ""; 
     document.getElementById("Conversion2").src = ""; 
     document.getElementById("Conversion3").src = ""; 
@@ -452,6 +475,7 @@ function clearMap(){
     document.getElementById("RollButton").src = ("");
     document.getElementById("X").src = ("");
     document.getElementById("Swords").src = ("");
+    document.getElementById("Fire").src = ("");
     document.getElementById("SoldierToPeasant").src = ("");
     document.getElementById("HorizontalLine").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
@@ -532,6 +556,13 @@ function draw() {
     if(battle == 1 && battleScreen == 0){
         document.getElementById("EndTurnButton").src = "";
     }
+
+    if(burning==true){
+        document.getElementById("Fire").src = "graphics/Fire.png";  
+        document.getElementById("Fire").style.left = towns[burningTown].x;
+        document.getElementById("Fire").style.top = towns[burningTown].y;
+    }
+    
 
 
     if(pushedButton != ""){
