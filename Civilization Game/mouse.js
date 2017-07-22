@@ -250,16 +250,17 @@ function mouseReleased() {
                         for(var b=0;b<squads.length;b++){
                             for(var c=0;c<towns.length;c++){
                                 if(selection == towns[c] && towns[c].menu == 3 && towns[c].team == 1){
-                                    if(squadIsPresentAt(towns[c].x,towns[c].y,1)==false){
+                                    if(squadIsPresentAt(towns[c].x,towns[c].y,1)==false&& unitDropped == false){
+                                        unitDropped = true;
                                         squads.push(new Squad(towns[c].x,towns[c].y,squads.length,1));     
                                         squads[squads.length-1].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                         towns[c].garrison.splice(garrisonUnitNumber-1,1); 
                                     }else{
                                         if(squads[b].x == towns[c].x && squads[b].y == towns[c].y && squads[b].team == 1){
                                             if(towns[c].garrison[garrisonUnitNumber-1]!=null && unitDropped == false){
+                                                unitDropped = true;
                                                 squads[b].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                                 towns[c].garrison.splice(garrisonUnitNumber-1,1);
-                                                unitDropped = true;
                                             }
                                         }
                                     }
@@ -268,7 +269,8 @@ function mouseReleased() {
                         }    
                     }else{
                         for(var c=0;c<towns.length;c++){
-                            if(selection == towns[c]){
+                            if(selection == towns[c] && unitDropped == false){
+                                unitDropped = true;
                                 squads.push(new Squad(towns[c].x,towns[c].y,squads.length,1));     
                                 squads[0].units.push(new Unit(towns[c].garrison[garrisonUnitNumber-1].unitType));
                                 towns[c].garrison.splice(garrisonUnitNumber-1,1);
@@ -432,7 +434,7 @@ function mousePressed(){
     unitDropped = false;
     for(var a=0;a<squads.length;a++){
         if(mouseIsContainedIn(parseInt(document.getElementById("MapUnit"+(a+1)).style.left),parseInt(document.getElementById("MapUnit"+(a+1)).style.top),parseInt(document.getElementById("MapUnit"+(a+1)).style.left)+80,parseInt(document.getElementById("MapUnit"+(a+1)).style.top)+90)){
-            if(battle==0){
+            if(battle==0&&squads[a].team==1){
                 mapUnitIsHeld = true;
                 mapUnitNumber = a+1;    
             }

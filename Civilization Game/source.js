@@ -1,6 +1,6 @@
 var selection;
 var gold = 10;
-var maximumUnits = 12;
+var maximumUnits = 20;
 var townCost = 3;
 var turnFinished = true;
 var turn = 1;
@@ -409,7 +409,7 @@ function clearMap(){
     document.getElementById("ConstructionsButton").src = "";    
     document.getElementById("TaxRatesButton").src = "";   
     document.getElementById("SettleTownButton").src = "";   
-    document.getElementById("EndTurnButton").src = "";   
+    document.getElementById("EndTurnButton").src = "";    
     document.getElementById("Conversion1").src = ""; 
     document.getElementById("Conversion2").src = ""; 
     document.getElementById("Conversion3").src = ""; 
@@ -576,14 +576,7 @@ function draw() {
                                             
                                     }
                                 }    
-                            } 
-                            
-                               
-                        }else if(squads[a].team==2){
-                            document.getElementById("Arrow"+(a+1)).src = ("graphics/Arrow.png");
-                            document.getElementById("Arrow"+(a+1)).style.top = (squads[a].y + mapPoints[b].y)/2 +70;
-                            document.getElementById("Arrow"+(a+1)).style.left = (squads[a].x + mapPoints[b].x)/2;
-                            document.getElementById('Arrow'+(a+1)).style.webkitTransform = "rotate("+angleBetween(squads[a].x,squads[a].y,mapPoints[b].x,mapPoints[b].y)+"deg)";    
+                            }            
                         }
                     }
                 }
@@ -740,10 +733,3 @@ function draw() {
     }
 
 }
-
-
-
-
-
-
-

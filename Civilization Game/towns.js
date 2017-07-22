@@ -23,6 +23,7 @@ function Town(x,y,i,t){
     this.grow = function(){
         var oldPop = this.peasants;
         var newPop = round(this.peasants*(1+this.growthRate));
+        newPop = constrain(newPop,0,20);
         var difference = newPop-oldPop;
         this.peasants = this.peasants + difference;
         for(var a=0;a<difference;a++){
@@ -68,6 +69,7 @@ function Town(x,y,i,t){
                 document.getElementById("Flag"+this.i).style.left = this.x-20;
                 document.getElementById("Flag"+this.i).style.top = this.y-20;
             }
+
 
         }
 

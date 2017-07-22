@@ -29,7 +29,7 @@ function Squad(x,y,i,t){
 		}
 
 		if(adjacent(this.x,this.y,this.targetX,this.targetY)){
-			if(squadIsPresentAt(this.targetX,this.targetY,this.team)==false){
+			if(squadIsPresentAt(this.targetX,this.targetY,this.team)==false&&battle==0){
 				this.x = this.targetX;
 				this.y = this.targetY;	
 			}	
