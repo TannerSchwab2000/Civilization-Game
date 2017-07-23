@@ -17,10 +17,10 @@ var pushedButton = "";
 var pressed = false;
 var burning = false;
 var burningTown;
-var messageDisplay1=false;
+var message1 = false;
 
 function resetMessages(){
-    messageDisplay1=false;
+    message1 = false;
 }
 
 function destroyTown(){
@@ -50,75 +50,77 @@ function mapPoint(x,y){
     this.y = y;
 }
 
+
+    
 function adjacent(x1,y1,x2,y2){
-    if(x1==100 && y1==340){
-        if(x2==355 && y2==233){
+    if(x1==50 && y1==340){
+        if(x2==305 && y2==233){
             return true;
         }else{
             return false;
         }
-    }else if(x1==240 && y1==90){
-        if(x2==355 && y2==233){
+    }else if(x1==190 && y1==90){
+        if(x2==305 && y2==233){
             return true;
         }else{
             return false;
         }
-    }else if(x1==355 && y1==233){
-        if(x2==100 && y2==340 || x2==240 && y2==90 || x2==550 && y2==30 || x2==695 && y2==400){
+    }else if(x1==305 && y1==233){
+        if(x2==50 && y2==340 || x2==190 && y2==90 || x2==500 && y2==30 || x2==645 && y2==400){
             return true;
         }else{
             return false;
         }
-    }else if(x1==550 && y1==30){
-        if(x2==355 && y2==233){
+    }else if(x1==500 && y1==30){
+        if(x2==305 && y2==233){
             return true;
         }else{
             return false;
         }
-    }else if(x1==695 && y1==400){
-        if(x2==355 && y2==233|| x2==1080 && y2==330){
+    }else if(x1==645 && y1==400){
+        if(x2==305 && y2==233|| x2==1050 && y2==330){
             return true;
         }else{
             return false;
         }
-    }else if(x1==1080 && y1==330){
-        if(x2==695 && y2==400 || x2==1085 && y2==100||x2==1320 && y2==260){
+    }else if(x1==1050 && y1==330){
+        if(x2==645 && y2==400 || x2==1035 && y2==100||x2==1270 && y2==260){
             return true;
         }else{
             return false;
         }
-    }else if(x1==1085 && y1==100){
-        if(x2==1080 && y2==330){
+    }else if(x1==1035 && y1==100){
+        if(x2==1050 && y2==330){
             return true;
         }else{
             return false;
         }
-    }else if(x1==1320 && y1==260){
-        if(x2==1080 && y2==330 || x2==1415 && y2==125 || x2==1340 && y2==440){
+    }else if(x1==1270 && y1==260){
+        if(x2==1050 && y2==330 || x2==1365 && y2==125 || x2==1290 && y2==440){
             return true;
         }else{
             return false;
         }
-    }else if(x1==1415 && y1==125){
-        if(x2==1320 && y2==260){
+    }else if(x1==1365 && y1==125){
+        if(x2==1270 && y2==260){
             return true;
         }else{
             return false;
         }
-    }else if(x1==1340 && y1==440){
-        if(x2==1320 && y2==260 || x2==1730 && y2==500){
+    }else if(x1==1290 && y1==440){
+        if(x2==1270 && y2==260 || x2==1680 && y2==500){
             return true;
         }else{
             return false;
         }
-    }else if(x1==1730 && y1==500){
-        if(x2==1340 && y2==440 || x2==1690 && y2==310){
+    }else if(x1==1680 && y1==500){
+        if(x2==1290 && y2==440 || x2==1640 && y2==310){
             return true;
         }else{
             return false;
         }
-    }else if(x1==1690 && y1==310){
-        if(x2==1730 && y2==500){
+    }else if(x1==1640 && y1==310){
+        if(x2==1680 && y2==500){
             return true;
         }else{
             return false;
@@ -371,7 +373,7 @@ function angleBetween(x1,y1,x2,y2){
     };
 
     var angleRadians = Math.atan2(p2.y - p1.y, p2.x - p1.x);
-    var angleDeg = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;  
+    var angleDeg = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 190 / Math.PI;  
     return(angleDeg);  
 }
 
@@ -519,18 +521,18 @@ function setup() {
     document.getElementById("MapUnit1").style.top=0;
     document.getElementById("MapUnit2").style.left=0;
     document.getElementById("MapUnit2").style.top=0;
-    mapPoints.push(new mapPoint(100,340));
-    mapPoints.push(new mapPoint(240,90));
-    mapPoints.push(new mapPoint(355,233));
-    mapPoints.push(new mapPoint(550,30));
-    mapPoints.push(new mapPoint(695,400));
-    mapPoints.push(new mapPoint(1080,330));
-    mapPoints.push(new mapPoint(1085,100));
-    mapPoints.push(new mapPoint(1320,260));
-    mapPoints.push(new mapPoint(1415,125));
-    mapPoints.push(new mapPoint(1340,440));
-    mapPoints.push(new mapPoint(1730,500));
-    mapPoints.push(new mapPoint(1690,310));
+    mapPoints.push(new mapPoint(50,340));
+    mapPoints.push(new mapPoint(190,90));
+    mapPoints.push(new mapPoint(305,233));
+    mapPoints.push(new mapPoint(500,30));
+    mapPoints.push(new mapPoint(645,400));
+    mapPoints.push(new mapPoint(1050,330));
+    mapPoints.push(new mapPoint(1035,100));
+    mapPoints.push(new mapPoint(1270,260));
+    mapPoints.push(new mapPoint(1365,125));
+    mapPoints.push(new mapPoint(1290,440));
+    mapPoints.push(new mapPoint(1680,500));
+    mapPoints.push(new mapPoint(1640,310));
 
     var rand = round(random(0,11));
     towns.push(new Town(mapPoints[rand].x,mapPoints[rand].y,1,1));    
@@ -628,6 +630,12 @@ function draw() {
         towns[i].render();
         towns[i].update();
     }
+
+    if(message1==true){
+        document.getElementById("SquadTroops").style.top = 835;
+        document.getElementById("SquadTroops").innerHTML = "You need at least 2 peasants to reproduce.";
+    }
+
     for(var a=0;a<squads.length;a++){
         squads[a].render();
     }
@@ -700,7 +708,7 @@ function draw() {
 
         for(var a=0;a<squads[squad1].units.length;a++){
             document.getElementById("SquadUnit"+(a+1)).style.left = 305;
-            document.getElementById("SquadUnit"+(a+1)).style.top = 295 +(45*squads[squad1].units.length-1)-(45*(a+1))+(291-parseInt(document.getElementById("Slider1").style.top));
+            document.getElementById("SquadUnit"+(a+1)).style.top = 305 +(45*squads[squad1].units.length-1)-(45*(a+1))+(291-parseInt(document.getElementById("Slider1").style.top));
 
             if(squads[squad1].units[a].unitType==1){
                 document.getElementById("SquadUnit"+(a+1)).src = "graphics/SwordsmanListUnit.png";   
@@ -723,7 +731,7 @@ function draw() {
         if(squads[squad2] != null){
             for(var a=0;a<squads[squad2].units.length;a++){
                 document.getElementById("GarrisonUnit"+(a+1)).style.left = 1405;
-                document.getElementById("GarrisonUnit"+(a+1)).style.top = 295 +(45*squads[squad2].units.length-1)-(45*(a+1))+(291-parseInt(document.getElementById("Slider2").style.top));
+                document.getElementById("GarrisonUnit"+(a+1)).style.top = 305 +(45*squads[squad2].units.length-1)-(45*(a+1))+(291-parseInt(document.getElementById("Slider2").style.top));
 
                 if(squads[squad2].units[a].unitType==1){
                     document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/SwordsmanListUnit.png";   
