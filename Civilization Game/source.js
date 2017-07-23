@@ -17,6 +17,11 @@ var pushedButton = "";
 var pressed = false;
 var burning = false;
 var burningTown;
+var messageDisplay1=false;
+
+function resetMessages(){
+    messageDisplay1=false;
+}
 
 function destroyTown(){
     towns.splice(burningTown,1);

@@ -334,15 +334,18 @@ function mouseReleased() {
              for(var i=0;i<towns.length;i++){
                 if(selection == towns[i] && towns[i].menu == 1 && towns[i].team == 1){
                     if(towns[i].peasants>0){
-                        gold = gold + 5;
                         var unitRemoved = false;
                         for(var c=0;c<towns[i].garrison.length;c++){
                             if(unitRemoved == false){
-                                if(towns[i].garrison[c].unitType == 4){
+                                if(towns[i].garrison[c].unitType == 4&&towns[i].peasants>2){
+                                    gold = gold + 5;
                                     towns[i].garrison.splice(c,1); 
                                     towns[i].garrison.push(new Unit(5));
                                     unitRemoved = true;
                                     document.getElementById("Click").play();
+                                }else{
+                                    messageDisplay1 = true;
+                                    setTimeout(resetMessages, 2000);
                                 }
                             }
                         }

@@ -91,6 +91,11 @@ function Town(x,y,i,t){
     			document.getElementById("Conversion2").src = "graphics/Conversion2.png"; 
     			document.getElementById("Conversion3").src = "graphics/Conversion3.png"; 
     			document.getElementById("Conversion4").src = "graphics/Conversion4.png"; 
+                if(messageDisplay1==true){
+                    document.getElementById("SquadTroops").innerHTML = ("You need at least 2 peasants to reproduce.");
+                    document.getElementById("SquadTroops").style.top = 847; 
+                }
+                
     		}else if(this.menu==2){
                 if(this.wall==true){
                     document.getElementById("Construction1").src = "graphics/Construction1Green.png";  
@@ -102,6 +107,7 @@ function Town(x,y,i,t){
     			document.getElementById("SquadListBackground1").src = "graphics/SquadListBackground.png"; 
     			document.getElementById("SquadListBackground2").src = "graphics/SquadListBackground.png"; 
     			document.getElementById("SquadTroops").innerHTML = ("Sqaud Troops");
+                document.getElementById("SquadTroops").style.top = 947;
     			document.getElementById("TownTroops").innerHTML = ("Town Garrison("+this.garrison.length+")");
     			document.getElementById("Slider1").src = "graphics/Slider.png";
     			document.getElementById("Slider2").src = "graphics/Slider.png";
