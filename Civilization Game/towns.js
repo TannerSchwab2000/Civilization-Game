@@ -16,10 +16,13 @@ function Town(x,y,i,t){
     this.soldiers = 0;
     this.slaves = 0;
     this.wall = false;
+    this.tower = false;
+    this.arrowFired = false;
 
     for(var b=0;b<this.peasants;b++){
             this.garrison.push(new Unit(4));
     }
+
 
     this.grow = function(){
         var oldPop = this.peasants;
@@ -45,9 +48,6 @@ function Town(x,y,i,t){
 		document.getElementById("town" + this.i).style.left = this.x;
 		document.getElementById("town" + this.i).style.top = this.y;
 
-        if(this.wall==true){
-
-        }
 
         if(this.team == 1){
             document.getElementById("Flag"+this.i).src = "graphics/BlueFlag.png"; 
@@ -97,12 +97,17 @@ function Town(x,y,i,t){
                 }else{
                     document.getElementById("Construction1").src = "graphics/Construction1.png"; 
                 }
-    			document.getElementById("Construction2").src = "graphics/Construction2.png"; 
+
+                if(this.tower==true){
+                    document.getElementById("Construction2").src = "graphics/Construction2Green.png";  
+                }else{
+                    document.getElementById("Construction2").src = "graphics/Construction2.png"; 
+                }
     		}else if(this.menu==3){
     			document.getElementById("SquadListBackground1").src = "graphics/SquadListBackground.png"; 
     			document.getElementById("SquadListBackground2").src = "graphics/SquadListBackground.png"; 
                 document.getElementById("SquadTroops").style.top = 947;
-    			document.getElementById("SquadTroops").innerHTML = ("Sqaud Troops");
+    			document.getElementById("SquadTroops").innerHTML = ("Squad Troops");
     			document.getElementById("TownTroops").innerHTML = ("Town Garrison("+this.garrison.length+")");
     			document.getElementById("Slider1").src = "graphics/Slider.png";
     			document.getElementById("Slider2").src = "graphics/Slider.png";
@@ -207,10 +212,6 @@ function Town(x,y,i,t){
 
     			
     			
-    			if(this.tower==true){
-    				document.getElementById("SquadListBackground3").src = "graphics/SquadListBackground.png";
-    				document.getElementById("TowerTroops").innerHTML = ("Tower Garrison");	
-    			}
     			
     		}else if(this.menu==4){
                 document.getElementById("NumberBackground").src = "graphics/NumberBackground.png";
@@ -246,6 +247,12 @@ function Town(x,y,i,t){
             }
 		}
 
+        if(this.tower==true){
+            document.getElementById("Tower" + this.i).src = "graphics/Tower.png";
+            document.getElementById("Tower" + this.i).style.left = this.x-50;
+            document.getElementById("Tower" + this.i).style.top = this.y;
+        }
+
         if(selection == towns[this.i-1]){
             document.getElementById("town" + this.i).style.WebkitFilter="brightness(120%)";
         }else{
@@ -266,6 +273,8 @@ function Town(x,y,i,t){
         var growthRate = 40 - (this.taxRate*10);
         this.growthRate = growthRate/100;
         this.taxRate = this.realTaxRate;
+
+
 
         this.soldiers = 0;
         for(var a=0;a<this.garrison.length;a++){

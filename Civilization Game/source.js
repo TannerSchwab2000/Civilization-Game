@@ -18,6 +18,49 @@ var pressed = false;
 var burning = false;
 var burningTown;
 var message1 = false;
+var arrowMoving = false;
+var arrowTargetX;
+var arrowTargetY;
+var targetSquad;
+
+function adjustArrow(){
+    if(arrowMoving==true){
+        console.log("Moved");
+        document.getElementById('Arrow').style.webkitTransform = "rotate("+angleBetween(parseInt(document.getElementById("Arrow").style.left),parseInt(document.getElementById("Arrow").style.top),arrowTargetX,arrowTargetY)+"deg)";  
+        if(parseInt(document.getElementById("Arrow").style.left)!=arrowTargetX || parseInt(document.getElementById("Arrow").style.top)!=arrowTargetY){
+            if(parseInt(document.getElementById("Arrow").style.left)-arrowTargetX < 0){
+                document.getElementById("Arrow").style.left = parseInt(document.getElementById("Arrow").style.left) + 1; 
+            }else if(parseInt(document.getElementById("Arrow").style.left)-arrowTargetX > 0){
+                document.getElementById("Arrow").style.left = parseInt(document.getElementById("Arrow").style.left) - 1; 
+            }
+
+            if(parseInt(document.getElementById("Arrow").style.top)-arrowTargetY < 0){
+                document.getElementById("Arrow").style.top = parseInt(document.getElementById("Arrow").style.top) + 1; 
+            }else if(parseInt(document.getElementById("Arrow").style.top)-arrowTargetY > 0){
+                document.getElementById("Arrow").style.top = parseInt(document.getElementById("Arrow").style.top) - 1; 
+            }   
+            setTimeout(adjustArrow,0.1);  
+        }else{
+            arrowMoving = false;
+            if(squads[targetSquad].units.length>1){
+                squads[targetSquad].units.splice(squads[targetSquad].units.length-1,1);   
+            }else{
+                squads.splice(targetSquad,1);
+            }
+        }    
+    }
+    
+}
+
+function arrowEffect(x1,y1,x2,y2){
+    document.getElementById("Arrow").style.left = x1;
+    document.getElementById("Arrow").style.top = y1;
+    document.getElementById('Arrow').style.webkitTransform = "rotate("+angleBetween(x1,y1,x2,y2)+"deg)";  
+    arrowMoving = true;
+    arrowTargetX=x2+50;
+    arrowTargetY=y2+50;
+    setTimeout(adjustArrow,100);  
+}
 
 function resetMessages(){
     message1 = false;
@@ -172,11 +215,21 @@ function advanceTurn(){
             rand = round(random(0,squads[a].adjacentSpaces.length-1));
             squads[a].targetX = squads[a].adjacentSpaces[rand].x;
             squads[a].targetY = squads[a].adjacentSpaces[rand].y; 
+
         }
         if(squads[a].team==1 && battle == 0){
             squads[a].update();
         }
+
+
     }
+
+    for(var a=0;a<towns.length;a++){
+        towns[a].arrowFired = false;
+    }
+
+
+
         
     }   
 }
@@ -437,6 +490,7 @@ function clearMap(){
     for(var a=1;a<13;a++){
         document.getElementById("town"+a).src = ""; 
         document.getElementById("Flag"+a).src = ""; 
+        document.getElementById("Tower"+a).src = ""; 
     }  
     document.getElementById("ConvertUnitsButton").src = "";    
     document.getElementById("GarrisonButton").src = "";    
@@ -488,6 +542,7 @@ function clearMap(){
     document.getElementById("X").src = ("");
     document.getElementById("Swords").src = ("");
     document.getElementById("Fire").src = ("");
+    document.getElementById("Arrow").src = ("");
     document.getElementById("SoldierToPeasant").src = ("");
     document.getElementById("HorizontalLine").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
@@ -564,6 +619,30 @@ function draw() {
     document.getElementById("DividingLine").src = ("graphics/DividingLine.png");
     document.getElementById("HorizontalLine").src = ("graphics/HorizontalLine.png");
     document.getElementById("EndTurnButton").src = ("graphics/EndTurnButton.png");
+
+    for(var d=0;d<towns.length;d++){
+        for(var a=0;a<mapPoints.length;a++){
+            if(adjacent(towns[d].x,towns[d].y,mapPoints[a].x,mapPoints[a].y)){
+                for(var b=0;b<squads.length;b++){
+                    if(squads[b].x == mapPoints[a].x && squads[b].y== mapPoints[a].y){
+                        if(towns[d].tower==true && squads[b].team != towns[d].team){
+                            console.log("Fired");
+                            if(towns[d].arrowFired==false){
+                                towns[d].arrowFired = true; 
+                                targetSquad = b;
+                                arrowEffect(towns[d].x,towns[d].y,mapPoints[a].x,mapPoints[a].y);   
+                            }
+                        }
+                    }
+                }
+            }
+        }    
+    }
+    
+
+    if(arrowMoving){
+        document.getElementById("Arrow").src = ("graphics/Arrow2.png"); 
+    }
 
     if(battle == 1 && battleScreen == 0){
         document.getElementById("EndTurnButton").src = "";

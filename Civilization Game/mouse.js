@@ -37,6 +37,19 @@ function mouseReleased() {
         }
     }
 
+    if(mouseIsContainedIn(1226,815,1307,890)&&townSelected){
+        for(var a=0;a<towns.length;a++){
+            if(selection==towns[a]){
+                if(towns[a].slaves>1 && towns[a].menu==2){
+                    removeTownUnit(a,5);
+                    removeTownUnit(a,5);
+                    towns[a].tower = true;
+                    document.getElementById("Build").play();
+                }
+            }
+        }
+    }
+
     if(mouseIsContainedIn(parseInt(document.getElementById("SoldierToPeasant").x),parseInt(document.getElementById("SoldierToPeasant").y),parseInt(document.getElementById("SoldierToPeasant").x)+105,parseInt(document.getElementById("SoldierToPeasant").x)+70)){
         if(squadListUnitHeld){
             for(var a=0;a<squads.length;a++){
