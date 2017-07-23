@@ -153,7 +153,9 @@ function advanceTurn(){
 
     for(var a=0;a<towns.length;a++){
         if(squadIsPresentAt(towns[a].x,towns[a].y,1)==false&&squadIsPresentAt(towns[a].x,towns[a].y,2)&&towns[a].team==1){
-            burn(a);   
+            if(towns[a].wall==false){
+                burn(a);     
+            } 
         }
     }
 
@@ -251,24 +253,27 @@ function calculateAdvantage(u1,u2){
 
 function removeSquadUnit(s,u){
     var removed = false;
-    for(var a=0;a<squads[s].units.length;a++){
-        if(u==0){
-            if(squads[s].units[a].unitType==1 || squads[s].units[a].unitType==2 || squads[s].units[a].unitType==3){
-                if(removed == false){
-                    squads[s].units.splice(a,1);   
-                    removed = true;
+    if(squads[s] != null){
+        for(var a=0;a<squads[s].units.length;a++){
+            if(u==0){
+                if(squads[s].units[a].unitType==1 || squads[s].units[a].unitType==2 || squads[s].units[a].unitType==3){
+                    if(removed == false){
+                        squads[s].units.splice(a,1);   
+                        removed = true;
+                    }
+                }
+            }else{
+                if(squads[s].units[a].unitType==u){
+                    if(removed == false){
+                        squads[s].units.splice(a,1);   
+                        removed = true;
+                    }
                 }
             }
-        }else{
-            if(squads[s].units[a].unitType==u){
-                if(removed == false){
-                    squads[s].units.splice(a,1);   
-                    removed = true;
-                }
-            }
-        }
-        
+            
+        }    
     }
+    
     if(squads[s].units.length==0){
         squads.splice(s,1);
     } 

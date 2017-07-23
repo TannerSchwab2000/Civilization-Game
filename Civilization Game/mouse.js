@@ -23,6 +23,20 @@ function mouseReleased() {
         console.log(mouseX,mouseY);
     }
 
+    if(mouseIsContainedIn(990,815,1070,890)&&townSelected){
+        for(var a=0;a<towns.length;a++){
+            if(selection==towns[a]){
+                if(towns[a].slaves>2){
+                    removeTownUnit(a,5);
+                    removeTownUnit(a,5);
+                    removeTownUnit(a,5);
+                    towns[a].wall = true;
+                    document.getElementById("Build").play();
+                }
+            }
+        }
+    }
+
     if(mouseIsContainedIn(parseInt(document.getElementById("SoldierToPeasant").x),parseInt(document.getElementById("SoldierToPeasant").y),parseInt(document.getElementById("SoldierToPeasant").x)+105,parseInt(document.getElementById("SoldierToPeasant").x)+70)){
         if(squadListUnitHeld){
             for(var a=0;a<squads.length;a++){
@@ -98,11 +112,11 @@ function mouseReleased() {
                     if(squads[squad2].units.length>1){
                         removeSquadUnit(squad2,squads[squad2].units[squads[squad2].units.length-1].unitType);   
                     }else{
-                        squad1=-1;
-                        squad2=-1;
                         squads.splice(squad2,1);
                         battle = 0;
                         battleScreen = 0;
+                        squad1=-1;
+                        squad2=-1;
                         document.getElementById("Roll1").innerHTML = ("");    
                         document.getElementById("Roll2").innerHTML = ("");   
                         document.getElementById("SquadListBackground1").style.left = 1020; 
@@ -426,7 +440,9 @@ function mouseReleased() {
             for(var a=0;a<towns.length;a++){
                 if(selection==towns[a]&&towns[a].team==2){
                     if(squadIsPresentAt(towns[a].x,towns[a].y,1) && squadIsPresentAt(towns[a].x,towns[a].y,2)==false){
-                        burn(a);    
+                        if(towns[a].wall == false){
+                            burn(a);      
+                        }  
                     }  
                 }
             }

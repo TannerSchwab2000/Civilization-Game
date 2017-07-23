@@ -15,6 +15,7 @@ function Town(x,y,i,t){
     this.growthRate = 0;
     this.soldiers = 0;
     this.slaves = 0;
+    this.wall = false;
 
     for(var b=0;b<this.peasants;b++){
             this.garrison.push(new Unit(4));
@@ -23,7 +24,7 @@ function Town(x,y,i,t){
     this.grow = function(){
         var oldPop = this.peasants;
         var newPop = round(this.peasants*(1+this.growthRate));
-        newPop = constrain(newPop,0,20);
+        newPop = constrain(newPop,0,15);
         var difference = newPop-oldPop;
         this.peasants = this.peasants + difference;
         for(var a=0;a<difference;a++){
@@ -43,6 +44,10 @@ function Town(x,y,i,t){
 	this.render = function(){
 		document.getElementById("town" + this.i).style.left = this.x;
 		document.getElementById("town" + this.i).style.top = this.y;
+
+        if(this.wall==true){
+
+        }
 
         if(this.team == 1){
             document.getElementById("Flag"+this.i).src = "graphics/BlueFlag.png"; 
@@ -87,7 +92,11 @@ function Town(x,y,i,t){
     			document.getElementById("Conversion3").src = "graphics/Conversion3.png"; 
     			document.getElementById("Conversion4").src = "graphics/Conversion4.png"; 
     		}else if(this.menu==2){
-    			document.getElementById("Construction1").src = "graphics/Construction1.png"; 
+                if(this.wall==true){
+                    document.getElementById("Construction1").src = "graphics/Construction1Green.png";  
+                }else{
+                    document.getElementById("Construction1").src = "graphics/Construction1.png"; 
+                }
     			document.getElementById("Construction2").src = "graphics/Construction2.png"; 
     		}else if(this.menu==3){
     			document.getElementById("SquadListBackground1").src = "graphics/SquadListBackground.png"; 
@@ -217,28 +226,37 @@ function Town(x,y,i,t){
 		}
 
 		if(this.size==1){
-			if(selection == towns[i-1]){
-				document.getElementById("town" + this.i).src = "graphics/SmallTownSelected.png";	
-			}else{
-				document.getElementById("town" + this.i).src = "graphics/SmallTown.png";	
-			}
+            if(this.wall==true){
+                document.getElementById("town" + this.i).src = "graphics/SmallTownWall.png";
+            }else{
+                document.getElementById("town" + this.i).src = "graphics/SmallTown.png";
+            }
 		}else if(this.size==2){
-			if(selection == towns[i-1]){
-				document.getElementById("town" + this.i).src = "graphics/MediumTownSelected.png";	
-			}else{
-				document.getElementById("town" + this.i).src = "graphics/MediumTown.png";	
-			}
+            if(this.wall==true){
+                document.getElementById("town" + this.i).src = "graphics/MediumTownWall.png";
+            }else{
+                document.getElementById("town" + this.i).src = "graphics/MediumTown.png";
+            }
 		}else if(this.size==3){
-			if(selection == towns[i-1]){
-				document.getElementById("town" + this.i).src = "graphics/LargeTownSelected.png";
-			}else{
-				document.getElementById("town" + this.i).src = "graphics/LargeTown.png";	
-			}
+            if(this.wall==true){
+                document.getElementById("town" + this.i).src = "graphics/LargeTownWall.png";
+            }else{
+                document.getElementById("town" + this.i).src = "graphics/LargeTown.png";
+            }
 		}
 
+        if(selection == towns[this.i-1]){
+            document.getElementById("town" + this.i).style.WebkitFilter="brightness(120%)";
+        }else{
+            document.getElementById("town" + this.i).style.WebkitFilter="brightness(100%)";
+        }
+
 		if(selection==towns[this.i-1]&&this.team==2){
-            if(squadIsPresentAt(this.x,this.y,1)&&squadIsPresentAt(this.x,this.y,2)==false)
-            document.getElementById("RaiseTownButton").src = "graphics/RaiseTownButton.png";
+            if(squadIsPresentAt(this.x,this.y,1)&&squadIsPresentAt(this.x,this.y,2)==false){
+                document.getElementById("RaiseTownButton").src = "graphics/RaiseTownButton.png";    
+            }
+
+            
         }
 
 	}
