@@ -338,11 +338,13 @@ function removeSquadUnit(s,u){
             }
             
         }    
-    }
+    
     
     if(squads[s].units.length==0){
         squads.splice(s,1);
     } 
+
+    }
     
 }
 
