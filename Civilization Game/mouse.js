@@ -123,7 +123,7 @@ function mouseReleased() {
             if(winner==1){
                 if(squads[squad2] != null){
                     if(squads[squad2].units.length>1){
-                        removeSquadUnit(squad2,squads[squad2].units[squads[squad2].units.length-1].unitType);   
+                        squads[squad2].units.splice(squads[squad2].units.length-1,1);   
                     }else{
                         squads.splice(squad2,1);
                         battle = 0;
