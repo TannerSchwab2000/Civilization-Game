@@ -26,7 +26,7 @@ function mouseReleased() {
     if(mouseIsContainedIn(990,815,1070,890)&&townSelected){
         for(var a=0;a<towns.length;a++){
             if(selection==towns[a]){
-                if(towns[a].slaves>2){
+                if(towns[a].slaves>2 && towns[a].menu==2){
                     removeTownUnit(a,5);
                     removeTownUnit(a,5);
                     removeTownUnit(a,5);
