@@ -25,7 +25,6 @@ function adjustArrow(){
     var t = firingTown;
     if(towns[t]!=null){
         if(arrowMoving==true){
-                console.log("Moved");
                 document.getElementById("RealArrow"+(t+1)).style.webkitTransform = "rotate("+angleBetween(parseInt(document.getElementById("RealArrow"+(t+1)).style.left),parseInt(document.getElementById("RealArrow"+(t+1)).style.top),towns[t].arrowTargetX,towns[t].arrowTargetY)+"deg)";  
                 if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)!=towns[t].arrowTargetX || parseInt(document.getElementById("RealArrow"+(t+1)).style.top)!=towns[t].arrowTargetY){
                     if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX < 0){
@@ -71,6 +70,9 @@ function resetMessages(){
 function destroyTown(){
     towns.splice(burningTown,1);
     burning = false;
+    if(burningTown==firingTown){
+        arrowMoving=false;
+    }
 }
 
 function burn(t){
@@ -180,7 +182,6 @@ function advanceTurn(){
     if(turnAdvanced==false){
         turn++;
         console.log("Turn #"+turn);   
-        console.log(towns); 
         turnAdvanced=true; 
 
 
@@ -351,7 +352,6 @@ function removeTownUnit(t,u){
         if(u == 0){
            for(var a=0;a<towns[t].garrison.length;a++){
                 if(towns[t].garrison[a].unitType==1 || towns[t].garrison[a].unitType==2 || towns[t].garrison[a].unitType==3){
-                    console.log("good");
                     if(removed == false){
                         towns[t].garrison.splice(a,1);   
                         removed = true;
@@ -503,6 +503,7 @@ function clearMap(){
         document.getElementById("Flag"+a).src = ""; 
         document.getElementById("Tower"+a).src = ""; 
         document.getElementById("RealArrow"+a).src = "";
+        document.getElementById("MapUnit"+a).src = "";
     }  
     document.getElementById("ConvertUnitsButton").src = "";    
     document.getElementById("GarrisonButton").src = "";    
@@ -528,14 +529,6 @@ function clearMap(){
     document.getElementById("Slider2").src = "";
     document.getElementById("SliderBackground1").src = "";
     document.getElementById("SliderBackground2").src = "";
-    document.getElementById("MapUnit1").src = "";
-    document.getElementById("MapUnit2").src = "";
-    document.getElementById("MapUnit3").src = "";
-    document.getElementById("MapUnit4").src = "";
-    document.getElementById("MapUnit5").src = "";
-    document.getElementById("MapUnit6").src = "";
-    document.getElementById("MapUnit7").src = "";
-    document.getElementById("MapUnit8").src = "";
     document.getElementById("Arrow1").src = ("");
     document.getElementById("Arrow2").src = ("");
     document.getElementById("Arrow3").src = ("");
@@ -637,7 +630,6 @@ function draw() {
                 for(var b=0;b<squads.length;b++){
                     if(squads[b].x == mapPoints[a].x && squads[b].y== mapPoints[a].y){
                         if(towns[d].tower==true && squads[b].team != towns[d].team){
-                            console.log("Fired");
                             if(towns[d].arrowFired==false && arrowMoving==false){
                                 towns[d].arrowFired = true; 
                                 towns[d].targetSquad = b;
@@ -654,7 +646,8 @@ function draw() {
     if(arrowMoving){
         for(var a=0;a<towns.length;a++){
             if(a==firingTown){
-                document.getElementById("RealArrow"+(a+1)).src = ("graphics/Arrow2.png");     
+                document.getElementById("RealArrow"+(a+1)).src = ("graphics/Arrow2.png");   
+                document.getElementById("EndTurnButton").src = "";      
             } 
         } 
     }

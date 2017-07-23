@@ -150,7 +150,7 @@ function mouseReleased() {
             }else if(winner==2){
                 if(squads[squad1] != null){
                     if(squads[squad1].units.length>1){
-                        removeSquadUnit(squad1,squads[squad1].units[squads[squad1].units.length-1].unitType);   
+                        squads[squad1].units.splice(squads[squad1].units.length-1,1);  
                     }else{
                         squads.splice(squad1,1);
                         battle = 0;
@@ -428,7 +428,7 @@ function mouseReleased() {
                         }
                 }          
         }
-        if(mouseIsContainedIn(870,766,1030,800) && battle==0){
+        if(mouseIsContainedIn(870,766,1030,800) && battle==0 && arrowMoving == false){
             for(var a=0;a<squads.length;a++){
                 squads[a].update();
             } 
@@ -453,7 +453,6 @@ function mouseReleased() {
         }
 
         if(mouseIsContainedIn(1300,875,1460,910)){
-            console.log("clicked");
             for(var a=0;a<towns.length;a++){
                 if(selection==towns[a]&&towns[a].team==2){
                     if(squadIsPresentAt(towns[a].x,towns[a].y,1) && squadIsPresentAt(towns[a].x,towns[a].y,2)==false){
