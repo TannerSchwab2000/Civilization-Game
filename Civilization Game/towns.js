@@ -18,6 +18,9 @@ function Town(x,y,i,t){
     this.wall = false;
     this.tower = false;
     this.arrowFired = false;
+    this.targetSquad;
+    this.arrowTargetX;
+    this.arrowTargetY;
 
     for(var b=0;b<this.peasants;b++){
             this.garrison.push(new Unit(4));
@@ -320,6 +323,7 @@ function Town(x,y,i,t){
                 if(this.soldiers>2){
                         if(this.slaves<3 && this.peasants>2){
                             if(squadIsPresentAt(this.x,this.y,2)==false){
+                                console.log(this.i);
                                 removeTownUnit(this.i-1,4);
                                 this.garrison.push(new Unit(5));
                                 redGold = redGold + 5;

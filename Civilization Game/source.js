@@ -19,47 +19,49 @@ var burning = false;
 var burningTown;
 var message1 = false;
 var arrowMoving = false;
-var arrowTargetX;
-var arrowTargetY;
-var targetSquad;
+var firingTown;
 
 function adjustArrow(){
-    if(arrowMoving==true){
-        console.log("Moved");
-        document.getElementById('Arrow').style.webkitTransform = "rotate("+angleBetween(parseInt(document.getElementById("Arrow").style.left),parseInt(document.getElementById("Arrow").style.top),arrowTargetX,arrowTargetY)+"deg)";  
-        if(parseInt(document.getElementById("Arrow").style.left)!=arrowTargetX || parseInt(document.getElementById("Arrow").style.top)!=arrowTargetY){
-            if(parseInt(document.getElementById("Arrow").style.left)-arrowTargetX < 0){
-                document.getElementById("Arrow").style.left = parseInt(document.getElementById("Arrow").style.left) + 1; 
-            }else if(parseInt(document.getElementById("Arrow").style.left)-arrowTargetX > 0){
-                document.getElementById("Arrow").style.left = parseInt(document.getElementById("Arrow").style.left) - 1; 
-            }
+    var t = firingTown;
+    if(towns[t]!=null){
+        if(arrowMoving==true){
+                console.log("Moved");
+                document.getElementById("RealArrow"+(t+1)).style.webkitTransform = "rotate("+angleBetween(parseInt(document.getElementById("RealArrow"+(t+1)).style.left),parseInt(document.getElementById("RealArrow"+(t+1)).style.top),towns[t].arrowTargetX,towns[t].arrowTargetY)+"deg)";  
+                if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)!=towns[t].arrowTargetX || parseInt(document.getElementById("RealArrow"+(t+1)).style.top)!=towns[t].arrowTargetY){
+                    if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX < 0){
+                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) + 1; 
+                    }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX > 0){
+                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) - 1; 
+                    }
 
-            if(parseInt(document.getElementById("Arrow").style.top)-arrowTargetY < 0){
-                document.getElementById("Arrow").style.top = parseInt(document.getElementById("Arrow").style.top) + 1; 
-            }else if(parseInt(document.getElementById("Arrow").style.top)-arrowTargetY > 0){
-                document.getElementById("Arrow").style.top = parseInt(document.getElementById("Arrow").style.top) - 1; 
-            }   
-            setTimeout(adjustArrow,0.1);  
-        }else{
-            arrowMoving = false;
-            if(squads[targetSquad].units.length>1){
-                squads[targetSquad].units.splice(squads[targetSquad].units.length-1,1);   
-            }else{
-                squads.splice(targetSquad,1);
+                    if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY < 0){
+                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) + 1; 
+                    }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY > 0){
+                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) - 1; 
+                    }   
+                    setTimeout(adjustArrow,0.01);  
+                }else{
+                    arrowMoving = false;
+                    if(squads[towns[t].targetSquad].units.length>1){
+                        squads[towns[t].targetSquad].units.splice(squads[towns[t].targetSquad].units.length-1,1);   
+                    }else{
+                        squads.splice(towns[t].targetSquad,1);
+                    }
+                }    
             }
-        }    
     }
+    
     
 }
 
-function arrowEffect(x1,y1,x2,y2){
-    document.getElementById("Arrow").style.left = x1;
-    document.getElementById("Arrow").style.top = y1;
-    document.getElementById('Arrow').style.webkitTransform = "rotate("+angleBetween(x1,y1,x2,y2)+"deg)";  
+function arrowEffect(x1,y1,x2,y2,t){
+    document.getElementById("RealArrow"+(t+1)).style.left = x1;
+    document.getElementById("RealArrow"+(t+1)).style.top = y1;
     arrowMoving = true;
-    arrowTargetX=x2+50;
-    arrowTargetY=y2+50;
-    setTimeout(adjustArrow,100);  
+    towns[t].arrowTargetX=x2+50;
+    towns[t].arrowTargetY=y2+50;
+    firingTown = t;
+    setTimeout(adjustArrow,0.1); 
 }
 
 function resetMessages(){
@@ -72,11 +74,14 @@ function destroyTown(){
 }
 
 function burn(t){
-    flameLevel = 0;
-    burning = true;
-    burningTown = t; 
-    document.getElementById("FireSound").play();
-    setTimeout(destroyTown, 2000);
+    if(burning==false){
+        flameLevel = 0;
+        burning = true;
+        burningTown = t; 
+        document.getElementById("FireSound").play();
+        setTimeout(destroyTown, 2000);    
+    }
+    
 }
 
 function wait(){
@@ -175,7 +180,7 @@ function advanceTurn(){
     if(turnAdvanced==false){
         turn++;
         console.log("Turn #"+turn);   
-        console.log("Enemy Gold:"+redGold); 
+        console.log(towns); 
         turnAdvanced=true; 
 
 
@@ -342,27 +347,30 @@ function removeSquadUnit(s,u){
 
 function removeTownUnit(t,u){
     var removed = false;
-    if(u == 0){
-       for(var a=0;a<towns[t].garrison.length;a++){
-            if(towns[t].garrison[a].unitType==1 || towns[t].garrison[a].unitType==2 || towns[t].garrison[a].unitType==3){
-                console.log("good");
-                if(removed == false){
-                    towns[t].garrison.splice(a,1);   
-                    removed = true;
+    if(towns[t]!=null){
+        if(u == 0){
+           for(var a=0;a<towns[t].garrison.length;a++){
+                if(towns[t].garrison[a].unitType==1 || towns[t].garrison[a].unitType==2 || towns[t].garrison[a].unitType==3){
+                    console.log("good");
+                    if(removed == false){
+                        towns[t].garrison.splice(a,1);   
+                        removed = true;
+                    }
                 }
-            }
-        }  
-    }else{
-        for(var a=0;a<towns[t].garrison.length;a++){
-            if(towns[t].garrison[a].unitType==u){
-                if(removed == false){
-                    towns[t].garrison.splice(a,1);   
-                    removed = true;
-                }
-            }
+            }  
+        }else{
+            for(var a=0;a<towns[t].garrison.length;a++){
+                if(towns[t].garrison[a].unitType==u){
+                    if(removed == false){
+                        towns[t].garrison.splice(a,1);   
+                        removed = true;
+                    }
+                }    
+            
         }    
     }
     
+    }
     
 }
 
@@ -370,27 +378,30 @@ function removeTownUnit(t,u){
 
 function transferUnit(t,s,n){
     var removed = false;
-    if(n == 0){
-       for(var a=0;a<towns[t].garrison.length;a++){
-            if(towns[t].garrison[a].unitType==1 || towns[t].garrison[a].unitType==2 || towns[t].garrison[a].unitType==3){
-                if(removed == false){
-                    squads[s].units.push(new Unit(towns[t].garrison[a].unitType));
-                    towns[t].garrison.splice(a,1);   
-                    removed = true;
+    if(towns[t]!=null){
+        if(n == 0){
+           for(var a=0;a<towns[t].garrison.length;a++){
+                if(towns[t].garrison[a].unitType==1 || towns[t].garrison[a].unitType==2 || towns[t].garrison[a].unitType==3){
+                    if(removed == false){
+                        squads[s].units.push(new Unit(towns[t].garrison[a].unitType));
+                        towns[t].garrison.splice(a,1);   
+                        removed = true;
+                    }
                 }
-            }
-        }  
-    }else{
-        for(var a=0;a<towns[t].garrison.length;a++){
-            if(towns[t].garrison[a].unitType==n){
-                if(removed == false){
-                    squads[s].units.push(new Unit(n));
-                    towns[t].garrison.splice(a,1);   
-                    removed = true;
+            }  
+        }else{
+            for(var a=0;a<towns[t].garrison.length;a++){
+                if(towns[t].garrison[a].unitType==n){
+                    if(removed == false){
+                        squads[s].units.push(new Unit(n));
+                        towns[t].garrison.splice(a,1);   
+                        removed = true;
+                    }
                 }
-            }
+            }    
         }    
     }
+    
     
     
 }
@@ -491,6 +502,7 @@ function clearMap(){
         document.getElementById("town"+a).src = ""; 
         document.getElementById("Flag"+a).src = ""; 
         document.getElementById("Tower"+a).src = ""; 
+        document.getElementById("RealArrow"+a).src = "";
     }  
     document.getElementById("ConvertUnitsButton").src = "";    
     document.getElementById("GarrisonButton").src = "";    
@@ -542,7 +554,6 @@ function clearMap(){
     document.getElementById("X").src = ("");
     document.getElementById("Swords").src = ("");
     document.getElementById("Fire").src = ("");
-    document.getElementById("Arrow").src = ("");
     document.getElementById("SoldierToPeasant").src = ("");
     document.getElementById("HorizontalLine").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
@@ -627,10 +638,10 @@ function draw() {
                     if(squads[b].x == mapPoints[a].x && squads[b].y== mapPoints[a].y){
                         if(towns[d].tower==true && squads[b].team != towns[d].team){
                             console.log("Fired");
-                            if(towns[d].arrowFired==false){
+                            if(towns[d].arrowFired==false && arrowMoving==false){
                                 towns[d].arrowFired = true; 
-                                targetSquad = b;
-                                arrowEffect(towns[d].x,towns[d].y,mapPoints[a].x,mapPoints[a].y);   
+                                towns[d].targetSquad = b;
+                                arrowEffect(towns[d].x,towns[d].y,mapPoints[a].x,mapPoints[a].y,d);   
                             }
                         }
                     }
@@ -641,7 +652,11 @@ function draw() {
     
 
     if(arrowMoving){
-        document.getElementById("Arrow").src = ("graphics/Arrow2.png"); 
+        for(var a=0;a<towns.length;a++){
+            if(a==firingTown){
+                document.getElementById("RealArrow"+(a+1)).src = ("graphics/Arrow2.png");     
+            } 
+        } 
     }
 
     if(battle == 1 && battleScreen == 0){
