@@ -346,7 +346,7 @@ function Town(x,y,i,t){
                                 var rand = round(random(1,2));
                                 if(rand==1){
                                     for(var a=0;a<squads.length;a++){
-                                        if(squads[a].x == this.x && squads[a].y == this.y){
+                                        if(squads[a].x == this.x && squads[a].y == this.y && squads[a].team==2){
                                             transferUnit(this.i-1,a,0);
                                             transferUnit(this.i-1,a,5);
                                         }
@@ -396,11 +396,28 @@ function Town(x,y,i,t){
                 }
                 if(this.peasants>3){
                     if(redGold>4 && this.soldiers<3){
-                        redGold = redGold-5;
-                        removeTownUnit(this.i-1,4);
-                        var r = round(random(1,3));
-                        this.garrison.push(new Unit(r));
-                        this.peasants--;
+                        if(youHaveWalls){
+                            var r = round(random(1,2));
+                            if(r==1){
+                                redGold = redGold-5;
+                                removeTownUnit(this.i-1,4);
+                                var r = round(random(1,3));
+                                this.garrison.push(new Unit(r));
+                                this.peasants--;     
+                            }else{
+                                removeTownUnit(this.i-1,5);
+                                this.garrison.push(new Unit(6));
+                                this.slaves--; 
+                            }
+                        }else{
+                            redGold = redGold-5;
+                            removeTownUnit(this.i-1,4);
+                            var r = round(random(1,3));
+                            this.garrison.push(new Unit(r));
+                            this.peasants--;    
+                        }
+                        
+
                     }   
                     if(this.taxRate<2){
                     this.taxRate = 2;

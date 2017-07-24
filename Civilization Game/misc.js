@@ -32,17 +32,17 @@ function adjustArrow(){
     if(towns[t]!=null){
         if(arrowMoving==true){
                 document.getElementById("RealArrow"+(t+1)).style.webkitTransform = "rotate("+angleBetween(parseInt(document.getElementById("RealArrow"+(t+1)).style.left),parseInt(document.getElementById("RealArrow"+(t+1)).style.top),towns[t].arrowTargetX,towns[t].arrowTargetY)+"deg)";  
-                if(abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX)>15 || abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY)>15){
+                if(abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX)>20 || abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY)>20){
                     if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX < -5){
-                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) + 15; 
+                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) + 20; 
                     }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX > 5){
-                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) - 15; 
+                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) - 20; 
                     }
 
                     if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY < -5){
-                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) + 15; 
+                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) + 20; 
                     }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY > 5){
-                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) - 15; 
+                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) - 20; 
                     }   
                     setTimeout(adjustArrow,1);  
                 }else{
@@ -75,6 +75,7 @@ function resetMessages(){
 
 function destroyTown(){
     towns[burningTown].burnt = true;
+    towns[burningTown].wall = false;
     burning = false;
     if(burningTown==firingTown){
         arrowMoving=false;
@@ -218,7 +219,17 @@ function advanceTurn(){
         if(squadIsPresentAt(towns[a].x,towns[a].y,1)==false&&squadIsPresentAt(towns[a].x,towns[a].y,2)&&towns[a].team==1){
             if(towns[a].wall==false){
                 burn(a);     
-            } 
+            }else{
+                for(var b=0;b<squads.length;b++){
+                    if(squads[b].x==towns[a].x&&squads[b].y==towns[a].y){
+                        if(squads[b].rams>0){
+                            removeSquadUnit(b,6);
+                            towns[a].wall = false;
+                            document.getElementById("Break").play();
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -406,7 +417,7 @@ function transferUnit(t,s,n){
     if(towns[t]!=null){
         if(n == 0){
            for(var a=0;a<towns[t].garrison.length;a++){
-                if(towns[t].garrison[a].unitType==1 || towns[t].garrison[a].unitType==2 || towns[t].garrison[a].unitType==3){
+                if(towns[t].garrison[a].unitType==1 || towns[t].garrison[a].unitType==2 || towns[t].garrison[a].unitType==3 || towns[t].garrison[a].unitType==6){
                     if(removed == false){
                         squads[s].units.push(new Unit(towns[t].garrison[a].unitType));
                         towns[t].garrison.splice(a,1);   

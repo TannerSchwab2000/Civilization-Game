@@ -4,6 +4,7 @@ var maximumUnits = 20;
 var townCost = 3;
 var redGold = 10;
 var gameOver = false;
+var youHaveWalls = false;
 
 
 function setup() {
@@ -305,6 +306,13 @@ function draw() {
             }    
         }
         
+    }
+    youHaveWalls=false;
+    for(var a=0;a<towns.length;a++){
+        if(towns[a].wall == true){
+            youHaveWalls=true;
+        }
+
     }
 
 
