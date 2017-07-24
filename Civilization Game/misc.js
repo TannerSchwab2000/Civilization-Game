@@ -32,17 +32,17 @@ function adjustArrow(){
     if(towns[t]!=null){
         if(arrowMoving==true){
                 document.getElementById("RealArrow"+(t+1)).style.webkitTransform = "rotate("+angleBetween(parseInt(document.getElementById("RealArrow"+(t+1)).style.left),parseInt(document.getElementById("RealArrow"+(t+1)).style.top),towns[t].arrowTargetX,towns[t].arrowTargetY)+"deg)";  
-                if(abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX)>10 || abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY)>10){
+                if(abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX)>15 || abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY)>15){
                     if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX < -5){
-                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) + 10; 
+                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) + 15; 
                     }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX > 5){
-                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) - 10; 
+                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) - 15; 
                     }
 
                     if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY < -5){
-                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) + 10; 
+                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) + 15; 
                     }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY > 5){
-                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) - 10; 
+                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) - 15; 
                     }   
                     setTimeout(adjustArrow,1);  
                 }else{
@@ -79,6 +79,7 @@ function destroyTown(){
     if(burningTown==firingTown){
         arrowMoving=false;
     }
+    burningTown = -1;
 }
 
 function burn(t){

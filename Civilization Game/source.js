@@ -3,6 +3,7 @@ var gold = 10;
 var maximumUnits = 20;
 var townCost = 3;
 var redGold = 10;
+var gameOver = false;
 
 
 function setup() {
@@ -294,6 +295,25 @@ function draw() {
             }    
         }
         
+    }
+
+    var enemyTowns=0;
+    var yourTowns=0;
+    for(var a=0;a<towns.length;a++){
+        if(towns[a].team==1 && towns[a].burnt==false){
+            yourTowns++;
+        }else if(towns[a].team==2 && towns[a].burnt==false){
+            enemyTowns++;
+        }
+    }
+    if(enemyTowns==0){
+        clearMap();
+        document.body.style.backgroundColor = 'rgb(254,178,0)';
+        document.getElementById("Map").src = "graphics/YouWin.png"
+    }else if(yourTowns==0){
+        clearMap();
+        document.body.style.backgroundColor = 'rgb(127,0,0)';
+        document.getElementById("Map").src = "graphics/YouLose.png"
     }
 
 }
