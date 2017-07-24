@@ -23,6 +23,7 @@ function mouseReleased() {
         console.log(mouseX,mouseY);
     }
 
+
     if(mouseIsContainedIn(990,815,1070,890)&&townSelected){
         for(var a=0;a<towns.length;a++){
             if(selection==towns[a]){
@@ -366,6 +367,25 @@ function mouseReleased() {
                 }
             }
         }
+        if(mouseIsContainedIn(1150,865,1310,900) && townSelected == true){
+             for(var i=0;i<towns.length;i++){
+                if(selection == towns[i] && towns[i].menu == 1 && towns[i].team == 1){
+                    if(towns[i].slaves>0){
+                        var unitRemoved = false;
+                        for(var c=0;c<towns[i].garrison.length;c++){
+                            if(unitRemoved == false){
+                                if(towns[i].garrison[c].unitType == 5){
+                                    towns[i].garrison.splice(c,1); 
+                                    towns[i].garrison.push(new Unit(6));
+                                    unitRemoved = true;
+                                    document.getElementById("Click").play();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         if(mouseIsContainedIn(310,900,470,940) && townSelected == true){
             for(var i=0;i<towns.length;i++){
                 if(selection == towns[i] && towns[i].team == 1){
@@ -458,6 +478,25 @@ function mouseReleased() {
                     if(squadIsPresentAt(towns[a].x,towns[a].y,1) && squadIsPresentAt(towns[a].x,towns[a].y,2)==false){
                         if(towns[a].wall == false){
                             burn(a);      
+                        }  
+                    }  
+                }
+            }
+        }
+
+        if(mouseIsContainedIn(1300,920,1460,955)){
+            for(var a=0;a<towns.length;a++){
+                if(selection==towns[a]&&towns[a].team==2){
+                    if(squadIsPresentAt(towns[a].x,towns[a].y,1) && squadIsPresentAt(towns[a].x,towns[a].y,2)==false){
+                        if(towns[a].wall == true && battle==0){
+                            for(var b=0;b<squads.length;b++){
+                                if(squads[b].rams>0){
+                                    removeSquadUnit(b,6);
+                                    towns[a].wall=false;
+                                    document.getElementById("Break").play();      
+                                }
+                            }
+                               
                         }  
                     }  
                 }

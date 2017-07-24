@@ -486,6 +486,10 @@ function renderSquads(){
                 document.getElementById("MapUnit" + (a+1)).src = "graphics/SlaveUnit.png"; 
                 document.getElementById("MapUnit" + (a+1)).style.left = squads[a].x; 
                 document.getElementById("MapUnit" + (a+1)).style.top = squads[a].y; 
+            }else if(squads[a].units[squads[a].units.length-1].unitType == 6){
+                document.getElementById("MapUnit" + (a+1)).src = "graphics/RamUnit.png"; 
+                document.getElementById("MapUnit" + (a+1)).style.left = squads[a].x; 
+                document.getElementById("MapUnit" + (a+1)).style.top = squads[a].y; 
             }
             if(mapUnitIsHeld==true && mapUnitNumber==(a+1)){
                 document.getElementById("MapUnit" + (a+1)).style.left = mouseX-60; 
@@ -522,6 +526,7 @@ function clearMap(){
     document.getElementById("Conversion2").src = ""; 
     document.getElementById("Conversion3").src = ""; 
     document.getElementById("Conversion4").src = ""; 
+    document.getElementById("Conversion5").src = ""; 
     document.getElementById("Construction1").src = ""; 
     document.getElementById("Construction2").src = ""; 
     document.getElementById("SquadListBackground1").src = ""; 
@@ -546,6 +551,7 @@ function clearMap(){
     document.getElementById("Fire").src = ("");
     document.getElementById("SoldierToPeasant").src = ("");
     document.getElementById("HorizontalLine").src = ("");
+    document.getElementById("DestroyWallButton").src = ("");
     document.getElementById("SquadTroops").innerHTML = ("");
     document.getElementById("TownTroops").innerHTML = ("");
     document.getElementById("TowerTroops").innerHTML = ("");   

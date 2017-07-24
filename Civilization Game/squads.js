@@ -9,6 +9,7 @@ function Squad(x,y,i,t){
 	this.targetY=this.y;
 	this.i = i;
 	this.slaves=0;
+	this.rams=0;
 	this.team=t;
 	this.adjacentSpaces =[];
 
@@ -16,9 +17,12 @@ function Squad(x,y,i,t){
 		this.adjacentSpaces =[];
 		console.log(this.x,this.y);
 		this.slaves = 0;
+		this.rams = 0;
 		for(var s=0;s<this.units.length;s++){
 			if(this.units[s].unitType == 5){
 				this.slaves++;
+			}else if(this.units[s].unitType == 6){
+				this.rams++;
 			}
 		}
 
@@ -36,7 +40,6 @@ function Squad(x,y,i,t){
 		}
 		if(townIsPresentAt(this.x,this.y)==false && this.team == 2 && towns.length<12){
 			if(this.slaves>2){
-				console.log("settled");
 				removeSquadUnit(this.i,5);
 				removeSquadUnit(this.i,5);
 				removeSquadUnit(this.i,5);
@@ -66,9 +69,12 @@ function Squad(x,y,i,t){
 
 
 		this.slaves = 0;
+		this.rams = 0;
 		for(var s=0;s<this.units.length;s++){
 			if(this.units[s].unitType == 5){
 				this.slaves++;
+			}else if(this.units[s].unitType == 6){
+				this.rams++;
 			}
 		}
 
@@ -96,6 +102,9 @@ function Squad(x,y,i,t){
 						document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*sliderScale);
 					}else if(squads[a].units[c].unitType == 5){
 						document.getElementById("SquadUnit" + (c+1)).src = "graphics/SlaveListUnit.png";
+						document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*sliderScale);
+					}else if(squads[a].units[c].unitType == 6){
+						document.getElementById("SquadUnit" + (c+1)).src = "graphics/RamListUnit.png";
 						document.getElementById("SquadUnit" + (c+1)).style.top = 815 + Math.abs((squads[a].units.length-1)-c)*45 - ((parseInt(document.getElementById("Slider1").style.top) - 811)*sliderScale);
 					}
 					if(parseInt(document.getElementById("SquadUnit" + (c+1)).style.top) > 920){

@@ -151,7 +151,7 @@ function draw() {
     }
 
     if(message1==true){
-        document.getElementById("SquadTroops").style.top = 835;
+        document.getElementById("SquadTroops").style.top = 825;
         document.getElementById("SquadTroops").innerHTML = "You need at least 2 peasants to reproduce.";
     }
 
@@ -236,6 +236,8 @@ function draw() {
                 document.getElementById("SquadUnit"+(a+1)).src = "graphics/PeasantListUnit.png";   
             }else if(squads[squad1].units[a].unitType==5){
                 document.getElementById("SquadUnit"+(a+1)).src = "graphics/SlaveListUnit.png";   
+            }else if(squads[squad1].units[a].unitType==6){
+                document.getElementById("SquadUnit"+(a+1)).src = "graphics/RamListUnit.png";   
             }
 
             if(parseInt(document.getElementById("SquadUnit"+(a+1)).style.top)>420 || parseInt(document.getElementById("SquadUnit"+(a+1)).style.top)<285){
@@ -259,7 +261,10 @@ function draw() {
                     document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/PeasantListUnit.png";   
                 }else if(squads[squad2].units[a].unitType==5){
                     document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/SlaveListUnit.png";   
+                }else if(squads[squad2].units[a].unitType==6){
+                    document.getElementById("GarrisonUnit"+(a+1)).src = "graphics/RamListUnit.png";   
                 }
+
 
                 if(parseInt(document.getElementById("GarrisonUnit"+(a+1)).style.top)>420 || parseInt(document.getElementById("GarrisonUnit"+(a+1)).style.top)<285){
                     document.getElementById("GarrisonUnit"+(a+1)).src = ""; 
@@ -279,6 +284,8 @@ function draw() {
             document.getElementById("MapUnit"+(squad1+1)).src = "graphics/PeasantUnit.png";   
         }else if(squads[squad1].units[squads[squad1].units.length-1].unitType==5){
             document.getElementById("MapUnit"+(squad1+1)).src = "graphics/SlaveUnit.png";   
+        }else if(squads[squad1].units[squads[squad1].units.length-1].unitType==6){
+            document.getElementById("MapUnit"+(squad1+1)).src = "graphics/RamUnit.png";   
         }
 
         if(squads[squad2] != null){
@@ -292,6 +299,8 @@ function draw() {
                 document.getElementById("MapUnit"+(squad2+1)).src = "graphics/PeasantUnit.png";   
             }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==5){
                 document.getElementById("MapUnit"+(squad2+1)).src = "graphics/SlaveUnit.png";   
+            }else if(squads[squad2].units[squads[squad2].units.length-1].unitType==6){
+                document.getElementById("MapUnit"+(squad2+1)).src = "graphics/RamUnit.png";   
             }    
         }
         
