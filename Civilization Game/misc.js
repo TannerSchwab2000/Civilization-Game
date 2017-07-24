@@ -544,7 +544,6 @@ function clearMap(){
     document.getElementById("PlusButton").src = ("");
     document.getElementById("NumberBackground").src = ("");
     document.getElementById("DividingLine").src = ("");
-    document.getElementById("Map").src = ("");
     document.getElementById("RollButton").src = ("");
     document.getElementById("X").src = ("");
     document.getElementById("Swords").src = ("");

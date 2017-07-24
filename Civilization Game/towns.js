@@ -15,7 +15,7 @@ function Town(x,y,i,t){
     this.growthRate = 0;
     this.soldiers = 0;
     this.slaves = 0;
-    this.wall = true;
+    this.wall = false;
     this.tower = false;
     this.arrowFired = false;
     this.targetSquad;

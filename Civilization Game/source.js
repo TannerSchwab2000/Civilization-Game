@@ -165,6 +165,7 @@ function draw() {
     }
 
     if(battle==1 && battleScreen==1){
+        document.getElementById("Map").src = ("");
         clearMap();
 
         if(calculateAdvantage(squads[squad1].units[squads[squad1].units.length-1].unitType,squads[squad2].units[squads[squad2].units.length-1].unitType) == 1){
@@ -306,6 +307,7 @@ function draw() {
         
     }
 
+
     var enemyTowns=0;
     var yourTowns=0;
     for(var a=0;a<towns.length;a++){
@@ -316,13 +318,17 @@ function draw() {
         }
     }
     if(enemyTowns==0){
+        document.getElementById("Map").src = ("");
         clearMap();
         document.body.style.backgroundColor = 'rgb(254,178,0)';
         document.getElementById("Map").src = "graphics/YouWin.png"
     }else if(yourTowns==0){
+        document.getElementById("Map").src = ("");
         clearMap();
         document.body.style.backgroundColor = 'rgb(127,0,0)';
         document.getElementById("Map").src = "graphics/YouLose.png"
     }
+
+
 
 }
