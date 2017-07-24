@@ -26,17 +26,17 @@ function adjustArrow(){
     if(towns[t]!=null){
         if(arrowMoving==true){
                 document.getElementById("RealArrow"+(t+1)).style.webkitTransform = "rotate("+angleBetween(parseInt(document.getElementById("RealArrow"+(t+1)).style.left),parseInt(document.getElementById("RealArrow"+(t+1)).style.top),towns[t].arrowTargetX,towns[t].arrowTargetY)+"deg)";  
-                if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)!=towns[t].arrowTargetX || parseInt(document.getElementById("RealArrow"+(t+1)).style.top)!=towns[t].arrowTargetY){
+                if(abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX)>2 || abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY)>2){
                     if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX < 0){
-                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) + 1; 
+                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) + 2; 
                     }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX > 0){
-                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) - 1; 
+                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) - 2; 
                     }
 
                     if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY < 0){
-                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) + 1; 
+                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) + 2; 
                     }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY > 0){
-                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) - 1; 
+                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) - 2; 
                     }   
                     setTimeout(adjustArrow,0.01);  
                 }else{
@@ -506,6 +506,7 @@ function clearMap(){
         document.getElementById("Tower"+a).src = ""; 
         document.getElementById("RealArrow"+a).src = "";
         document.getElementById("MapUnit"+a).src = "";
+        document.getElementById("Arrow"+a).src = ("");
     }  
     document.getElementById("ConvertUnitsButton").src = "";    
     document.getElementById("GarrisonButton").src = "";    
@@ -531,14 +532,6 @@ function clearMap(){
     document.getElementById("Slider2").src = "";
     document.getElementById("SliderBackground1").src = "";
     document.getElementById("SliderBackground2").src = "";
-    document.getElementById("Arrow1").src = ("");
-    document.getElementById("Arrow2").src = ("");
-    document.getElementById("Arrow3").src = ("");
-    document.getElementById("Arrow4").src = ("");
-    document.getElementById("Arrow5").src = ("");
-    document.getElementById("Arrow6").src = ("");
-    document.getElementById("Arrow7").src = ("");
-    document.getElementById("Arrow8").src = ("");
     document.getElementById("VS").src = ("");
     document.getElementById("MinusButton").src = ("");
     document.getElementById("PlusButton").src = ("");
@@ -675,15 +668,12 @@ function draw() {
     }
     
 
-    for(var a=0;a<mapPoints.length;a++){
-        if(battle == 1){
-            if(squads[squad1].x == mapPoints[a].x && squads[squad1].y == mapPoints[a].y){
-                document.getElementById("Swords").src = ("graphics/CrossedSwords.png");
-                document.getElementById("Swords").style.left = mapPoints[a].x;  
-                document.getElementById("Swords").style.top = mapPoints[a].y;  
-            }
-        }
+    if(battle == 1){
+        document.getElementById("Swords").src = ("graphics/CrossedSwords.png");
+        document.getElementById("Swords").style.left = squads[squad1].x;  
+        document.getElementById("Swords").style.top = squads[squad1].y;  
     }
+
 
     for(var a=0;a<squads.length;a++){
         if(squads[a].targetX != squads[a].x){

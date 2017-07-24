@@ -280,27 +280,17 @@ function Town(x,y,i,t){
 
 
         this.soldiers = 0;
+        this.slaves = 0;
+        this.peasants = 0;
         for(var a=0;a<this.garrison.length;a++){
             if(this.garrison[a].unitType==1 || this.garrison[a].unitType==2 || this.garrison[a].unitType==3){
                 this.soldiers++;
-            }
-        }
-
-        this.slaves = 0;
-        for(var a=0;a<this.garrison.length;a++){
-            if(this.garrison[a].unitType==5){
+            }else if(this.garrison[a].unitType==5){
                 this.slaves++;
-            }
-        }
-
-        this.peasants = 0;
-        for(var a=0;a<this.garrison.length;a++){
-            if(this.garrison[a].unitType==4){
+            }else if(this.garrison[a].unitType==4){
                 this.peasants++;
             }
         }
-
-
 
 		if(selection == towns[i-1]){
 			townSelected = true;

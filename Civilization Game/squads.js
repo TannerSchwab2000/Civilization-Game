@@ -15,13 +15,6 @@ function Squad(x,y,i,t){
 	this.update = function(){
 		this.adjacentSpaces =[];
 
-		this.slaves = 0;
-		for(var s=0;s<this.units.length;s++){
-			if(this.units[s].unitType == 5){
-				this.slaves++;
-			}
-		}
-
 		for(var a=0;a<mapPoints.length;a++){
 			if(adjacent(this.x,this.y,mapPoints[a].x,mapPoints[a].y)){
 				this.adjacentSpaces.push(new mapPoint(mapPoints[a].x,mapPoints[a].y));	
@@ -64,13 +57,13 @@ function Squad(x,y,i,t){
 			var a = this.i;
 
 
-			var slaves = 0;
-			for(var s=0;s<this.units.length;s++){
-				if(this.units[s].unitType == 5){
-					slaves++;
-				}
+		this.slaves = 0;
+		for(var s=0;s<this.units.length;s++){
+			if(this.units[s].unitType == 5){
+				this.slaves++;
 			}
-		this.slaves = slaves;
+		}
+
 		if(this.slaves>townCost || this.slaves==townCost){
 			document.getElementById("SettleTownButton").src = "graphics/SettleTownButton.png";
 		}
