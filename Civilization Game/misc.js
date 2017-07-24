@@ -21,17 +21,17 @@ function adjustArrow(){
     if(towns[t]!=null){
         if(arrowMoving==true){
                 document.getElementById("RealArrow"+(t+1)).style.webkitTransform = "rotate("+angleBetween(parseInt(document.getElementById("RealArrow"+(t+1)).style.left),parseInt(document.getElementById("RealArrow"+(t+1)).style.top),towns[t].arrowTargetX,towns[t].arrowTargetY)+"deg)";  
-                if(abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX)>2 || abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY)>2){
+                if(abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX)>4 || abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY)>4){
                     if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX < 0){
-                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) + 2; 
+                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) + 4; 
                     }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX > 0){
-                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) - 2; 
+                        document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) - 4; 
                     }
 
                     if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY < 0){
-                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) + 2; 
+                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) + 4; 
                     }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY > 0){
-                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) - 2; 
+                        document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) - 4; 
                     }   
                     setTimeout(adjustArrow,0.1);  
                 }else{
@@ -515,7 +515,6 @@ function clearMap(){
     document.getElementById("Construction2").src = ""; 
     document.getElementById("SquadListBackground1").src = ""; 
     document.getElementById("SquadListBackground2").src = ""; 
-    document.getElementById("SquadListBackground3").src = ""; 
     for(var a=0;a<maximumUnits;a++){
         document.getElementById("GarrisonUnit"+(a+1)).src = "";  
         document.getElementById("SquadUnit"+(a+1)).src = "";  
