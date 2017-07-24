@@ -38,10 +38,8 @@ function setup() {
     rand = round(random(0,11));
     towns.push(new Town(mapPoints[rand].x,mapPoints[rand].y,2,2));     
 
-    if(towns[1].x==towns[0].x&&towns[1].y==towns[0].y){
-        rand = round(random(0,11));
-        towns[1].x = mapPoints[rand].x;
-        towns[1].y = mapPoints[rand].y;
+    if(abs(towns[1].x-towns[0].x)+abs(towns[1].y-towns[0].y)<800){
+        reRollTowns();
     }
 
     for(var a=0;a<maximumUnits;a++){

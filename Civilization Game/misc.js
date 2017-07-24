@@ -16,21 +16,32 @@ var turnFinished = true;
 var turn = 1;
 var turnAdvanced = false;
 
+function reRollTowns(){
+    if(abs(towns[1].x-towns[0].x)+abs(towns[1].y-towns[0].y)<800){
+        rand = round(random(0,11));
+        towns[1].x = mapPoints[rand].x;
+        towns[1].y = mapPoints[rand].y;
+    }
+    if(abs(towns[1].x-towns[0].x)+abs(towns[1].y-towns[0].y)<800){
+        reRollTowns();
+    }
+}
+
 function adjustArrow(){
     var t = firingTown;
     if(towns[t]!=null){
         if(arrowMoving==true){
                 document.getElementById("RealArrow"+(t+1)).style.webkitTransform = "rotate("+angleBetween(parseInt(document.getElementById("RealArrow"+(t+1)).style.left),parseInt(document.getElementById("RealArrow"+(t+1)).style.top),towns[t].arrowTargetX,towns[t].arrowTargetY)+"deg)";  
                 if(abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX)>10 || abs(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY)>10){
-                    if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX < 0){
+                    if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX < -5){
                         document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) + 10; 
-                    }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX > 0){
+                    }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.left)-towns[t].arrowTargetX > 5){
                         document.getElementById("RealArrow"+(t+1)).style.left = parseInt(document.getElementById("RealArrow"+(t+1)).style.left) - 10; 
                     }
 
-                    if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY < 0){
+                    if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY < -5){
                         document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) + 10; 
-                    }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY > 0){
+                    }else if(parseInt(document.getElementById("RealArrow"+(t+1)).style.top)-towns[t].arrowTargetY > 5){
                         document.getElementById("RealArrow"+(t+1)).style.top = parseInt(document.getElementById("RealArrow"+(t+1)).style.top) - 10; 
                     }   
                     setTimeout(adjustArrow,1);  
