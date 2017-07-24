@@ -74,7 +74,7 @@ function resetMessages(){
 }
 
 function destroyTown(){
-    towns.splice(burningTown,1);
+    towns[burningTown].burnt = true;
     burning = false;
     if(burningTown==firingTown){
         arrowMoving=false;
@@ -83,7 +83,6 @@ function destroyTown(){
 
 function burn(t){
     if(burning==false){
-        flameLevel = 0;
         burning = true;
         burningTown = t; 
         document.getElementById("FireSound").play();

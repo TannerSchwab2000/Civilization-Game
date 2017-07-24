@@ -14,7 +14,7 @@ function Squad(x,y,i,t){
 
 	this.update = function(){
 		this.adjacentSpaces =[];
-
+		console.log(this.x,this.y);
 		this.slaves = 0;
 		for(var s=0;s<this.units.length;s++){
 			if(this.units[s].unitType == 5){
@@ -34,7 +34,7 @@ function Squad(x,y,i,t){
 				this.y = this.targetY;	
 			}	
 		}
-		if(townIsPresentAt(this.x,this.y)==false && this.team == 2){
+		if(townIsPresentAt(this.x,this.y)==false && this.team == 2 && towns.length<12){
 			if(this.slaves>2){
 				console.log("settled");
 				removeSquadUnit(this.i,5);
@@ -73,7 +73,9 @@ function Squad(x,y,i,t){
 		}
 
 		if(this.slaves>townCost || this.slaves==townCost){
-			document.getElementById("SettleTownButton").src = "graphics/SettleTownButton.png";
+			if(townIsPresentAt(this.x,this.y)==false){
+				document.getElementById("SettleTownButton").src = "graphics/SettleTownButton.png";	
+			}
 		}
 
 			document.getElementById("SquadTroops").innerHTML = ("Sqaud Troops("+squads[a].units.length+")");

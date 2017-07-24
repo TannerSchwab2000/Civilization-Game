@@ -21,6 +21,7 @@ function Town(x,y,i,t){
     this.targetSquad;
     this.arrowTargetX;
     this.arrowTargetY;
+    this.burnt = false;
 
     for(var b=0;b<this.peasants;b++){
             this.garrison.push(new Unit(4));
@@ -39,11 +40,14 @@ function Town(x,y,i,t){
     }
 
     this.collect = function(){
-        if(this.team==1){
-            gold = gold + this.taxRate;
-        }else{
-            redGold = redGold + this.taxRate;
+        if(this.burnt==false){
+            if(this.team==1){
+                gold = gold + this.taxRate;
+            }else{
+                redGold = redGold + this.taxRate;
+            }    
         }
+        
         
     }
 
@@ -257,6 +261,7 @@ function Town(x,y,i,t){
         }
 
         if(selection == towns[this.i-1]){
+            console.log("town"+(this.i-1)+"x"+this.x+"y"+this.y);
             document.getElementById("town" + this.i).style.WebkitFilter="brightness(120%)";
         }else{
             document.getElementById("town" + this.i).style.WebkitFilter="brightness(100%)";
@@ -270,15 +275,18 @@ function Town(x,y,i,t){
             
         }
 
+
+        if(this.burnt==true){
+            document.getElementById("town"+this.i).src = "";
+            this.x = -999;
+            this.y = -999;
+        }
 	}
 
 	this.update = function(){
         var growthRate = 40 - (this.taxRate*10);
         this.growthRate = growthRate/100;
         this.taxRate = this.realTaxRate;
-
-
-
         this.soldiers = 0;
         this.slaves = 0;
         this.peasants = 0;

@@ -227,7 +227,7 @@ function mouseReleased() {
     for(var a=0;a<squads.length;a++){
         if(selection == squads[a]){
             if(squads[a].slaves>=townCost){
-                if(mouseIsContainedIn(1300,810,1462,845)){
+                if(mouseIsContainedIn(1300,810,1462,845)&& towns.length<12&&townIsPresentAt(squads[a].x,squads[a].y)==false){
                     towns.push(new Town(squads[a].x,squads[a].y,towns.length+1,1));  
                     document.getElementById("Build").play();
                     for(var b=0;b<townCost;b++){
@@ -318,10 +318,10 @@ function mouseReleased() {
     squadListUnitNumber = 0;
     garrisonUnitNumber = 0;
     for(var i=0;i<towns.length;i++){
-        mouseDistance = Math.abs(mouseX-(towns[i].x+70)) + Math.abs((mouseY+800)-(towns[i].y+70))
 
-        if(mouseDistance<100){
-                selection = towns[i];    
+        if(mouseIsContainedIn(towns[i].x,towns[i].y,towns[i].x+120,towns[i].y+120)){
+            console.log("yar");
+            selection = towns[i];    
         }
         if(mouseIsContainedIn(310,850,470,890) && townSelected == true){
             for(var i=0;i<towns.length;i++){
@@ -478,8 +478,10 @@ function mousePressed(){
     for(var a=0;a<squads.length;a++){
         if(mouseIsContainedIn(parseInt(document.getElementById("MapUnit"+(a+1)).style.left),parseInt(document.getElementById("MapUnit"+(a+1)).style.top),parseInt(document.getElementById("MapUnit"+(a+1)).style.left)+80,parseInt(document.getElementById("MapUnit"+(a+1)).style.top)+90)){
             if(battle==0&&squads[a].team==1){
-                mapUnitIsHeld = true;
-                mapUnitNumber = a+1;    
+                if(squadIsPresentAt(squads[a].x,squads[a].y,2)==false){
+                    mapUnitIsHeld = true;
+                    mapUnitNumber = a+1;      
+                }   
             }
             
         }
