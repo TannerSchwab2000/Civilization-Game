@@ -254,7 +254,7 @@ function calculateAdvantage(u1,u2){
         }else if(u2 == 1){
             advantage = 0;
             return 0;
-        }else if(u2 == 5){
+        }else if(u2 == 5||u2 == 6){
             advantage = 3;
             return 1;
         }else{
@@ -271,7 +271,7 @@ function calculateAdvantage(u1,u2){
         }else if(u2 == 2){
             advantage = 0;
             return 0;
-        }else if(u2 == 5){
+        }else if(u2 == 5||u2 == 6){
             advantage = 3;
             return 1;
         }else{
@@ -288,7 +288,7 @@ function calculateAdvantage(u1,u2){
         }else if(u2 == 3){
             advantage = 0;
             return 0;
-        }else if(u2 == 5){
+        }else if(u2 == 5||u2 == 6){
             advantage = 3;
             return 1;
         }else{
@@ -302,6 +302,9 @@ function calculateAdvantage(u1,u2){
         }else if(u2 == 5){
             advantage = 1;
             return 1;
+        }else if(u2 == 6){
+            advantage = 2;
+            return 1;
         }else{
             advantage = 0;
             return 0;
@@ -311,6 +314,23 @@ function calculateAdvantage(u1,u2){
             advantage = 3;
             return 2;
         }else if(u2 == 4){
+            advantage = 1;
+            return 2;
+        }else if(u2 == 6){
+            advantage = 1;
+            return 1;
+        }else{
+            advantage = 0;
+            return 0;
+        }
+    }else if(u1 == 6){
+        if(u2 == 1 || u2 == 2 || u2 == 3){
+            advantage = 3;
+            return 2;
+        }else if(u2 == 4){
+            advantage = 2;
+            return 2;
+        }else if(u2 == 5){
             advantage = 1;
             return 2;
         }else{

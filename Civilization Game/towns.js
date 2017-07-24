@@ -343,12 +343,31 @@ function Town(x,y,i,t){
                                 this.garrison.push(new Unit(5));
                                 redGold = redGold + 5;
                             }else{
-                                for(var a=0;a<squads.length;a++){
-                                    if(squads[a].x == this.x && squads[a].y == this.y){
-                                        transferUnit(this.i-1,a,0);
-                                        transferUnit(this.i-1,a,5);
+                                var rand = round(random(1,2));
+                                if(rand==1){
+                                    for(var a=0;a<squads.length;a++){
+                                        if(squads[a].x == this.x && squads[a].y == this.y){
+                                            transferUnit(this.i-1,a,0);
+                                            transferUnit(this.i-1,a,5);
+                                        }
+                                    }    
+                                }else{
+                                    if(this.wall==false){
+                                        removeTownUnit(this.i-1,5);
+                                        removeTownUnit(this.i-1,5);
+                                        removeTownUnit(this.i-1,5);
+                                        this.wall=true;    
+                                    }else{
+                                       for(var a=0;a<squads.length;a++){
+                                            if(squads[a].x == this.x && squads[a].y == this.y){
+                                                transferUnit(this.i-1,a,0);
+                                                transferUnit(this.i-1,a,5);
+                                            }
+                                        }   
                                     }
+                                    
                                 }
+                                
                                 
                             }
                         }else{
